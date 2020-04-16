@@ -1,9 +1,9 @@
 
 const express = require('express');
 const app = express();
-var http = require('http').createServer(app);
+const server = app.listen(port);
 
-var io = require('socket.io')(http);
+var io = require('socket.io')(server);
 
 const port = process.env.PORT || 1337;
 
@@ -13,4 +13,3 @@ io.on('connection', (socket) => {
   socket.emit('chat message', "SOCKET.IO IS WORKING");
 });
 
-app.listen(port);
