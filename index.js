@@ -10,6 +10,9 @@ var io = require('socket.io')(server);
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-  io.emit('chat message', "SOCKET.IO IS WORKING");
+  socket.emit('chat message', "SOCKET.IO IS WORKING");
+  socket.on('disconnect', (socket) => {
+    console.log("disconnected")
+  })
 });
 
