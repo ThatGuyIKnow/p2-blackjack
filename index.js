@@ -8,7 +8,4 @@ const port = process.env.PORT;
 
 app.use(express.static('public'));
 
-io.on('connection', (socket) => {
-  socket.emit('chat message', "SOCKET.IO IS WORKING");
-});
 app.listen(port);
