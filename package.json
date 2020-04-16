@@ -1,23 +1,16 @@
 {
-  "name": "app-service-hello-world",
-  "description": "Simple Hello World Node.js sample for Azure App Service",
-  "version": "0.0.1",
+  "name": "p2-blackjack",
+  "version": "0.0.0",
   "private": true,
-  "license": "MIT",
-  "author": "Microsoft",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./bin/www"
   },
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ThatGuyIKnow/p2-blackjack.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ThatGuyIKnow/p2-blackjack/issues"
-  },
-  "homepage": "https://github.com/ThatGuyIKnow/p2-blackjack#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
   }
 }
