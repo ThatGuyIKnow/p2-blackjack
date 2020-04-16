@@ -6,10 +6,7 @@ const port = process.env.PORT;
 app.static(express.static('public'));
 
 app.get("/", (req, res) => {
-  res.send({
-      "first": "jason",
-      "last": "bourne"
-  })
+  app.send('index.html')
 })
 
 app.listen(port);
