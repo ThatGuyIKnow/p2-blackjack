@@ -1,10 +1,13 @@
 
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 1337
+const express = require('express');
+const app = express();
+const port = process.env.PORT;
 
-app.get('/', (req, res) => {
-  res.type('text/plain')
-  res.send('Hello World!')
+app.get("/", (req, res) => {
+  res.send({
+      "first": "jason",
+      "last": "bourne"
+  })
 })
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+
+app.listen(port);
