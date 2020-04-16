@@ -5,5 +5,12 @@
 <h1>My First Heading</h1>
 <p>My first paragraph.</p>
 
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  socket.on('chat message', function(msg){
+    console.log(msg);
+  });
+</script>
 </body>
 </html> 
