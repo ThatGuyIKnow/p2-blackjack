@@ -1,11 +1,11 @@
 
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 1337;
 const server = app.listen(port);
 
 var io = require('socket.io')(server);
 
-const port = process.env.PORT || 1337;
 
 app.use(express.static('public'));
 
