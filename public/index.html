@@ -23,9 +23,6 @@
 
     function accessRoom(roomID) {
       socket.emit('access_room', roomID);
-      socket.on('room_control', function(msg){
-        console.log(msg);
-      });
     }
     </script>
   </body>

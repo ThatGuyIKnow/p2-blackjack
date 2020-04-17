@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
     */
     if(rooms.include(roomID)) {
       socket.join(roomID);
-      socket.emit('room_control', `Joined room ${roomID}`);
+      socket.to(roomID).emit('chat message', `Joined room ${roomID}`);
     }
   });
   socket.on('disconnect', (socket) => {
