@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
     */
    socket.emit('chat message', roomID + typeof roomID);
     if(rooms.include(roomID)) {
-      socket.join(roomID, () => {
+      socket.join(roomID, (socket) => {
         socket.emit('chat message', `Joined room ${roomID}`);
       });
     }
