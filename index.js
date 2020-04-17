@@ -19,8 +19,9 @@ io.on('connection', (socket) => {
     }
     */
     if(rooms.include(roomID)) {
-      socket.join(roomID);
-      socket.to(roomID).emit('chat message', `Joined room ${roomID}`);
+      socket.join(roomID, () => {
+        io.to(roomID).emit('chat message', `Joined room ${roomID}`);
+      });
     }
   });
   socket.on('disconnect', (socket) => {
