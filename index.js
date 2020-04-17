@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 1337;
 const server = app.listen(port);
 
-const io = require('socket.io')(server, {'transports': ['websocket', 'polling']});;
+const io = require('socket.io')(server);
 
 app.use(express.static('public'));
 
