@@ -1,66 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The Tea Cozy</title>
+    <title>P2 General Cards</title>
     <link href="./css/main.css" type="text/css" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <img src="img/img-tea-cozy-logo.png">
-      <nav>
-        <a href="#mission">Mission</a>
-        <a href="#tea">Featured Tea</a>
-        <a href="#locations">Locations</a>
-      </nav>
-    </header>
-    <div id="mission">
-      <div class="banner-overlay">
-        <h2>Our Mission</h2>
-        <h4>Handpicked, Artisanally Curated, Free Range, Sustainable, Small Batch,
-        Fair Trade, Organic Tea</h4>
-      </div>
-    </div>
-    <div id="tea">
-      <h2>Tea of the Month</h2>
-      <h4>What's Steeping at The Tea Cozy?</h4>
-      <div class="gallery">
-        <div class="gallery-content"><img src="img/img-berryblitz.jpg"><h3>Fall Berry Blitz Tea</h3></div>
-        <div class="gallery-content"><img src="img/img-spiced-rum.jpg"><h3>Spiced Rum Tea</h3></div>
-        <div class="gallery-content"><img src="img/img-donut.jpg"><h3>Seasonal Donuts</h3></div>
-        <div class="gallery-content"><img src="img/img-myrtle-ave.jpg"><h3>Myrtle Ave Tea</h3></div>
-        <div class="gallery-content"><img src="img/img-bedford-bizarre.jpg"><h3>Bedford Bizarre Tea</h3></div>
-      </div>
-    </div>
-    <div id="locations">
-      <h2>Locations</h2>
-      <div class="location-gallery">
-        <div class="location">
-          <h3>Downtown</h3>
-          <p>384 West 4th St</p>
-          <p>Suite 108</p>
-          <p>Portland, Maine</p>
-        </div>
-        <div class="location">
-          <h3>East Bayside</h3>
-          <p>3433 Phisherman's Avenue</p>
-          <p>(Northwest Corner)</p>
-          <p>Portland, Maine</p>
-        </div>
-        <div class="location">
-          <h3>Oakdale</h3>
-          <p>515 Crescent Avenue</p>
-          <p>Second Floor</p>
-          <p>Portland, Maine</p>
-        </div>
-      </div>
-    </div>
-    <div id="contact">
-      <h2>The Tea Cozy</h2>
-      <h4>contact@theteacozy.com</h4>
-      <h4>917-555-8904</h4>
-    </div>
-    <footer>
-      <h4>copyright The Tea Cozy 2017</h4>
-    </footer>
+    <h1>Tester tester</h1>
+    <h2>1..2..3</h2>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('chat message', function(msg){
+        console.log(msg);
+    });
+    </script>
   </body>
 </html>
