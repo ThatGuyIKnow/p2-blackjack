@@ -10,7 +10,8 @@ app.use(express.static('public'));
 io.on('connection', (socket) => {
   socket.join('boycott_nestle');
   io.to('boycott_nestle')
-    .emit('chat message', "This is a message for the room");
+    .emit('chat message', 
+          'This is a message for the room: A player has joined');
   socket.emit('chat message', "This is a message for the player");
   socket.on('disconnect', (socket) => {
     console.log("disconnected")
