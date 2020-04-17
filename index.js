@@ -10,6 +10,7 @@ app.use(express.static('public'));
 const rooms = ['room1', 'room2', 'room3', 'room4'];
 
 io.on('connection', (socket) => {
+  socket.emit('chat message', `Connected through WebSocket`);
   socket.on('access_room', (roomID) => {
     //socket.emit('chat message', '2' + roomID);
     /*
