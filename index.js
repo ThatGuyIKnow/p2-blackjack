@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
     }
     */
       console.log(rooms.includes(roomID));
-      socket.emit('chat message', roomID + ' ' + rooms.include(roomID));
+      socket.emit('chat message', roomID + ' ' + rooms.includes(roomID));
       socket.join(roomID, (err) => {
         socket.emit('chat message', `Joined room ${roomID}`);
       });
