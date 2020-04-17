@@ -18,9 +18,7 @@ io.on('connection', (socket) => {
       Object.keys(socket.rooms).map((room) => room != socket.id ? socket.leave(room) : socket.id);
     }
     */
-    socket.compress(false).emit('chat message', '4' + rooms.includes(roomID));
     if(rooms.include(roomID)) {
-      socket.compress(false).emit('chat message', '5' + roomID);
       socket.join(roomID);
       socket.emit('room_control', `Joined room ${roomID}`);
     }
