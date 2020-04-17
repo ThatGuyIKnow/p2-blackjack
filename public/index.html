@@ -16,7 +16,7 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let socket = io();
+      let socket = io( 'https://p2-blackjack.azurewebsites.net/', {'transports': ['websocket', 'polling']});
       socket.on('chat message', function(msg){
         console.log(msg);
     });
