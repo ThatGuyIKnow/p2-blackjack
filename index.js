@@ -8,7 +8,9 @@ const io = require('socket.io')(server);
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-  socket.emit('chat message', "SOCKET.IO IS WORKING");
+  socket.join('boycott_nestle');
+  io.to('boycott_nestle').emit('chat message', "This is a message for the room");
+  socket.emit('chat message', "This is a message for the player");
   socket.on('disconnect', (socket) => {
     console.log("disconnected")
   })
