@@ -9,10 +9,10 @@
     <h1>Tester tester</h1>
     <h2>1..2..3</h2>
     <div>
-      <button onclick="() => accessRoom('room1')">Room 1</button>
-      <button onclick="() => accessRoom('room2')">Room 2</button>
-      <button onclick="() => accessRoom('room3')">Room 3</button>
-      <button onclick="() => accessRoom('room4')">Room 4</button>
+      <button onclick="accessRoom('room1')">Room 1</button>
+      <button onclick="accessRoom('room2')">Room 2</button>
+      <button onclick="accessRoom('room3')">Room 3</button>
+      <button onclick="accessRoom('room4')">Room 4</button>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -22,10 +22,7 @@
     });
 
     function accessRoom(roomID) {
-      console.log(socket);
-      socket.emit('access_room', roomID,
-        () => console.log(socket)
-      );
+      socket.emit('access_room', roomID);
       socket.on('room_control', function(msg){
         console.log(msg);
       });
