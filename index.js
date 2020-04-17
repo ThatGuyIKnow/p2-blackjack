@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
       Object.keys(socket.rooms).map((room) => room != socket.id ? socket.leave(room) : socket.id);
     }
     */
+   socket.emit('chat message', roomID + typeof roomID);
     if(rooms.include(roomID)) {
       socket.join(roomID, () => {
         socket.emit('chat message', `Joined room ${roomID}`);
