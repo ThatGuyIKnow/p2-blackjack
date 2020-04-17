@@ -13,13 +13,10 @@ io.on('connection', (socket) => {
   socket.join('room5', (err) => socket.emit('chat message', 'Joined Room5'));
   socket.emit('chat message', `Connected through WebSocket`);
   socket.on('access_room', (roomID) => {
-    //socket.emit('chat message', '2' + roomID);
-    /*
     if(Object.keys(socket.rooms) != [socket.id]) {
       socket.emit('chat message', '3' + roomID);
       Object.keys(socket.rooms).map((room) => room != socket.id ? socket.leave(room) : socket.id);
     }
-    */
    if(rooms.includes(roomID)){
       socket.join(roomID, () => {
         socket.emit('chat message', `Rooms ${Object.keys(socket.rooms)}`);
