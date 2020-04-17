@@ -10,6 +10,7 @@ app.use(express.static('public'));
 const rooms = ['room1', 'room2', 'room3', 'room4'];
 
 io.on('connection', (socket) => {
+  socket.join('room1', (err) => socket.emit('chat message', 'Joined Room'));
   socket.emit('chat message', `Connected through WebSocket`);
   socket.on('access_room', (roomID) => {
     //socket.emit('chat message', '2' + roomID);
@@ -19,9 +20,9 @@ io.on('connection', (socket) => {
       Object.keys(socket.rooms).map((room) => room != socket.id ? socket.leave(room) : socket.id);
     }
     */
-   socket.emit('chat message', roomID + typeof roomID);
     if(rooms.include(roomID)) {
-      socket.join(roomID, (socket) => {
+      socket.emit('chat message', roomID + typeof roomID);
+      socket.join(roomID, (err) => {
         socket.emit('chat message', `Joined room ${roomID}`);
       });
     }
