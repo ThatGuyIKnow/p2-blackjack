@@ -1,7 +1,7 @@
-# p2-blackjack
+# P2 Blackjack
 
-## SW2 b2-28 - P2 project
+## SW2 b2-28
 
-Project to create a general system for representing card games, which utilizies state automata and competitive/cooperative systems.
+Project to create a general system for representing card games, which utilizes state automata and competitive/cooperative systems.
 
-[Found here](https://p2-blackjack.azurewebsites.net/ "Blackjack Azure")
+[Site can be found here](https://p2-blackjack.azurewebsites.net/ "Blackjack Azure")
