@@ -11,7 +11,7 @@ const rooms = ['room1', 'room2', 'room3', 'room4'];
 
 io.on('connection', (socket) => {
   socket.on('access_room', (roomID) => {
-    socket.emit('chat message', '2' + roomID);
+    //socket.emit('chat message', '2' + roomID);
     /*
     if(Object.keys(socket.rooms) != [socket.id]) {
       socket.emit('chat message', '3' + roomID);
