@@ -10,10 +10,10 @@ app.use(express.static('public'));
 const rooms = ['room1', 'room2', 'room3', 'room4'];
 
 io.on('connection', (socket) => {
-  socket.emit('chat message', JSON.stringify(socket.rooms));
+  socket.emit('chat message', Object.keys(socket.rooms));
   socket.on('access_room', (roomID) => {
     if(socket.rooms != [socket.id]) {
-      socket.rooms.map((room) => room != socket.id ? socket.leave(room) : socket.id);
+      Object.keys(socket.rooms).map((room) => room != socket.id ? socket.leave(room) : socket.id);
     }
     if(rooms.include(roomID)) {
       socket.join(roomID);
