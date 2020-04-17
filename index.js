@@ -11,6 +11,8 @@ const rooms = ['room1', 'room2', 'room3', 'room4'];
 
 io.on('connection', (socket) => {
   socket.emit('chat message', `Connected through WebSocket`);
+  socket.emit('chat message',
+                    `Rooms joined: ${Object.keys(socket.rooms)}`);
   socket.on('access_room', (roomID) => {
     if(rooms.includes(roomID)){
       //Leaves existing room(s)
