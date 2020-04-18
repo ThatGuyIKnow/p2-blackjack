@@ -4,25 +4,45 @@
     <title>P2 General Cards</title>
     <meta charset="UTF-8">
     <link href="./css/main.css" type="text/css" rel="stylesheet">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
   </head>
   <body>
     <h1>Tester tester</h1>
     <h2>1..2..3</h2>
     <div>
       <button onclick="accessRoom('room1')">Room 1</button>
+      <span id="room1">room1 (0/1)</span>
       <button onclick="accessRoom('room2')">Room 2</button>
+      <span id="room2">room2 (0/2)</span>
       <button onclick="accessRoom('room3')">Room 3</button>
+      <span id="room3">room3 (0/3)</span>
       <button onclick="accessRoom('room4')">Room 4</button>
+      <span id="room4">room4 (0/4)</span>
+      <button onclick="accessRoom('room5')">Room 5</button>
+      <span id="room5">room5 (0/5)</span>
+      <button onclick="accessRoom('room6')">Room 6</button>
+      <span id="room6">room6 (0/6)</span>
     </div>
+    <span>Connected to room: </span><span id="room_display">None</span>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       let socket = io();
-      socket.on('chat message', function(msg){
+      socket.on('message', function(msg){
         console.log(msg);
     });
 
+    socket.on('update_rooms', (rooms) => {
+      for(let e of rooms) {
+        $(`#${e.id}`).text(`${e.id} (${e.c}/${e.maxC})`);
+      }
+    })
+
     function accessRoom(roomID) {
       socket.emit('access_room', roomID);
+      socket.once('room_control', (gotAccess) => {
+        if(gotAccess) 
+          $("#room_display").text(roomID);
+      });
     }
     </script>
   </body>
