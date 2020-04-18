@@ -31,7 +31,7 @@
         console.log(msg);
     });
 
-    socket.on('update_rooms', (rooms) => {
+    socket.on('rooms_status', (rooms) => {
       for(let e of rooms) {
         $(`#${e.id}`).text(`${e.id} (${e.c}/${e.maxC})`);
       }

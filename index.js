@@ -18,28 +18,40 @@ const rooms = [
 
 io.on('connection', (socket) => {
   socket.send(`Connected through WebSocket`);
-  socket.emit('update_rooms', getRoomConnections())
+  //'rooms_status' = The status of room connections has changed
+  socket.emit('rooms_status', roomsConnections())
 
+  // 'access_room' = socket trying to access a room
   socket.on('access_room', (roomID) => {
     const room = rooms.find((r) => r.id == roomID);
-    const io_room = io.sockets.adapter.rooms[roomID];
+    const io_room = getRoomConnections(roomID);
     //If the room exist in "rooms" and either the room hasn't been created yet or the room (which has been created) is at less than maximum capacity
     if(room && (!io_room || io_room.length < room.maxConnections)){
       //Leaves existing room(s)
-      leaveRooms(socket);
-      socket.join(roomID, () => {
-        socket.emit('room_control', true);
-        io.emit('update_rooms', getRoomConnections());
-        socket.send(`Connected to room(s): ${Object.keys(socket.rooms)}`);
+      leaveAllRooms(socket);
+
+      socket.join(roomID, (err) => {
+        // 'room_control' = was socket allowed access
+        if(err) {
+          socket.emit('room_control', false);
+        }
+        else {
+          socket.emit('room_control', true);
+          socket.send(`Connected to room(s): ${Object.keys(socket.rooms)}`);
+          socket.to(roomID).send('A client has joined your room!');
+        }
+        //'rooms_status' = The status of rooms connections has changed
+        io.emit('rooms_status', roomsConnections());
       });
     }
   });
-  socket.on('disconnect', (socket) => {
+  socket.on('disconnect', () => {
     console.log("disconnected");
   })
 });
 
-function leaveRooms(socket) {
+// Make socket leave all rooms (except its ID-room)
+function leaveAllRooms(socket) {
   Object.keys(socket.rooms).map((room) => {
     if(room != socket.id) {
       socket.leave(room);
@@ -47,17 +59,22 @@ function leaveRooms(socket) {
   });
 }
 
-
-function getRoomConnections() {
+// Creates an array containing all roomID, amount of connections
+// and maximum amount of connections.
+function roomsConnections() {
   let arr = [];
   for(let e of rooms) {
-    const room = io.sockets.adapter.rooms[e.id];
-    if(!room) {
+    const connections = getRoomConnections(e.id);
+    if(!connections) {
       arr.push({id: e.id, c: 0, maxC: e.maxConnections});
     }
     else {
-      arr.push({id: e.id, c: room.length, maxC: e.maxConnections});
+      arr.push({id: e.id, c: connections.length, maxC: e.maxConnections});
     }
   }
   return arr;
+}
+
+function getRoomConnections(roomID) {
+  return io.sockets.adapter.rooms[roomID];
 }
