@@ -25,6 +25,9 @@
       <button onclick="accessRoom('0')">Leave room</button>
     </div>
     <span>Connected to room: </span><span id="room_display">None</span>
+    <h2><u>LOG</u></h2>
+    <ul id="log">
+    </ul>
     <script src="/socket.io/socket.io.js"></script>
     <script>
 
@@ -58,7 +61,7 @@
 
     function addSocketHandlers(socket) {
       socket.on('message', function(msg){
-        console.log(msg);
+        $("#log").append(`<li>${msg}</li>`);
       });
       socket.on('rooms_status', (rooms) => {
         for(let e of rooms) {

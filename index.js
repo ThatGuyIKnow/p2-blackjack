@@ -70,7 +70,9 @@ io.on('connection', (socket) => {
 function leaveAllRooms(socket) {
   for(let roomID of Object.keys(socket.rooms)) {
     if(roomID != socket.id) {
-      socket.leave(roomID);
+      socket.leave(roomID, () => {
+        socket.to(roomID).send('A client has left your room!');
+      });
     }
   }
 }
