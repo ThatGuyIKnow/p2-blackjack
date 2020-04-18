@@ -5,6 +5,10 @@ const server = app.listen(port);
 
 const io = require('socket.io')(server);
 
+app.get('/rooms_status.json', (req, res) => {
+  res.send(JSON.stringify(allRoomConnections()));
+});
+
 app.use(express.static('public'));
 
 const rooms = [
@@ -19,14 +23,25 @@ const rooms = [
 io.on('connection', (socket) => {
   socket.send(`Connected through WebSocket`);
   //'rooms_status' = The status of room connections has changed
-  socket.emit('rooms_status', roomsConnections())
+  socket.emit('rooms_status', allRoomConnections())
 
   // 'access_room' = socket trying to access a room
   socket.on('access_room', (roomID) => {
+    if(roomID == '0') {
+      socket.send('Leaving room(s)');
+      leaveAllRooms(socket);
+      io.emit('rooms_status', allRoomConnections());
+      socket.disconnect();
+      return;
+    }
     const room = rooms.find((r) => r.id == roomID);
     const io_room = getRoomConnections(roomID);
     //If the room exist in "rooms" and either the room hasn't been created yet or the room (which has been created) is at less than maximum capacity
     if(room && (!io_room || io_room.length < room.maxConnections)){
+      
+      if(Object.keys(socket.rooms).includes(roomID))
+        return;
+        
       //Leaves existing room(s)
       leaveAllRooms(socket);
 
@@ -41,27 +56,28 @@ io.on('connection', (socket) => {
           socket.to(roomID).send('A client has joined your room!');
         }
         //'rooms_status' = The status of rooms connections has changed
-        io.emit('rooms_status', roomsConnections());
+        io.emit('rooms_status', allRoomConnections());
       });
     }
   });
   socket.on('disconnect', () => {
     console.log("disconnected");
+    io.emit('rooms_status', allRoomConnections());
   })
 });
 
 // Make socket leave all rooms (except its ID-room)
 function leaveAllRooms(socket) {
-  Object.keys(socket.rooms).map((room) => {
-    if(room != socket.id) {
-      socket.leave(room);
+  for(let roomID of Object.keys(socket.rooms)) {
+    if(roomID != socket.id) {
+      socket.leave(roomID);
     }
-  });
+  }
 }
 
 // Creates an array containing all roomID, amount of connections
 // and maximum amount of connections.
-function roomsConnections() {
+function allRoomConnections() {
   let arr = [];
   for(let e of rooms) {
     const connections = getRoomConnections(e.id);

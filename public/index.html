@@ -22,26 +22,48 @@
       <span id="room5">room5 (0/5)</span>
       <button onclick="accessRoom('room6')">Room 6</button>
       <span id="room6">room6 (0/6)</span>
+      <button onclick="accessRoom('0')">Leave room</button>
     </div>
     <span>Connected to room: </span><span id="room_display">None</span>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let socket = io();
-      socket.on('message', function(msg){
-        console.log(msg);
-    });
 
-    socket.on('rooms_status', (rooms) => {
-      for(let e of rooms) {
-        $(`#${e.id}`).text(`${e.id} (${e.c}/${e.maxC})`);
-      }
+    // Fetches the room status using a GET request
+    fetch("http://localhost:1337/rooms_status.json", {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache', 
+      credentials: 'same-origin',
     })
+      .then((res) => res.json())
+      .then((rooms) => {
+        for(let e of rooms) {
+          $(`#${e.id}`).text(`${e.id} (${e.c}/${e.maxC})`);
+        }
+      })
+
+    let socket;
 
     function accessRoom(roomID) {
+      if(!socket || !socket.connected){
+        socket = io();
+        addSocketHandlers(socket);
+      }
       socket.emit('access_room', roomID);
       socket.once('room_control', (gotAccess) => {
         if(gotAccess) 
           $("#room_display").text(roomID);
+      });
+    }
+
+    function addSocketHandlers(socket) {
+      socket.on('message', function(msg){
+        console.log(msg);
+      });
+      socket.on('rooms_status', (rooms) => {
+        for(let e of rooms) {
+          $(`#${e.id}`).text(`${e.id} (${e.c}/${e.maxC})`);
+        }
       });
     }
     </script>
