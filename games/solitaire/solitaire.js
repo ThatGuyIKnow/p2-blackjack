@@ -1,3 +1,3 @@
 const getDeck = require('../../public/js/main');
 
-getDeck();
+getDeck(1);
