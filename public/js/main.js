@@ -1,6 +1,7 @@
 let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     suits = ["spades", "hearts", "diamonds", "clubs"];
 
+// Create X number of decks
 function createDeck(number_of_decks) {
 
     let deck = new Array,
@@ -50,9 +51,10 @@ function randomNumber(size) {
     return Math.floor(Math.random() * size);
 }
 
-// Get the deck
+// Get the uber-deck
 module.exports = function getDeck(number_of_decks) {
     deck = createDeck(number_of_decks);
     shuffleDeck(deck);
     console.log(deck);
+    return deck;
 }
