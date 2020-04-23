@@ -21,6 +21,16 @@
         console.log(msg);
     });
 
+    let ping;
+    socket.on('room control', () => {
+      if(ping == undefined) {
+        ping = setInterval(() => {
+          socket.emit('session ping');
+          console.log("Ping send");
+        }, 2000);
+      }
+    })
+    
     function accessRoom(roomID) {
       socket.emit('access_room', roomID);
     }

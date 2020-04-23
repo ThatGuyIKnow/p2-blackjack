@@ -7,12 +7,31 @@ const io = require('socket.io')(server);
 
 app.use(express.static('public'));
 
+const options = {
+  pingTimeout : 12000, //ms
+}
 
 const rooms = {
-  'room1': [], 
-  'room2': [], 
-  'room3': [], 
-  'room4': [], 
+  'room1': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+  'room2': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+  'room3': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+  'room4': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
 };
 
 function parseCookie(data) {
@@ -24,40 +43,33 @@ function parseCookie(data) {
   return cookie;
 }
 
-io.use((socket, next) => {
-  const handshake = socket.request;
-  const id = parseCookie(handshake.headers.cookie)['io'];
-  console.log(id);
-  console.log("socket id before: " + socket.id);
+const stickySessionMiddleware = (socket, next) => {
+  const cookie = socket.request.headers.cookie;
+  if(cookie == "") {
+    next();
+    return;
+  }
+
+  const id = parseCookie(cookie)['io'];
   for(let roomKey of Object.keys(rooms)) {
-    if(rooms[roomKey].includes(id)) {
-      for(let i = 0; i < rooms[roomKey].length; i++) {
-        if(rooms[roomKey][i] == id) {
-          rooms[roomKey][i] = socket.id;
+
+    const connections = rooms[roomKey].connections;
+    if(connections.includes(id)) {      
+
+      for(let i = 0; i < connections.length; i++) {  
+        if(connections[i] == id) {
+          connections[i] = socket.id;
           socket.join(roomKey)
         }
-      
-        let sessionDrop = setTimeout(dropSession, 10000, socket);
-        socket.on('session ping', () => {
-          clearTimeout(sessionDrop);
-          sessionDrop = setTimeout(dropSession, 10000, socket);
-        });
       } 
+
+      addSocketEventHandlers(socket);
+      break;
     } 
   }
   next();
-});
-
-
-io.use((socket, next) => {
-  const date = new Date();
-  date.setTime(date.getTime() + 10000) //10 seconds 
-  const cookie = socket.handshake.headers.cookie.replace(/(io=[^;]{1,};)/, 
-            () => {return "io=" + socket.id + "; expires="+ date.toUTCString() + ";"});
-  console.log(cookie);
-  socket.handshake.headers.cookie = cookie;
-  next();
-});
+}
+io.use(stickySessionMiddleware);
 
 
 io.on('connection', (socket) => {
@@ -70,15 +82,14 @@ io.on('connection', (socket) => {
         room != socket.id ? socket.leave(room) : socket.id);
 
       socket.join(roomID, (err) => {
-        if(!err)
-        rooms[roomID].push(socket.id);
+        if(err) {
+          dropSession(socket);
+          return;
+        }
+        rooms[roomID].connections.push(socket.id);
         socket.emit('chat message', `Rooms: ${JSON.stringify(rooms)}`);
-        // Disconnects the client if a ping hasn't been send in 10000 ms
-        let sessionDrop = setTimeout(dropSession, 10000, socket);
-        socket.on('session ping', () => {
-          clearTimeout(sessionDrop);
-          sessionDrop = setTimeout(dropSession, 10000, socket);
-        });
+
+        addSocketEventHandlers(socket);
       });
     }
   });
@@ -88,15 +99,36 @@ io.on('connection', (socket) => {
   })
 });
 
-function dropSession(socket) {
+
+function addSocketEventHandlers(socket) 
+{
+  // Disconnects the client if a ping hasn't been send in pingTimeout ms
+  let sessionDrop = setTimeout(dropSession, options.pingTimeout, socket);
+
+  socket.on('session ping', () => {
+    clearTimeout(sessionDrop);
+    sessionDrop = setTimeout(dropSession, options.pingTimeout, socket);
+  });
+
+  socket.emit('room control');
+}
+
+
+function dropSession(socket) 
+{
   if(!socket.connected)
     return;
+  
   for(let roomKey of Object.keys(rooms)) {
-    if(rooms[roomKey].includes(socket.id)) {
-      rooms[roomKey] = rooms[roomKey].filter((conn) => conn != socket.id);
+  
+    let connections = rooms[roomKey].connections;
+    if(connections.includes(socket.id)) {
+      rooms[roomKey].connections = connections.filter((conn) => conn != socket.id);
     }
+  
   }
   socket.emit('chat message', `Disconnected from Socket IO Session`);
   socket.emit('chat message', `Rooms: ${JSON.stringify(rooms)}`);
+  
   socket.disconnect();
 }
