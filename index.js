@@ -8,7 +8,7 @@ const io = require('socket.io')(server);
 app.use(express.static('public'));
 
 const options = {
-  pingTimeout : 12000, //ms
+  pingTimeout : 60000, //1 minutes
 }
 
 const rooms = {
@@ -34,7 +34,8 @@ const rooms = {
   }, 
 };
 
-function parseCookie(data) {
+function parseCookie(data) 
+{
   let parseData =  [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
   let cookie = {};
   for(let match of parseData) {
@@ -67,6 +68,7 @@ const stickySessionMiddleware = (socket, next) => {
       break;
     } 
   }
+  console.log(io.engine);
   next();
 }
 io.use(stickySessionMiddleware);
