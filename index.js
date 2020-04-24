@@ -68,23 +68,24 @@ const stickySessionMiddleware = (socket, next) => {
       break;
     } 
   }
-  console.log(io.engine);
   next();
 }
 io.use(stickySessionMiddleware);
 
 io.on('connection', (socket) => {
-  socket.emit('chat message', `Connected through WebSocket`);
-  socket.emit('chat message', `Rooms joined: ${Object.keys(socket.rooms)}`);
+  socket.send(`Connected through WebSocket. ID: ${socket.id}`);
+  socket.send(`Rooms: ${JSON.stringify(rooms)}`);
   
   socket.on('accessRoom',(roomID) => {
-    if(!Object.keys(rooms).include(roomID) || rooms[roomID].connections.length >= rooms[roomID].maxConnections) {
+    if(!Object.keys(rooms).includes(roomID) || rooms[roomID].connections.length >= rooms[roomID].maxConnections) {
       socket.send("Error joining room " + roomID);
     }
     else {
       leaveRooms(socket);
       socket.join(roomID);
-      AddSocketEventHandlers(socket);
+      rooms[roomID].connections.push(socket.id);
+      addSocketEventHandlers(socket);
+      socket.send(`Rooms: ${JSON.stringify(rooms)}`);
     }
   });
   
@@ -122,10 +123,10 @@ function dropSession(socket)
 }
 
 function leaveRooms(socket) {
-  for(let roomKey in Object.keys(rooms))
+  for(let roomKey of Object.keys(rooms))
   {
     const room = rooms[roomKey];
-    if(room.connections.include(socket.id)) 
+    if(room.connections.includes(socket.id)) 
     {
       socket.leave(roomKey);
       room.connections = room.connections.filter((e) => e != socket.id);
