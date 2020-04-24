@@ -9,6 +9,12 @@ app.use(express.static('public'));
 
 const rooms = ['room1', 'room2', 'room3', 'room4'];
 
+socket.on('accessRoom',(roomID) => {
+if(!Object.keys(rooms).include(roomID) || rooms[roomID].connections.length >= rooms[roomID].maxConnections)
+    return XXX
+    else socket.join(roomID), AddSocketEventHandlers();
+});
+
 io.on('connection', (socket) => {
   socket.emit('chat message', `Connected through WebSocket`);
   socket.emit('chat message', `Rooms joined: ${Object.keys(socket.rooms)}`);
