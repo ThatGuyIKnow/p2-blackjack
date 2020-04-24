@@ -7,30 +7,58 @@ const io = require('socket.io')(server);
 
 app.use(express.static('public'));
 
-const rooms = ['room1', 'room2', 'room3', 'room4'];
-
-socket.on('accessRoom',(roomID) => {
-if(!Object.keys(rooms).include(roomID) || rooms[roomID].connections.length >= rooms[roomID].maxConnections)
-    return XXX
-    else socket.join(roomID), AddSocketEventHandlers();
-});
+const rooms = {
+  'room1': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+  'room2': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+  'room3': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+  'room4': 
+  {
+    connections : [],
+    maxConnections : 1
+  }, 
+};
 
 io.on('connection', (socket) => {
   socket.emit('chat message', `Connected through WebSocket`);
   socket.emit('chat message', `Rooms joined: ${Object.keys(socket.rooms)}`);
-  socket.on('access_room', (roomID) => {
-    if (rooms.includes(roomID)) {
-      //Leaves existing room(s)
-      Object.keys(socket.rooms).map((room) =>
-        room != socket.id ? socket.leave(room) : socket.id);
-
-      socket.join(roomID, () => {
-        socket.emit('chat message', `Rooms joined: ${Object.keys(socket.rooms)}`);
-      });
+  
+  socket.on('accessRoom',(roomID) => {
+    if(!Object.keys(rooms).include(roomID) || rooms[roomID].connections.length >= rooms[roomID].maxConnections) {
+      socket.send("Error joining room " + roomID);
+    }
+    else {
+      leaveRooms(socket);
+      socket.join(roomID);
+      AddSocketEventHandlers(socket);
     }
   });
+  
 
   socket.on('disconnect', (socket) => {
     console.log("disconnected")
   })
 });
+
+function leaveRooms(socket) {
+  for(let roomKey in Object.keys(rooms))
+  {
+      const room = rooms[roomKey];
+    if(room.connections.include(socket.id)) 
+    {
+      socket.leave(roomKey);
+      room.connections = room.connections.filter((e) => e != socket.id);
+    }
+  }
+}
