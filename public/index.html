@@ -17,7 +17,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       let socket = io();
-      socket.on('chat message', function(msg){
+      socket.on('message', function(msg){
         console.log(msg);
     });
 
@@ -32,7 +32,7 @@
     })
     
     function accessRoom(roomID) {
-      socket.emit('access_room', roomID);
+      socket.emit('accessRoom', roomID);
     }
     </script>
   </body>

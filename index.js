@@ -73,28 +73,21 @@ const stickySessionMiddleware = (socket, next) => {
 }
 io.use(stickySessionMiddleware);
 
-
 io.on('connection', (socket) => {
   socket.emit('chat message', `Connected through WebSocket`);
-  socket.emit('chat message', `Rooms: ${JSON.stringify(rooms)}`);
-  socket.on('access_room', (roomID) => {
-    if (rooms[roomID] != undefined) {
-      //Leaves existing room(s)
-      Object.keys(socket.rooms).map((room) =>
-        room != socket.id ? socket.leave(room) : socket.id);
-
-      socket.join(roomID, (err) => {
-        if(err) {
-          dropSession(socket);
-          return;
-        }
-        rooms[roomID].connections.push(socket.id);
-        socket.emit('chat message', `Rooms: ${JSON.stringify(rooms)}`);
-
-        addSocketEventHandlers(socket);
-      });
+  socket.emit('chat message', `Rooms joined: ${Object.keys(socket.rooms)}`);
+  
+  socket.on('accessRoom',(roomID) => {
+    if(!Object.keys(rooms).include(roomID) || rooms[roomID].connections.length >= rooms[roomID].maxConnections) {
+      socket.send("Error joining room " + roomID);
+    }
+    else {
+      leaveRooms(socket);
+      socket.join(roomID);
+      AddSocketEventHandlers(socket);
     }
   });
+  
 
   socket.on('disconnect', (socket) => {
     console.log("disconnected")
@@ -118,19 +111,24 @@ function addSocketEventHandlers(socket)
 
 function dropSession(socket) 
 {
-  if(!socket.connected)
-    return;
+  leaveRooms(socket)
   
-  for(let roomKey of Object.keys(rooms)) {
   
-    let connections = rooms[roomKey].connections;
-    if(connections.includes(socket.id)) {
-      rooms[roomKey].connections = connections.filter((conn) => conn != socket.id);
-    }
-  
+  if(socket.connected) {
+    socket.send(`Disconnected from Socket IO Session`);
+    socket.send(`Rooms: ${JSON.stringify(rooms)}`);
+    socket.disconnect();
   }
-  socket.emit('chat message', `Disconnected from Socket IO Session`);
-  socket.emit('chat message', `Rooms: ${JSON.stringify(rooms)}`);
-  
-  socket.disconnect();
+}
+
+function leaveRooms(socket) {
+  for(let roomKey in Object.keys(rooms))
+  {
+    const room = rooms[roomKey];
+    if(room.connections.include(socket.id)) 
+    {
+      socket.leave(roomKey);
+      room.connections = room.connections.filter((e) => e != socket.id);
+    }
+  }
 }
