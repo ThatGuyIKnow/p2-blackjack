@@ -137,17 +137,22 @@ function addSocketEventHandlers(socket) {
     let room = rooms[socket.rooms[1]]; // Probly unstable. Search in rooms const instead
     if (room.data == {}) {
       solitaire.init((state, err) => {
-        if (err)
+        if (err) {
           socket.send(err);
-        else
+        } else {
+          room.state = state;
           callback(state);
+        }
       });
     } else {
       solitaire.action(room.state, data, (state, err) => {
-        if (err)
+        if (err) {
           socket.send(err);
-        else
+        } else {
+          room.state = state;
           callback(state);
+        }
+
       });
     }
   })
