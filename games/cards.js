@@ -1,11 +1,11 @@
 let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     suits = ["spades", "hearts", "diamonds", "clubs"];
 
-// Create (X) number of decks
-function createDeck(number_of_decks) {
+// Create @param number of decks
+function buildDeck(number_of_decks) {
 
-    let deck = new Array,
-        ID, i, j, card;
+    let deck = [],
+        id, i, j, card;
 
     for (i = 0; i < suits.length; i++) {
 
@@ -15,9 +15,10 @@ function createDeck(number_of_decks) {
             ID = randomNumber(1000000).toString(36);
 
             card = {
-                Suit: suits[i % 4],
-                Rank: ranks[j % 13],
-                ID: ID
+                suit: suits[i % 4],
+                rank: ranks[j % 13],
+                id: ID,
+                hidden: true,
             };
             deck.push(card);
         }
@@ -52,10 +53,10 @@ function randomNumber(size) {
 }
 
 // Get the uber-deck
-module.exports = function getDeck(number_of_decks) {
-    deck = createDeck(number_of_decks);
+module.exports = function createDeck(number_of_decks) {
+    let deck = buildDeck(number_of_decks);
     shuffleDeck(deck);
-    console.log(deck);
+    //console.log(deck);
 
     return deck;
 }
