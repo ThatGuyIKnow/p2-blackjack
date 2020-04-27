@@ -1,3 +1,3 @@
-const getDeck = require('../../public/js/main');
+const getDeck = require('../cards.js');
 
 getDeck(1);
