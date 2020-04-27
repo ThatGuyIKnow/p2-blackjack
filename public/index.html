@@ -13,6 +13,7 @@
       <button onclick="accessRoom('room2')">Room 2</button>
       <button onclick="accessRoom('room3')">Room 3</button>
       <button onclick="accessRoom('room4')">Room 4</button>
+      <button onclick="doTheThing()">Action</button>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -24,6 +25,13 @@
     function accessRoom(roomID) {
       socket.emit('access_room', roomID);
     }
+
+    function doTheThing() 
+      {  
+        socket.emit("player action", {}, (state) => {
+          print(state);
+        })
+      }
     </script>
   </body>
 </html>
