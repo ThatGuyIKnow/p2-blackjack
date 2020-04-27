@@ -17,12 +17,22 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       let socket = io();
-      socket.on('chat message', function(msg){
+      socket.on('message', function(msg){
         console.log(msg);
     });
 
+    let ping;
+    socket.on('room control', () => {
+      if(ping == undefined) {
+        ping = setInterval(() => {
+          socket.emit('session ping');
+          console.log("Ping send");
+        }, 2000);
+      }
+    })
+    
     function accessRoom(roomID) {
-      socket.emit('access_room', roomID);
+      socket.emit('accessRoom', roomID);
     }
     </script>
   </body>
