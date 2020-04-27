@@ -32,10 +32,9 @@ const rooms = {
 };
 
 // @param {string} data The cookie string
-function parseCookie(data) 
-{
-  let parseData =  [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
-  /* Converts the parsed data to an object with the key-value pairs found in    
+function parseCookie(data) {
+  let parseData = [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
+
   /* Converts the parsed data to an object with the key-value pairs found in
    * the cookie (match[0] is the entire cookie string).
    */
