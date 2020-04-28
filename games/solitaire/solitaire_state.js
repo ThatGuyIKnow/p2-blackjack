@@ -2,19 +2,20 @@ const createDeck = require('../cards');
 
 let deck = createDeck(1, 0);
 
-module.exports = function createTableaus(deck) {
-    let tableau = [];
+/*TODO Add back in later module.exports = */
+function createTableaus(deck) {
+    let tableaus = [];
 
     for (let i = 0; i < deck.length; i++)
         deck[i].hidden = false;
 
     for (let i = 0; i < 7; i++)
-        tableau[i + 1] = Tableau(deck, i);
+        tableaus[i + 1] = Tableau(deck, i);
 
-    console.log(tableau);
+    console.log(tableaus);
     console.log(deck);
 
-    return tableau;
+    return tableaus;
 }
 
 // Create tableau with @param cards
@@ -34,3 +35,5 @@ function Tableau(deck, number_of_cards) {
 
     return tableau;
 }
+
+createTableaus(deck);
