@@ -2,26 +2,41 @@ let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     suits = ["spades", "hearts", "diamonds", "clubs"];
 
 // Create @param number of decks
-function buildDeck(number_of_decks) {
+function buildDeck(number_of_decks, number_of_jokers) {
 
     let deck = [],
-        id, i, j, card;
+        ID = 1,
+        last_id, card;
 
-    for (i = 0; i < suits.length; i++) {
+    for (let i = 0; i < suits.length; i++) {
 
-        for (j = 0; j < ranks.length * number_of_decks; j++) {
+        for (let j = 0; j < ranks.length * number_of_decks; j++) {
 
             // Random alpha-numeric string
-            ID = randomNumber(1000000).toString(36);
-
             card = {
                 suit: suits[i % 4],
                 rank: ranks[j % 13],
-                id: ID,
-                hidden: true,
+                id: ID++,
+                isJoker: false,
+                hidden: true
             };
             deck.push(card);
         }
+    }
+    // Get the last id to start of the joker id count
+    last_id = deck[deck.length - 1].id + 1;
+
+    // Construct jokers
+    for (let i = 0; i < number_of_jokers; i++) {
+
+        card = {
+            suit: 0,
+            rank: 0,
+            id: last_id++,
+            isJoker: true,
+            hidden: true
+        };
+        deck.push(card);
     }
 
     return deck;
@@ -53,10 +68,10 @@ function randomNumber(size) {
 }
 
 // Get the uber-deck
-module.exports = function createDeck(number_of_decks) {
-    let deck = buildDeck(number_of_decks);
+module.exports = function createDeck(number_of_decks, number_of_jokers) {
+    let deck = buildDeck(number_of_decks, number_of_jokers);
     shuffleDeck(deck);
-    //console.log(deck);
+    console.log(deck);
 
     return deck;
 }

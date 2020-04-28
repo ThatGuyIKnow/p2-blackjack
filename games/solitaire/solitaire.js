@@ -1,7 +1,7 @@
-const createTableaus = require("./solitaire_state.js");
-const createDeck = require('../cards.js');
-const gamemaster = require('./solitaire_gamemaster.js');
-const dealer = require('./solitaire_dealer.js');
+const createTableaus = require("./solitaire_state");
+const createDeck = require('../cards');
+const gamemaster = require('./solitaire_gamemaster');
+const dealer = require('./solitaire_dealer');
 
 function init(callback) {
     const s_pile = createDeck(1);

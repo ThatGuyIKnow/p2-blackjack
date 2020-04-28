@@ -1,11 +1,14 @@
-module.exports = function createTableaus(deck) {
-    let tableau = [],
-        i;
+const createDeck = require('../cards');
 
-    for (i = 0; i < deck.length; i++)
+let deck = createDeck(1, 0);
+
+module.exports = function createTableaus(deck) {
+    let tableau = [];
+
+    for (let i = 0; i < deck.length; i++)
         deck[i].hidden = false;
 
-    for (i = 0; i < 7; i++)
+    for (let i = 0; i < 7; i++)
         tableau[i + 1] = Tableau(deck, i);
 
     console.log(tableau);
@@ -16,13 +19,12 @@ module.exports = function createTableaus(deck) {
 
 // Create tableau with @param cards
 function Tableau(deck, number_of_cards) {
-    let tableau = [],
-        i;
+    let tableau = [];
 
     console.log(deck);
     console.log("removing " + number_of_cards);
 
-    for (i = 0; i < number_of_cards; i++) {
+    for (let i = 0; i < number_of_cards; i++) {
         if (i != 0)
             deck[0].hidden = true;
 
