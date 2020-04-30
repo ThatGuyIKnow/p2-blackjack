@@ -31,14 +31,14 @@
         }, 2000);
       }
     })
-    
+
     function accessRoom(roomID) {
       socket.emit('accessRoom', roomID);
     }
 
-    function doTheThing() 
-    {  
-        
+    function doTheThing()
+    {
+
       socket.emit("player action", {}, (state) => {
         console.log(state);
       })

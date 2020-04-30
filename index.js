@@ -75,7 +75,7 @@ const stickySessionMiddleware = (socket, next) => {
       for (let i = 0; i < connections.length; i++) {
         if (connections[i] == id) {
           connections[i] = socket.id;
-          socket.join(roomKey)
+          socket.join(roomKey);
         }
       }
 
@@ -84,7 +84,7 @@ const stickySessionMiddleware = (socket, next) => {
     }
   }
   next();
-}
+};
 io.use(stickySessionMiddleware);
 
 /*
@@ -110,8 +110,8 @@ io.on('connection', (socket) => {
 
 
   socket.on('disconnect', (socket) => {
-    console.log("disconnected")
-  })
+    console.log("disconnected");
+  });
 });
 
 
@@ -155,7 +155,7 @@ function addSocketEventHandlers(socket) {
 
       });
     }
-  })
+  });
 }
 
 /*
@@ -164,7 +164,7 @@ function addSocketEventHandlers(socket) {
  * @param {Socket object} socket The socket to drop
  */
 function dropSession(socket) {
-  leaveRooms(socket)
+  leaveRooms(socket);
 
 
   if (socket.connected) {
