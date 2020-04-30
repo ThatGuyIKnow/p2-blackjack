@@ -15,6 +15,22 @@
       <button onclick="accessRoom('room4')">Room 4</button>
       <button onclick="doTheThing()">Action</button>
     </div>
+    
+    <textarea id="testAction" rows="4" cols="50">{
+      "action": "MovePile",
+      "sequence": {
+          "from": {
+            "pile": "f_pile",
+            "pile_number": 2,
+            "card_number": 3
+          },
+          "to": {
+            "pile": "t_pile",
+            "pile_number": 4
+          }
+        }
+     }</textarea>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
       let socket = io();
@@ -31,15 +47,15 @@
         }, 2000);
       }
     })
-
+    
     function accessRoom(roomID) {
       socket.emit('accessRoom', roomID);
     }
 
-    function doTheThing()
-    {
-
-      socket.emit("player action", {}, (state) => {
+    function doTheThing() 
+    {  
+      let action = JSON.parse(document.getElementById("testAction").value);
+      socket.emit("player action", action, (state) => {
         console.log(state);
       })
     }

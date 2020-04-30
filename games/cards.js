@@ -71,7 +71,6 @@ function randomNumber(size) {
 module.exports = function createDeck(number_of_decks, number_of_jokers) {
     let deck = buildDeck(number_of_decks, number_of_jokers);
     shuffleDeck(deck);
-    console.log(deck);
 
     return deck;
 }

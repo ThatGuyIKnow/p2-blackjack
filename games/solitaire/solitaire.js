@@ -1,37 +1,29 @@
 const createTableaus = require("./solitaire_state");
 const createDeck = require('../cards');
-const gamemaster = require('./solitaire_gamemaster');
-const dealer = require('./solitaire_dealer');
+const gameMaster = require('./solitaire_gamemaster');
 
-function init(callback) {
-    const s_pile = createDeck(1);
+module.exports =  {
+    init : function (callback) {
+        const s_pile = createDeck(1);
 
-    for (let card in s_pile) {
-        card.hidden = false;
-    }
-    const t_pile = createTableaus(s_pile);
-    const f_pile = [
-        [],
-        [],
-        [],
-        []
-    ];
-    const state = {
-        s_pile,
-        t_pile,
-        f_pile
-    };
-    callback(state);
-}
-
-function action(state, action, callback) {
-    gamemaster.verify(state, action, (err) => {
-        if (err) {
-            console.log(err);
-            callback(state, err);
-            return;
+        for (let card of s_pile) {
+            card.hidden = false;
         }
-        const newState = dealer.act(state, action);
-        callback(newState);
-    });
+        const t_pile = createTableaus(s_pile);
+        const f_pile = [
+            [],
+            [],
+            [],
+            []
+        ];
+        const state = {
+            s_pile,
+            t_pile,
+            f_pile
+        };
+        callback(state);
+    },
+
+    action : gameMaster.act,
+    filterState : (state) => gameMaster.filterState(state),
 }

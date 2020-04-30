@@ -10,10 +10,7 @@ function createTableaus(deck) {
         deck[i].hidden = false;
 
     for (let i = 0; i < 7; i++)
-        tableaus[i + 1] = Tableau(deck, i);
-
-    console.log(tableaus);
-    console.log(deck);
+        tableaus[i] = Tableau(deck, i + 1);
 
     return tableaus;
 }
@@ -21,9 +18,6 @@ function createTableaus(deck) {
 // Create tableau with @param cards
 function Tableau(deck, number_of_cards) {
     let tableau = [];
-
-    console.log(deck);
-    console.log("removing " + number_of_cards);
 
     for (let i = 0; i < number_of_cards; i++) {
         if (i != 0)
@@ -36,4 +30,5 @@ function Tableau(deck, number_of_cards) {
     return tableau;
 }
 
-createTableaus(deck);
+
+module.exports = createTableaus;
