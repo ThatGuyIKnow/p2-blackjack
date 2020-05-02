@@ -1,7 +1,5 @@
 const createDeck = require('../cards');
 
-let deck = createDeck(1, 0);
-
 /*TODO Add back in later module.exports = */
 function createTableaus(deck) {
     let tableaus = [];

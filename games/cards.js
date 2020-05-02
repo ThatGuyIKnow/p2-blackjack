@@ -1,5 +1,5 @@
 let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-    suits = ["spades", "hearts", "diamonds", "clubs"];
+    suits = ["spades", "hearts", "clubs", "diamonds"];
 
 // Create @param number of decks
 function buildDeck(number_of_decks, number_of_jokers) {
@@ -12,7 +12,7 @@ function buildDeck(number_of_decks, number_of_jokers) {
 
         for (let j = 0; j < ranks.length * number_of_decks; j++) {
 
-            // Random alpha-numeric string
+            // Incrementing ID
             card = {
                 suit: suits[i % 4],
                 rank: ranks[j % 13],
