@@ -1,21 +1,118 @@
 
 class VerificationError extends Error{}
-class StateChangeError  extends Error{}
 
 const dealer = require('./solitaire_dealer.js');
 
+/*
+ * - Export module
+ * - Ruleset
+ * - Action functions
+ * - Verify function
+ * - Helper Verify functions
+ * - General helper functions
+ * 
+ */
 
-function deepCopy(object) 
-{
-  return JSON.parse(JSON.stringify(object));
+/*
+ * ========== Export Module ==========
+ */
+ /*
+  *
+  * Export module (GameMaster).
+  * Has two main functions, which is filterState and act.
+  * filterState's function is to create a state which filters
+  * the state for cards which have hidden set to True.
+  * 
+  * act's function is to take an action and trigger a corresponding 
+  * action function, which verifies and acts on the state.
+  */
+ module.exports = {
+
+  /*
+   * Returns a copy of a solitaire state where all hidden cards values have
+   * been set to 0/""
+   * 
+   * @param {object} state The solitaire state to filter
+   */  
+
+  filterState : function (state) {
+    let filteredState = deepCopy(state);
+  
+    let t_pile = filteredState.t_pile;
+    for(let pile of t_pile) {
+      for(let card of pile) {
+        if(card.hidden) {
+          card.isJoker = false;
+          card.rank = 0;
+          card.suit = "";
+          card.id = 0;
+        }
+      }
+    }
+    
+    return filteredState;
+  },
+
+  /*
+   * Searches the ruleset const, for the key passed in action. If found, 
+   * calls the corresponding function with (state, action, callback) args.
+   * 
+   * @param {object} state     The solitaire state
+   * @param {object} action    The action to preform on the state
+   * @param {object} callback  A callback fn in the form om (state, err) =>
+   */  
+  act : function (state, action, callback) {
+    console.log(action);
+    
+    if(Object.keys(ruleset).includes(action.action)) {
+      const newState = deepCopy(state);
+      ruleset[action.action](newState, action, callback);
+    }
+    else {
+      let err = new VerificationError('Action not found');
+      callback(state, err);
+    }
+  },
 }
+
+/*
+ * ========== RULESET ==========
+ */
+
+/*
+ * The ruleset for the GameMaster. 
+ * ruleset is a preset map, which uses key/function pairs
+ * to interpret the action passed to the GameMaster
+ */
 
 const ruleset = {
-  'MovePile' : MovePile,
+  'MovePile' : movePile,
 }
 
 
-function MovePile (state, action, callback)
+/*
+ * ========== ACTION FUNCTION(S) ==========
+ */
+
+ /*
+  * The action function(s) are functions which verifies the
+  * validity of an action, and then passes the information to the dealer
+  * if it is valid.
+  * The only action in solitaire is the MovePile action, which
+  * moves one or more card(s) from one pile to another.
+  * The action function firstly verifies whenever an action
+  * is valid on a certain state, and if yes, it copies the state
+  * and calls a function from the dealer to alter the copied state.
+  * This state is then passed in the callback function.
+  * If the verification fails, the original passed state, and an error
+  * is passed in the callback instead
+  * 
+  * @param {object} state     The solitaire state
+  * @param {object} action    The action to preform on the state
+  * @param {object} callback  A callback fn in the form om (state, err) =>
+  */
+
+function movePile (state, action, callback)
 { 
   let error;
 
@@ -29,25 +126,38 @@ function MovePile (state, action, callback)
   if (error)
     return;
 
-
-  // dealer.MovePile(state, action, (err) => {
-  //   if (err) {
-  //     error = err;
-  //     callback(state, err);
-  //   }
-  // });
-  // if (error)
-  //   return;
-
-  callback(state);
+  const newState = deepCopy(state);
+  dealer.movePile(newState, action);
+  callback(newState);
   
 }
 
 
+function deepCopy(object) 
+{
+  return JSON.parse(JSON.stringify(object));
+}
+
 /*
- *
- * Takes the state, and action, and a callback event in form callback(err)
+ * ========== VERIFY FUNCTION(S) ==========
  */
+
+/*
+ * Verify function are responsible for verifying if a specific function 
+ * is valid to preform on a given state.
+ */
+
+ /*
+  * verifyMovePile verifies if the movePile action is valid on a given state.
+  * verifyMovePile separates the validation based on what pile the card(s) are
+  * being moved from (verifyFromFoundation, verifyFromStockpile, 
+  * verifyFromTableau).
+  * Calls callback if error is found. The function does not return anything.
+  * 
+  * @param {object} state     The solitaire state
+  * @param {object} action    The action to preform on the state
+  * @param {object} callback  A callback fn in the form om (state, err) =>
+  */
 function verifyMovePile (state, action, callback) 
 {
   const from = action.sequence.from;
@@ -71,7 +181,13 @@ function verifyMovePile (state, action, callback)
   }
 }
 
+/*
+ * ========== VERIFY HELPER FUNCTION(S) ==========
+ */
 
+ /*
+  * Helper functions for verifying state and actions
+  */ 
 
 /*
  * Verifies a move from the Foundation pile to another pile.
@@ -144,9 +260,9 @@ function verifyFromStockpile(state, from, to, callback)
 }
 
 /*
-* Verifies a move from the Foundation pile to another pile.
-* Takes the state, the from and to component of an action and the callback(err)
-*/
+ * Verifies a move from the Foundation pile to another pile.
+ * Takes the state, the from and to component of an action and the callback(err)
+ */
 function verifyFromTableau(state, from, to, callback)
 {
   if(!state.t_pile[from.pile_number][from.card_number]
@@ -160,7 +276,7 @@ function verifyFromTableau(state, from, to, callback)
   let from_card2 = state.t_pile[from.pile_number][from.card_number + 1];
   let to_card;
 
-  if(!canGrabCard(from_card1, from_card2))
+  if(!canMoveTableau(from_card1, from_card2))
   {
     callback(new VerificationError("Illegal move here"));
     return;
@@ -195,9 +311,19 @@ function verifyFromTableau(state, from, to, callback)
   }
 }
 
-function canGrabCard(card1, card2)
+/*
+ * Check if the tableau card package can be moved, based on the card to move
+ * and the card below it. Here card1 is the card to move.
+ * Here a the order of cards are so that card1 is above card2 on the solitaire
+ * table e.g. card1 = 10 of Spades, card2 = 9 of Hearts would be valid.
+ * Returns True if the configuration is valid and False otherwise.
+ * 
+ * @param{card Object} card1 The first card object
+ * @param{card Object} card2 The second card object
+ */
+function canMoveTableau(card1, card2)
 {
-  if(card1 == undefined)
+  if(card1 == undefined || card1.hidden == true)
     return false;
   
   if(card2 == undefined)
@@ -212,10 +338,20 @@ function canGrabCard(card1, card2)
   return card1_red != card2_red;
 }
 
+
+/*
+ * Checks if a given card is valid to place onto another card
+ * in the tableau pile. Here card1 is the card which is being
+ * moved, and card2 is the card which it is being moved onto.
+ * Returns True if the configuration is valid and False otherwise.
+ * 
+ * @param{card Object} card1 The first card object
+ * @param{card Object} card2 The second card object
+ */
 function isCorrectPlacementTableau(card1, card2) 
 {
 
-if(card1 == undefined)
+if(card1 == undefined || card1.hidden == true)
   return false;
 
 if(card2 == undefined) {
@@ -223,10 +359,10 @@ if(card2 == undefined) {
   return card1.rank == 13;
 }
 
-if(card1.rank + 1 != card2.rank)
+if(card2.hidden)
   return false;
 
-if(card1.hidden || card2.hidden)
+if(card1.rank + 1 != card2.rank)
   return false;
 
 let card1_red = ["hearts", "diamonds"].includes(card1.suit);
@@ -235,6 +371,18 @@ let card2_red = ["hearts", "diamonds"].includes(card2.suit);
 return card1_red != card2_red;
 }
 
+/*
+ * Checks if a given card is valid to place onto another card
+ * in the foundation pile. Here card1 is the card which is being
+ * moved, and card2 is the card which it is being moved onto.
+ * If card2 is undefined (which means the corresponding pile is empty) 
+ * the pile_number is instead referred to check if the placement is correct.
+ * Returns True if the configuration is valid and False otherwise.
+ * 
+ * @param{card Object} card1       The first card object
+ * @param{card Object} card2       The second card object
+ * @param{Integer}     pile_number The pile to move onto
+ */
 function isCorrectPlacementFoundation(card1, card2, pile_number) 
 {  
   if(card2 == undefined)
@@ -255,7 +403,6 @@ function isCorrectPlacementFoundation(card1, card2, pile_number)
         return false;
     }
   }
-
   
 if(card1.rank - 1  != card2.rank)
   return false;
@@ -269,47 +416,7 @@ return card1.suit == card2.suit;
 
 
 
-module.exports = {
 
-  // Den skal kunne interpret
-  // Den skal kunne bekrn af en aktion
-  // Den skal kunne interagere med Dealeren
-  // Den skal have en
-
-  
-
-  filterState : function (state) {
-    let filteredState = deepCopy(state);
-  
-    let t_pile = filteredState.t_pile;
-    for(let pile of t_pile) {
-      for(let card of pile) {
-        if(card.hidden) {
-          card.isJoker = false;
-          card.rank = 0;
-          card.suit = "";
-          card.id = 0;
-        }
-      }
-    }
-    
-    return filteredState;
-  },
-
-  act : function (state, action, callback) {
-    console.log(action);
-    if(Object.keys(ruleset).includes(action.action)) {
-      const newState = deepCopy(state);
-      ruleset[action.action](newState, action, callback);
-    }
-    else {
-      callback(state);
-    }
-  },
-
-
-
-}
 
 // How should an action from the client look?
 // {
