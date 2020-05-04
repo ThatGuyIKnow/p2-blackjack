@@ -1,7 +1,17 @@
-let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+/*
+ * The different ranks and suits a card can have.
+ */
+const ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     suits = ["spades", "hearts", "clubs", "diamonds"];
 
-// Create @param number of decks
+/*
+ * Creates a deck, which is an array of card objects. This deck contains
+ * {number_of_decks} amount of single decks, and {number_of_jokers} amount
+ * of jokers.
+ *
+ * @param {Integer} number_of_decks  The amounts of single decks in the deck
+ * @param {Integer} number_of_jokers The amount of jokers in the deck
+ */
 function buildDeck(number_of_decks, number_of_jokers) {
 
     let deck = [],
@@ -42,7 +52,11 @@ function buildDeck(number_of_decks, number_of_jokers) {
     return deck;
 }
 
-// Shuffle deck using the Fisher-Yates shuffle algorithm
+/*
+ * A function which shuffles a deck using the Fisher-Yates algorithm.
+ *
+ * @param {Array} number_of_decks  The deck to shuffle
+ */
 function shuffleDeck(deck) {
     let deck_size = deck.length,
         temp, random_card;
@@ -62,12 +76,22 @@ function shuffleDeck(deck) {
     return deck;
 }
 
-// Generate random number of certain size
+/*
+ * Helper function which generates a random positive integer up to {size}
+ * Returns said integer.
+ * 
+ * @param {Integer} size The maximum size of the number
+ */
 function randomNumber(size) {
     return Math.floor(Math.random() * size);
 }
-
-// Get the uber-deck
+/*
+ * The export module. Returns a shuffled deck of {number_of_decks} size, with
+ * {number_of_jokers} jokers.
+ *
+ * @param {Integer} number_of_decks  The amounts of single decks in the deck
+ * @param {Integer} number_of_jokers The amount of jokers in the deck
+ */
 module.exports = function createDeck(number_of_decks, number_of_jokers) {
     let deck = buildDeck(number_of_decks, number_of_jokers);
     shuffleDeck(deck);

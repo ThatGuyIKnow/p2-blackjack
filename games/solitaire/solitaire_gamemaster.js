@@ -57,9 +57,9 @@ const dealer = require('./solitaire_dealer.js');
    * Searches the ruleset const, for the key passed in action. If found, 
    * calls the corresponding function with (state, action, callback) args.
    * 
-   * @param {object} state     The solitaire state
-   * @param {object} action    The action to preform on the state
-   * @param {object} callback  A callback fn in the form om (state, err) =>
+   * @param {object}   state     The solitaire state
+   * @param {object}   action    The action to preform on the state
+   * @param {function} callback  A callback fn in the form om (state, err) =>
    */  
   act : function (state, action, callback) {
     console.log(action);
@@ -107,9 +107,9 @@ const ruleset = {
   * If the verification fails, the original passed state, and an error
   * is passed in the callback instead
   * 
-  * @param {object} state     The solitaire state
-  * @param {object} action    The action to preform on the state
-  * @param {object} callback  A callback fn in the form om (state, err) =>
+  * @param {object}   state     The solitaire state
+  * @param {object}   action    The action to preform on the state
+  * @param {function} callback  A callback fn in the form om (state, err) =>
   */
 
 function movePile (state, action, callback)
@@ -133,11 +133,6 @@ function movePile (state, action, callback)
 }
 
 
-function deepCopy(object) 
-{
-  return JSON.parse(JSON.stringify(object));
-}
-
 /*
  * ========== VERIFY FUNCTION(S) ==========
  */
@@ -151,36 +146,58 @@ function deepCopy(object)
   * verifyMovePile verifies if the movePile action is valid on a given state.
   * verifyMovePile separates the validation based on what pile the card(s) are
   * being moved from (verifyFromFoundation, verifyFromStockpile, 
-  * verifyFromTableau).
-  * Calls callback if error is found. The function does not return anything.
+  * verifyFromTableau) and where they are being moved to (verifyToFoundation, 
+  * verifyToTableau).
+  * Calls callback if an error is found. The function does not return anything.
   * 
-  * @param {object} state     The solitaire state
-  * @param {object} action    The action to preform on the state
-  * @param {object} callback  A callback fn in the form om (state, err) =>
+  * @param {object}   state     The solitaire state
+  * @param {object}   action    The action to preform on the state
+  * @param {function} callback  A callback fn in the form om (state, err) =>
   */
+
 function verifyMovePile (state, action, callback) 
 {
   const from = action.sequence.from;
   const to   = action.sequence.to;
 
-  if (from.pile == 'f_pile') 
-  {
-    verifyFromFoundation(state, from, to, callback);
+  let from_cards;
+  switch(from.pile) {
+    case('f_pile'):
+      from_cards = verifyFromFoundation(state, from, to, callback);
+      break;
+    case('t_pile'):
+      from_cards = verifyFromTableau(state, from, to, callback);
+      break;
+    case('s_pile'):
+      from_cards = verifyFromStockpile(state, from, to, callback);
+      break;
+    default:
+      from_cards = new VerificationError("(from) Pile does not exist");
+      return;
   }
-  else if (from.pile == 's_pile')
-  {
-    verifyFromStockpile(state, from, to, callback);
+  
+  if (Error.isPrototypeOf(from_cards)) {
+    callback(from_cards);
+    return;
   }
-  else if (from.pile == 't_pile')
-  {
-    verifyFromTableau(state, from, to, callback);
-  }
-  else
-  {
-    callback(state, new VerificationError("Action does not exist."))
-  }
-}
 
+  let allowedMove = false;
+  switch(to.pile) {
+    case('f_pile'):
+      if(from_cards[1] == undefined)
+        allowedMove = verifyToFoundation(state, from_cards[0], to);
+      break;
+    case('t_pile'):
+      allowedMove = verifyToTableau(state, from_cards[0], to);
+      break;
+    default:
+      callback(new VerificationError("(to) Pile does not exist"));
+      return;
+  }
+
+  if(allowedMove == false)
+    callback(new VerificationError("Illegal move"));
+}
 /*
  * ========== VERIFY HELPER FUNCTION(S) ==========
  */
@@ -190,125 +207,118 @@ function verifyMovePile (state, action, callback)
   */ 
 
 /*
- * Verifies a move from the Foundation pile to another pile.
- * Takes the state, the from and to component of an action and the callback(err)
+ * Verifies if the given cards can be picked up from the foundation pile. 
+ * If yes, returns an array of one card else returns
+ * an error.
+ * Returns either an array of cards or an VerificationError
+ * 
+ * @param {object} state  The solitaire state
+ * @param {object} from   The action.sequence.from
  */
-function verifyFromFoundation(state, from, to, callback)
+function verifyFromFoundation(state, from)
 {
-    if(state.f_pile[from.pile_number] == undefined ||
-       state.t_pile[to.pile_number]   == undefined)
+    if(state.f_pile[from.pile_number] == undefined)
     {
-      callback(new VerificationError("Illegal move"));
-      return;
+      return new VerificationError("Illegal move");
     }
 
-    if(to.pile == 't_pile')
-    {
-      let from_pile = state.f_pile[from.pile_number];
-      let from_card = from_pile[from_pile.length - 1];
-      
-      let to_pile = state.t_pile[to.pile_number];
-      let to_card = to_pile[to_pile.length - 1];
-      if(!isCorrectPlacementTableau(from_card, to_card))
-      {
-        callback(new VerificationError("Illegal move"));
-      }
-    }
-    else
-      callback(new VerificationError("Illegal move"));
+    let from_pile = state.f_pile[from.pile_number];
+    let from_card = from_pile[from_pile.length - 1];
+    
+    return [from_card];
   }
 
   
 /*
- * Verifies a move from the Stockpile pile to another pile.
- * Takes the state, the from and to component of an action and the callback(err)
+ * Verifies if the given cards can be picked up from the stockpile pile. 
+ * If yes, returns an array of one card else returns
+ * an error.
+ * Returns either an array of cards or an VerificationError
+ * 
+ * @param {object} state  The solitaire state
+ * @param {object} from   The action.sequence.from
  */
 function verifyFromStockpile(state, from, to, callback) 
 {
   if (!state.s_pile[from.card_number])
   {
-    callback(new VerificationError("Illegal move"));
-    return;
+    return new VerificationError("Illegal move");
   }
 
   let from_card = state.s_pile[from.card_number];
-  let to_card;
-
-  if (to.pile == 't_pile' && state.t_pile[to.pile_number] != undefined)
-  {
-    let to_pile = state.t_pile[to.pile_number];
-    to_card = to_pile[to_pile.length - 1];
-    
-    if(isCorrectPlacementTableau(from_card, to_card))
-      return;
-    else
-      callback(new VerificationError("Illegal move"));
-  }
   
-  else if (to.pile == 'f_pile' && state.f_pile[to.pile_number])
-  {
-    let to_pile = state.f_pile[to.pile_number];
-    to_card = to_pile[to_pile.length - 1];
-    
-    if(!isCorrectPlacementFoundation(from_card, to_card, to.pile_number))
-      callback(new VerificationError("Illegal move"));
-  }
-
-  else {
-    callback(new VerificationError("Illegal move"));
-  }
+  return [from_card];
 }
 
 /*
- * Verifies a move from the Foundation pile to another pile.
- * Takes the state, the from and to component of an action and the callback(err)
+ * Verifies if the given cards can be picked up from the tableau pile. 
+ * If yes, returns an array of the corresponding cards else returns
+ * an error.
+ * Returns either an array of cards or an VerificationError
+ * 
+ * @param {object} state  The solitaire state
+ * @param {object} from   The action.sequence.from
  */
-function verifyFromTableau(state, from, to, callback)
+function verifyFromTableau(state, from)
 {
-  if(!state.t_pile[from.pile_number][from.card_number]
-     || state.t_pile[from.pile_number][from.card_number].hidden)
+  if(!state.t_pile[from.pile_number][from.card_number])
   {
-    callback(new VerificationError("Illegal move"));
-    return;
+    return new VerificationError("Illegal move");
   }
 
   let from_card1 = state.t_pile[from.pile_number][from.card_number];
   let from_card2 = state.t_pile[from.pile_number][from.card_number + 1];
-  let to_card;
+  
 
-  if(!canMoveTableau(from_card1, from_card2))
+  if(canMoveTableau(from_card1, from_card2) == false)
   {
-    callback(new VerificationError("Illegal move here"));
-    return;
+    return new VerificationError("Illegal move");
   }
+  
+  return [from_card1, from_card2];
+}
 
-  if(to.pile == 't_pile' && state.t_pile[to.pile_number] != undefined)
-  {
-    let to_pile = state.t_pile[to.pile_number];
-    to_card = to_pile[to_pile.length - 1];
-    if(!isCorrectPlacementTableau(from_card1, to_card))
-    {
-      callback(new VerificationError("Illegal move"));
-    }
-  }
-  else if (to.pile == 'f_pile' && state.f_pile[to.pile_number] != undefined) 
-  {
-    if(from_card2 != undefined) 
-    {
-      callback(new VerificationError("Illegal move"));
-      return;
-    }
-    
-    let to_pile = state.f_pile[to.pile_number];
-    to_card = to_pile[to_pile.length - 1];
-    if(!isCorrectPlacementFoundation(from_card1, to_card, to.pile_number))
-    {
-      callback(new VerificationError("Illegal move"));
-    }
-  }
-  else {
-    callback(new VerificationError("Illegal move"));
-  }
+
+/*
+ * Verifies if a card is valid to be placed on a tableau pile, where that pile
+ * is defined from the {to} parameter.
+ * Returns a boolean value
+ * 
+ * @param {object} state     The solitaire state
+ * @param {array}  from_card An array of up to card(s)
+ * @param {object} to        The to sub-object of the action
+ */
+
+function verifyToTableau(state, from_card, to)
+{
+  if(state.t_pile[to.pile_number] == undefined)
+    return false;
+
+  let to_pile = state.t_pile[to.pile_number];
+  let to_card = to_pile[to_pile.length - 1];
+
+  return isCorrectPlacementTableau(from_card, to_card);
+  
+}
+
+/*
+ * Verifies if a card is valid to be placed on a foundation pile, where that 
+ * pile is defined from the {to} parameter.
+ * Returns a boolean value
+ * 
+ * @param {object} state     The solitaire state
+ * @param {array}  from_card An array of up to card(s)
+ * @param {object} to        The to sub-object of the action
+ */
+function verifyToFoundation(state, from_card, to) 
+{
+  if(state.f_pile[to.pile_number] == undefined)
+    return false;
+
+  let to_pile = state.f_pile[to.pile_number];
+  to_card = to_pile[to_pile.length - 1];
+  
+  return isCorrectPlacementFoundation(from_card, to_card, to.pile_number);
 }
 
 /*
@@ -355,7 +365,6 @@ if(card1 == undefined || card1.hidden == true)
   return false;
 
 if(card2 == undefined) {
-  console.log(card2 + " " + card1.rank);
   return card1.rank == 13;
 }
 
@@ -385,6 +394,9 @@ return card1_red != card2_red;
  */
 function isCorrectPlacementFoundation(card1, card2, pile_number) 
 {  
+  if(card1 == undefined)
+    return false;
+
   if(card2 == undefined)
   {
     if(card1.rank != 1)
@@ -414,6 +426,19 @@ return card1.suit == card2.suit;
 
 }
 
+/*
+ * ========== HELPER FUNCTIONS ==========
+ */
+
+/*
+ * Copies a object by converting it to a JSON string and converting it back.
+ *
+ * @param {object} Object to copy
+ */
+function deepCopy(object) 
+{
+  return JSON.parse(JSON.stringify(object));
+}
 
 
 

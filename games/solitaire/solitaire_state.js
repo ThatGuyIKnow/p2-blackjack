@@ -1,6 +1,12 @@
 const createDeck = require('../cards');
 
-/*TODO Add back in later module.exports = */
+/*
+ * Moves cards from the {deck} to an array of tableau piles
+ * which the function returns. These piles are based on the structure
+ * of a game of solitaire.
+ *
+ * @param {object} deck   The deck to alter
+ */
 function createTableaus(deck) {
     let tableaus = [];
 
@@ -8,13 +14,19 @@ function createTableaus(deck) {
         deck[i].hidden = false;
 
     for (let i = 0; i < 7; i++)
-        tableaus[i] = Tableau(deck, i + 1);
+        tableaus[i] = tableau(deck, i + 1);
 
     return tableaus;
 }
-
-// Create tableau with @param cards
-function Tableau(deck, number_of_cards) {
+/*
+ * An helper function of the createTableaus, which
+ * creates a single tableau pile with the number of 
+ * cards in the pile being determined by {number_of_cards}
+ *
+ * @param {object}  deck              The deck to alter
+ * @param {Integer} number_of_cards   The no. of cards in the pile
+ */
+function tableau(deck, number_of_cards) {
     let tableau = [];
 
     for (let i = 0; i < number_of_cards; i++) {
@@ -28,5 +40,32 @@ function Tableau(deck, number_of_cards) {
     return tableau;
 }
 
+/*
+ * Creates an initial random solitaire state, and returns it through
+ * an callback function.
+ *
+ * @param {function} callback A callback in the form (state) =>
+ */
+function init(callback) {
+    const s_pile = createDeck(1);
 
-module.exports = createTableaus;
+    for (let card of s_pile) {
+        card.hidden = false;
+    }
+    const t_pile = createTableaus(s_pile);
+    const f_pile = [
+        [],
+        [],
+        [],
+        []
+    ];
+    const state = {
+        s_pile,
+        t_pile,
+        f_pile
+    };
+    callback(state);
+}
+
+// ==== The export module ====
+module.exports = init;

@@ -13,12 +13,14 @@
       {"suit":"hearts","rank":9,"id":22,"isJoker":false,"hidden":false},
       {"suit":"spades","rank":8,"id":8,"isJoker":false,"hidden":false}
     ],
-    [],
+    [
+    ],
     [{"suit":"diamonds","rank":9,"id":48,"isJoker":false,"hidden":false}],
     [{"suit":"clubs","rank":9,"id":35,"isJoker":false,"hidden":false}],
     [{"suit":"clubs","rank":10,"id":36,"isJoker":false,"hidden":false}],
     [{"suit":"hearts","rank":3,"id":16,"isJoker":false,"hidden":false}],
-    []
+    [
+      {"suit":"diamonds","rank":13,"id":52,"isJoker":false,"hidden":false}]
   ],
   "s_pile":[
     {"suit":"spades","rank":3,"id":3,"isJoker":false,"hidden":false},
@@ -27,7 +29,6 @@
     {"suit":"hearts","rank":6,"id":19,"isJoker":false,"hidden":false},
     {"suit":"diamonds","rank":2,"id":41,"isJoker":false,"hidden":false},
     {"suit":"hearts","rank":2,"id":15,"isJoker":false,"hidden":false},
-    {"suit":"diamonds","rank":13,"id":52,"isJoker":false,"hidden":false},
     {"suit":"hearts","rank":12,"id":25,"isJoker":false,"hidden":false},
     {"suit":"hearts","rank":11,"id":24,"isJoker":false,"hidden":false},
     {"suit":"diamonds","rank":11,"id":50,"isJoker":false,"hidden":false},
