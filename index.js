@@ -1,3 +1,8 @@
+
+/*
+ * ======== SETUP ========
+ */
+
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -36,6 +41,10 @@ const rooms = {
     state: {}
   },
 };
+
+/*
+ * ======== MIDDLEWARE ========
+ */
 
 // @param {string} data The cookie string
 function parseCookie(data) {
@@ -92,6 +101,11 @@ const stickySessionMiddleware = (socket, next) => {
 };
 io.use(stickySessionMiddleware);
 
+
+/*
+ * ======== CONNECTION HANDLER ========
+ */
+
 /*
  * The on-connection Socket IO handler
  */
@@ -119,6 +133,9 @@ io.on('connection', (socket) => {
   });
 });
 
+/*
+ * ======== EVENT HANDLERS ========
+ */
 
 /*
  * Adds the necessary eventhandlers to a socket ( as of now, this only includes
@@ -138,6 +155,16 @@ function addSocketEventHandlers(socket) {
   socket.emit('room control');
 
 
+  addGameEventHandler(socket);
+}
+
+/*
+ * Adds a game handler for receiving player actions on the state
+ *
+ * @param {Socket object} socket The socket to apply the handlers
+ */
+function addGameEventHandler(socket)
+{
   socket.on('player action', (action, callback) => {
     let room = Object.values(rooms).find((room) => 
       room.connections.includes(socket.id)
@@ -162,6 +189,10 @@ function addSocketEventHandlers(socket) {
     }
   });
 }
+
+/*
+ * ======== HELPER FUNCTION(S) ========
+ */
 
 /*
  * Removes a socket from all rooms and disconnects the socket.
