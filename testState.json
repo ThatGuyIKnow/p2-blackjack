@@ -2,7 +2,7 @@
   "f_pile":[
     [
       {"suit":"spades","rank":1,"id":1,"isJoker":false,"hidden":false},
-      {"suit":"spades","rank":2,"id":2,"isJoker":false,"hidden":false}
+      {"suit":"spades","rank":2,"id":2,"isJoker":false,"hidden":false},
     ],
     [],
     [],

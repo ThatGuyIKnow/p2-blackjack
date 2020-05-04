@@ -169,15 +169,19 @@ function addGameEventHandler(socket)
     let room = Object.values(rooms).find((room) => 
       room.connections.includes(socket.id)
     );
+
     if(room == undefined)
       return;
-    if (Object.keys(room.state).length == 0) {
+
+    if (Object.keys(room.state).length == 0) 
+    {
       solitaire.init((state) => {
         room.state = state;
         const playerState = solitaire.filterState(state);
         callback(playerState);
       });
-    } else {
+    } 
+    else {
       solitaire.action(room.state, action, (state, err) => {
         if (err)
           socket.send(err);

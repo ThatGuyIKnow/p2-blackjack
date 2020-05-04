@@ -128,7 +128,11 @@ function movePile (state, action, callback)
 
   const newState = deepCopy(state);
   dealer.movePile(newState, action);
-  callback(newState);
+  
+  if(verifyEndState(newState))
+    callback({});
+  else
+    callback(newState);
   
 }
 
@@ -197,6 +201,23 @@ function verifyMovePile (state, action, callback)
 
   if(allowedMove == false)
     callback(new VerificationError("Illegal move"));
+}
+
+/*
+ * Verifies if a game of solitaire has reached its end-state, i.e.
+ * if the foundation piles are full.
+ *
+  * @param {object} state  The solitaire state
+ */
+function verifyEndState(state)
+{
+  const f_piles = state.f_pile;
+  for(let pile of f_piles)
+  {
+    if(pile.length != 13)
+      return false;
+  }
+  return true;
 }
 /*
  * ========== VERIFY HELPER FUNCTION(S) ==========
