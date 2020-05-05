@@ -1,4 +1,3 @@
-
 /*
  * ======== SETUP ========
  */
@@ -16,10 +15,12 @@ const solitaire = require("./games/solitaire/solitaire.js");
 app.use(express.static('public'));
 
 const options = {
+
   pingTimeout: 60000, //1 minute(s)
 };
 
 const rooms = {
+
   'room1': {
     connections: [],
     maxConnections: 1,
@@ -48,15 +49,19 @@ const rooms = {
 
 // @param {string} data The cookie string
 function parseCookie(data) {
+
   let parseData = [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
 
   /* Converts the parsed data to an object with the key-value pairs found in
    * the cookie (match[0] is the entire cookie string).
    */
   let cookie = {};
+
   for (let match of parseData) {
+
     cookie[match[1]] = match[2];
   }
+
   return cookie;
 }
 
@@ -69,13 +74,16 @@ function parseCookie(data) {
  * @param {function}      next   A callback function
  */
 const stickySessionMiddleware = (socket, next) => {
+
   const cookie = socket.request.headers.cookie;
+
   if (cookie == undefined) {
     next();
     return;
   }
 
   const id = parseCookie(cookie)['io'];
+
   if (id == undefined) {
     next();
     return;
@@ -84,9 +92,11 @@ const stickySessionMiddleware = (socket, next) => {
   for (let roomKey of Object.keys(rooms)) {
 
     const connections = rooms[roomKey].connections;
+
     if (connections.includes(id)) {
 
       for (let i = 0; i < connections.length; i++) {
+
         if (connections[i] == id) {
           connections[i] = socket.id;
           socket.join(roomKey);
@@ -110,6 +120,7 @@ io.use(stickySessionMiddleware);
  * The on-connection Socket IO handler
  */
 io.on('connection', (socket) => {
+
   socket.send(`Connected through WebSocket. ID: ${socket.id}`);
   socket.send(`Rooms: ${JSON.stringify(rooms)}`);
 
@@ -127,7 +138,6 @@ io.on('connection', (socket) => {
     }
   });
 
-
   socket.on('disconnect', (socket) => {
     console.log("disconnected");
   });
@@ -144,16 +154,17 @@ io.on('connection', (socket) => {
  * @param {Socket object} socket The socket to apply the handlers
  */
 function addSocketEventHandlers(socket) {
+
   // Disconnects the client if a ping hasn't been send in pingTimeout ms
   let sessionDrop = setTimeout(dropSession, options.pingTimeout, socket);
 
   socket.on('session ping', () => {
+
     clearTimeout(sessionDrop);
     sessionDrop = setTimeout(dropSession, options.pingTimeout, socket);
   });
 
   socket.emit('room control');
-
 
   addGameEventHandler(socket);
 }
@@ -163,32 +174,30 @@ function addSocketEventHandlers(socket) {
  *
  * @param {Socket object} socket The socket to apply the handlers
  */
-function addGameEventHandler(socket)
-{
+function addGameEventHandler(socket) {
+
   socket.on('player action', (action, callback) => {
-    let room = Object.values(rooms).find((room) => 
+
+    let room = Object.values(rooms).find((room) =>
       room.connections.includes(socket.id)
     );
 
-    if(room == undefined)
-      return;
+    if (room == undefined) return;
 
-    if (Object.keys(room.state).length == 0) 
-    {
+    if (Object.keys(room.state).length == 0) {
       solitaire.init((state) => {
         room.state = state;
         const playerState = solitaire.filterState(state);
         callback(playerState);
       });
-    } 
-    else {
+    } else {
       solitaire.action(room.state, action, (state, err) => {
-        if (err)
+        if (err) {
           socket.send(err);
-        else
+        } else {
           room.state = state;
-
-        callback(state);
+          callback(state);
+        }
       });
     }
   });
@@ -204,8 +213,8 @@ function addGameEventHandler(socket)
  * @param {Socket object} socket The socket to drop
  */
 function dropSession(socket) {
-  leaveRooms(socket);
 
+  leaveRooms(socket);
 
   if (socket.connected) {
     socket.send(`Disconnected from Socket IO Session`);
@@ -219,10 +228,12 @@ function dropSession(socket) {
  *
  * @param {Socket object} socket The socket to leave rooms
  */
-
 function leaveRooms(socket) {
+
   for (let roomKey of Object.keys(rooms)) {
+
     const room = rooms[roomKey];
+
     if (room.connections.includes(socket.id)) {
       socket.leave(roomKey);
       room.connections = room.connections.filter((e) => e != socket.id);

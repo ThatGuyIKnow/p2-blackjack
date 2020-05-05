@@ -8,36 +8,42 @@ const createDeck = require('../cards');
  * @param {object} deck   The deck to alter
  */
 function createTableaus(deck) {
-    let tableaus = [];
 
-    for (let i = 0; i < deck.length; i++)
-        deck[i].hidden = false;
+  let tableaus = [];
 
-    for (let i = 0; i < 7; i++)
-        tableaus[i] = tableau(deck, i + 1);
+  for (let i = 0; i < deck.length; i++) {
+    deck[i].hidden = false;
+  }
 
-    return tableaus;
+
+  for (let i = 0; i < 7; i++) {
+    tableaus[i] = tableau(deck, i + 1);
+  }
+
+  return tableaus;
 }
+
 /*
  * An helper function of the createTableaus, which
- * creates a single tableau pile with the number of 
+ * creates a single tableau pile with the number of
  * cards in the pile being determined by {number_of_cards}
  *
  * @param {object}  deck              The deck to alter
  * @param {Integer} number_of_cards   The no. of cards in the pile
  */
 function tableau(deck, number_of_cards) {
-    let tableau = [];
 
-    for (let i = 0; i < number_of_cards; i++) {
-        if (i != 0)
-            deck[0].hidden = true;
+  let tableau = [];
 
-        tableau.push(deck[0]);
-        deck.splice(0, 1);
-    }
+  for (let i = 0; i < number_of_cards; i++) {
 
-    return tableau;
+    if (i != 0) deck[0].hidden = true;
+
+    tableau.push(deck[0]);
+    deck.splice(0, 1);
+  }
+
+  return tableau;
 }
 
 /*
@@ -47,24 +53,27 @@ function tableau(deck, number_of_cards) {
  * @param {function} callback A callback in the form (state) =>
  */
 function init(callback) {
-    const s_pile = createDeck(1);
 
-    for (let card of s_pile) {
-        card.hidden = false;
-    }
-    const t_pile = createTableaus(s_pile);
-    const f_pile = [
-        [],
-        [],
-        [],
-        []
-    ];
-    const state = {
-        s_pile,
-        t_pile,
-        f_pile
-    };
-    callback(state);
+  const s_pile = createDeck(1);
+
+  for (let card of s_pile) {
+    card.hidden = false;
+  }
+
+  const t_pile = createTableaus(s_pile);
+  const f_pile = [
+    [],
+    [],
+    [],
+    []
+  ];
+  const state = {
+    s_pile,
+    t_pile,
+    f_pile
+  };
+
+  callback(state);
 }
 
 // ==== The export module ====
