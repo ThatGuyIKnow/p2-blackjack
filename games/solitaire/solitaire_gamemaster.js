@@ -384,10 +384,9 @@ function isCorrectPlacementTableau(card1, card2) {
  * If card2 is undefined (which means the corresponding pile is empty)
  * the pile_number is instead referred to check if the placement is correct.
  * Returns True if the configuration is valid and False otherwise.
- *
- * @param{card Object} card1       The first card object
- * @param{card Object} card2       The second card object
- * @param{Integer}     pile_number The pile to move onto
+ * @param{Object}    card1         The first card object
+ * @param{Object}    card2         The second card object
+ * @param{Integer}   pile_number   The pile to move onto
  */
 function isCorrectPlacementFoundation(card1, card2, pile_number) {
 
@@ -420,16 +419,11 @@ function isCorrectPlacementFoundation(card1, card2, pile_number) {
   if (card1.hidden || card2.hidden) return false;
 
   return card1.suit == card2.suit;
-
 }
 
-// ========== HELPER FUNCTIONS ==========
-
-
 /**
- * Copies a object by converting it to a JSON string and converting it back.
- *
- * @param {object} Object to copy
+ * Helper Function. Copies an object by converting it to and from a JSON string.
+ * @param {Object} Object The object to copy
  */
 function deepCopy(object) {
 

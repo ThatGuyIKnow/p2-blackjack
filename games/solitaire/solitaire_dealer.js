@@ -2,11 +2,9 @@
  * The export module for an solitaire dealer. The only function
  * the solitaire dealer has available is the take cards from a pile
  * and move it onto another pile.
- *
- * @param {object} state   The solitaire state
- * @param {object} action The action to preform on the state
+ * @param {Object} state   The solitaire state
+ * @param {Object} action  The action to preform on the state
  */
-
 module.exports = {
   movePile: function (state, action) {
 
@@ -17,9 +15,8 @@ module.exports = {
 
 /**
  * Removes the top card from the foundation pile and returns it.
- *
- * @param {object} state   The solitaire state
- * @param {object} action The action to preform on the state
+ * @param {Object} state   The solitaire state
+ * @param {Object} action  The action to preform on the state
  */
 function removeCardFoundation(state, action) {
 
@@ -30,9 +27,8 @@ function removeCardFoundation(state, action) {
 
 /**
  * Removes a card from the stockpile pile and returns it.
- *
- * @param {object} state   The solitaire state
- * @param {object} action The action to preform on the state
+ * @param {Object} state   The solitaire state
+ * @param {Object} action  The action to preform on the state
  */
 function removeCardStockpile(state, action) {
 
@@ -43,9 +39,8 @@ function removeCardStockpile(state, action) {
 
 /**
  * Removes the top card(s) from the tableau pile and returns it.
- *
- * @param {object} state   The solitaire state
- * @param {object} action The action to preform on the state
+ * @param {Object} state   The solitaire state
+ * @param {Object} action The action to preform on the state
  */
 function removeCardsTableau(state, action) {
 
@@ -60,9 +55,8 @@ function removeCardsTableau(state, action) {
 /**
  * A function which calls the correct "removeCard" function,
  * based on the action.
- *
- * @param {object} state   The solitaire state
- * @param {object} action The action to preform on the state
+ * @param {Object} state   The solitaire state
+ * @param {Object} action  The action to preform on the state
  */
 function removeCards(state, action) {
 
@@ -79,11 +73,10 @@ function removeCards(state, action) {
 }
 
 /**
- * Pushes the {cardPackage} onto another pile based on the action
- *
- * @param {object} state        The solitaire state
- * @param {object} action       The action to preform on the state
- * @param {array}  cardPackage  A package of cards to push
+ * Pushes the {cardPackage} onto another pile based on the action.
+ * @param {Object} state        The solitaire state
+ * @param {Object} action       The action to preform on the state
+ * @param {Array}  cardPackage  A package of cards to push
  */
 function pushCards(state, action, cardPackage) {
 

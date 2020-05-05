@@ -2,11 +2,7 @@
     "source": {
         "include": [
             "./games",
-            "./games/solitaire",
-            "./games/blackjack",
-            "./games/mia",
-            "./games/whist",
-            "./public/js"
+            "./public"
         ],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|docs)"

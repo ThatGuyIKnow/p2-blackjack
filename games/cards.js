@@ -6,7 +6,6 @@ const suits = ["spades", "hearts", "clubs", "diamonds"];
  * Creates a deck, which is an array of card objects. This deck contains
  * {number_of_decks} amount of single decks, and {number_of_jokers} amount
  * of jokers.
- *
  * @param {Integer} number_of_decks  The amounts of single decks in the deck
  * @param {Integer} number_of_jokers The amount of jokers in the deck
  */
@@ -20,7 +19,6 @@ function buildDeck(number_of_decks, number_of_jokers) {
 
     for (let j = 0; j < ranks.length * number_of_decks; j++) {
 
-      // Incrementing ID
       card = {
         suit: suits[i % 4],
         rank: ranks[j % 13],
@@ -52,8 +50,7 @@ function buildDeck(number_of_decks, number_of_jokers) {
 
 /**
  * A function which shuffles a deck using the Fisher-Yates algorithm.
- *
- * @param {Array} number_of_decks  The deck to shuffle
+ * @param {Array} deck The deck to be shuffled
  */
 function shuffleDeck(deck) {
 
@@ -76,21 +73,18 @@ function shuffleDeck(deck) {
 }
 
 /**
- * Helper function which generates a random positive integer up to {size}
+ * Helper function which generates a random positive integer up to {size}.
  * Returns said integer.
- *
  * @param {Integer} size The maximum size of the number
  */
 function randomNumber(size) {
-
   return Math.floor(Math.random() * size);
 }
 
 /**
- * The export module. Returns a shuffled deck of {number_of_decks} size, with
+ * Returns a shuffled deck of {number_of_decks} size, with
  * {number_of_jokers} jokers.
- *
- * @param {Integer} number_of_decks  The amounts of single decks in the deck
+ * @param {Integer} number_of_decks The amounts of single decks in the deck
  * @param {Integer} number_of_jokers The amount of jokers in the deck
  */
 module.exports = function createDeck(number_of_decks, number_of_jokers) {
