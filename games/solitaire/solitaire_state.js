@@ -2,8 +2,7 @@ const createDeck = require('../cards');
 
 /**
  * Moves cards from the {deck} to an array of tableau piles
- * which the function returns. These piles are based on the structure
- * of a game of solitaire.
+ * which the function returns.
  * @param {object} deck   The deck to alter
  */
 function createTableaus(deck) {
