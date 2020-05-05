@@ -2,7 +2,7 @@ class VerificationError extends Error {}
 
 const dealer = require('./solitaire_dealer.js');
 
-/*
+/**
  * - Export module
  * - Ruleset
  * - Action functions
@@ -11,9 +11,9 @@ const dealer = require('./solitaire_dealer.js');
  * - General helper functions
  */
 
-/*
- * ========== Export Module ==========
- *
+// ========== Export Module ==========
+
+/**
  * Export module (GameMaster).
  * Has two main functions, which is filterState and act.
  * filterState's function is to create a state which filters
@@ -24,7 +24,7 @@ const dealer = require('./solitaire_dealer.js');
  */
 module.exports = {
 
-  /*
+  /**
    * Returns a copy of a solitaire state where all hidden cards values have
    * been set to 0/""
    *
@@ -52,7 +52,7 @@ module.exports = {
     return filteredState;
   },
 
-  /*
+  /**
    * Searches the ruleset const, for the key passed in action. If found,
    * calls the corresponding function with (state, action, callback) args.
    *
@@ -74,11 +74,9 @@ module.exports = {
   },
 };
 
-/*
- * ========== RULESET ==========
- */
+// ========== RULESET ==========
 
-/*
+/**
  * The ruleset for the GameMaster.
  * ruleset is a preset map, which uses key/function pairs
  * to interpret the action passed to the GameMaster
@@ -89,11 +87,9 @@ const ruleset = {
   'MovePile': movePile,
 };
 
-/*
- * ========== ACTION FUNCTION(S) ==========
- */
+// ========== ACTION FUNCTION(S) ==========
 
-/*
+/**
  * The action function(s) are functions which verifies the
  * validity of an action, and then passes the information to the dealer
  * if it is valid.
@@ -136,16 +132,14 @@ function movePile(state, action, callback) {
   }
 }
 
-/*
- * ========== VERIFY FUNCTION(S) ==========
- */
+// ========== VERIFY FUNCTION(S) ==========
 
-/*
+/**
  * Verify function are responsible for verifying if a specific function
  * is valid to preform on a given state.
  */
 
-/*
+/**
  * verifyMovePile verifies if the movePile action is valid on a given state.
  * verifyMovePile separates the validation based on what pile the card(s) are
  * being moved from (verifyFromFoundation, verifyFromStockpile,
@@ -208,7 +202,7 @@ function verifyMovePile(state, action, callback) {
   if (allowedMove == false) callback(new VerificationError("Illegal move"));
 }
 
-/*
+/**
  * Verifies if a game of solitaire has reached its end-state, i.e.
  * if the foundation piles are full.
  *
@@ -225,15 +219,10 @@ function verifyEndState(state) {
   return true;
 }
 
-/*
- * ========== VERIFY HELPER FUNCTION(S) ==========
- */
+// ========== VERIFY HELPER FUNCTION(S) ==========
 
-/*
- * Helper functions for verifying state and actions
- */
 
-/*
+/**
  * Verifies if the given cards can be picked up from the foundation pile.
  * If yes, returns an array of one card else returns
  * an error.
@@ -254,7 +243,7 @@ function verifyFromFoundation(state, from) {
   return [from_card];
 }
 
-/*
+/**
  * Verifies if the given cards can be picked up from the stockpile pile.
  * If yes, returns an array of one card else returns
  * an error.
@@ -274,7 +263,7 @@ function verifyFromStockpile(state, from, to, callback) {
   return [from_card];
 }
 
-/*
+/**
  * Verifies if the given cards can be picked up from the tableau pile.
  * If yes, returns an array of the corresponding cards else returns
  * an error.
@@ -299,7 +288,7 @@ function verifyFromTableau(state, from) {
   return [from_card1, from_card2];
 }
 
-/*
+/**
  * Verifies if a card is valid to be placed on a tableau pile, where that pile
  * is defined from the {to} parameter.
  * Returns a boolean value
@@ -319,7 +308,7 @@ function verifyToTableau(state, from_card, to) {
 
 }
 
-/*
+/**
  * Verifies if a card is valid to be placed on a foundation pile, where that
  * pile is defined from the {to} parameter.
  * Returns a boolean value
@@ -338,7 +327,7 @@ function verifyToFoundation(state, from_card, to) {
   return isCorrectPlacementFoundation(from_card, to_card, to.pile_number);
 }
 
-/*
+/**
  * Check if the tableau card package can be moved, based on the card to move
  * and the card below it. Here card1 is the card to move.
  * Here a the order of cards are so that card1 is above card2 on the solitaire
@@ -363,7 +352,7 @@ function canMoveTableau(card1, card2) {
 }
 
 
-/*
+/**
  * Checks if a given card is valid to place onto another card
  * in the tableau pile. Here card1 is the card which is being
  * moved, and card2 is the card which it is being moved onto.
@@ -388,7 +377,7 @@ function isCorrectPlacementTableau(card1, card2) {
   return card1_red != card2_red;
 }
 
-/*
+/**
  * Checks if a given card is valid to place onto another card
  * in the foundation pile. Here card1 is the card which is being
  * moved, and card2 is the card which it is being moved onto.
@@ -434,11 +423,10 @@ function isCorrectPlacementFoundation(card1, card2, pile_number) {
 
 }
 
-/*
- * ========== HELPER FUNCTIONS ==========
- */
+// ========== HELPER FUNCTIONS ==========
 
-/*
+
+/**
  * Copies a object by converting it to a JSON string and converting it back.
  *
  * @param {object} Object to copy

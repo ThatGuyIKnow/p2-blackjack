@@ -1,4 +1,4 @@
-/*
+/**
  * The export module for an solitaire dealer. The only function
  * the solitaire dealer has available is the take cards from a pile
  * and move it onto another pile.
@@ -15,7 +15,7 @@ module.exports = {
   }
 };
 
-/*
+/**
  * Removes the top card from the foundation pile and returns it.
  *
  * @param {object} state   The solitaire state
@@ -28,7 +28,7 @@ function removeCardFoundation(state, action) {
   return [pile.pop()];
 }
 
-/*
+/**
  * Removes a card from the stockpile pile and returns it.
  *
  * @param {object} state   The solitaire state
@@ -41,7 +41,7 @@ function removeCardStockpile(state, action) {
   return state.s_pile.splice(index, 1);
 }
 
-/*
+/**
  * Removes the top card(s) from the tableau pile and returns it.
  *
  * @param {object} state   The solitaire state
@@ -57,7 +57,7 @@ function removeCardsTableau(state, action) {
   return pile.splice(card_index);
 }
 
-/*
+/**
  * A function which calls the correct "removeCard" function,
  * based on the action.
  *
@@ -78,7 +78,7 @@ function removeCards(state, action) {
   }
 }
 
-/*
+/**
  * Pushes the {cardPackage} onto another pile based on the action
  *
  * @param {object} state        The solitaire state

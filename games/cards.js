@@ -2,7 +2,7 @@
 const ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 const suits = ["spades", "hearts", "clubs", "diamonds"];
 
-/*
+/**
  * Creates a deck, which is an array of card objects. This deck contains
  * {number_of_decks} amount of single decks, and {number_of_jokers} amount
  * of jokers.
@@ -50,7 +50,7 @@ function buildDeck(number_of_decks, number_of_jokers) {
   return deck;
 }
 
-/*
+/**
  * A function which shuffles a deck using the Fisher-Yates algorithm.
  *
  * @param {Array} number_of_decks  The deck to shuffle
@@ -75,7 +75,7 @@ function shuffleDeck(deck) {
   return deck;
 }
 
-/*
+/**
  * Helper function which generates a random positive integer up to {size}
  * Returns said integer.
  *
@@ -86,7 +86,7 @@ function randomNumber(size) {
   return Math.floor(Math.random() * size);
 }
 
-/*
+/**
  * The export module. Returns a shuffled deck of {number_of_decks} size, with
  * {number_of_jokers} jokers.
  *

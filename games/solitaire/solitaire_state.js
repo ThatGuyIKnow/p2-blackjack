@@ -1,6 +1,6 @@
 const createDeck = require('../cards');
 
-/*
+/**
  * Moves cards from the {deck} to an array of tableau piles
  * which the function returns. These piles are based on the structure
  * of a game of solitaire.
@@ -23,7 +23,7 @@ function createTableaus(deck) {
   return tableaus;
 }
 
-/*
+/**
  * An helper function of the createTableaus, which
  * creates a single tableau pile with the number of
  * cards in the pile being determined by {number_of_cards}
@@ -46,7 +46,7 @@ function tableau(deck, number_of_cards) {
   return tableau;
 }
 
-/*
+/**
  * Creates an initial random solitaire state, and returns it through
  * an callback function.
  *

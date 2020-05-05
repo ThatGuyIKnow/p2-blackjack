@@ -1,6 +1,4 @@
-/*
- * ======== SETUP ========
- */
+// ======== SETUP ========
 
 const express = require('express');
 const fs = require('fs');
@@ -43,11 +41,12 @@ const rooms = {
   },
 };
 
-/*
- * ======== MIDDLEWARE ========
+// ======== MIDDLEWARE ========
+
+/**
+ * @param {string} data The cookie string
  */
 
-// @param {string} data The cookie string
 function parseCookie(data) {
 
   let parseData = [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
@@ -65,7 +64,7 @@ function parseCookie(data) {
   return cookie;
 }
 
-/*
+/**
  * Takes the default cookie sent by Socket IO and checks if the socket ID sent
  * in the cookie is already in a room in rooms. If yes, then the socket's new
  * ID (which is created on the new connection) replaces the ID in the room.
@@ -112,11 +111,9 @@ const stickySessionMiddleware = (socket, next) => {
 io.use(stickySessionMiddleware);
 
 
-/*
- * ======== CONNECTION HANDLER ========
- */
+// ======== CONNECTION HANDLER ========
 
-/*
+/**
  * The on-connection Socket IO handler
  */
 io.on('connection', (socket) => {
@@ -143,11 +140,9 @@ io.on('connection', (socket) => {
   });
 });
 
-/*
- * ======== EVENT HANDLERS ========
- */
+// ======== EVENT HANDLERS ========
 
-/*
+/**
  * Adds the necessary eventhandlers to a socket ( as of now, this only includes
  * eventhandlers for maintaining an connection).
  *
@@ -169,7 +164,7 @@ function addSocketEventHandlers(socket) {
   addGameEventHandler(socket);
 }
 
-/*
+/**
  * Adds a game handler for receiving player actions on the state
  *
  * @param {Socket object} socket The socket to apply the handlers
@@ -203,11 +198,9 @@ function addGameEventHandler(socket) {
   });
 }
 
-/*
- * ======== HELPER FUNCTION(S) ========
- */
+// ======== HELPER FUNCTION(S) ========
 
-/*
+/**
  * Removes a socket from all rooms and disconnects the socket.
  *
  * @param {Socket object} socket The socket to drop
@@ -223,7 +216,7 @@ function dropSession(socket) {
   }
 }
 
-/*
+/**
  * Removes a socket from all rooms (expect its ID room)
  *
  * @param {Socket object} socket The socket to leave rooms
