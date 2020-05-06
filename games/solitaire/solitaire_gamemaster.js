@@ -177,7 +177,7 @@ function verifyMovePile(state, action, callback) {
   }
 
   if (Error.isPrototypeOf(from_cards)) {
-    callback(from_cards);
+    callback(state, from_cards);
     return;
   }
 

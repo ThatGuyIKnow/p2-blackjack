@@ -47,7 +47,11 @@ function removeCardsTableau(state, action) {
   const pile = state.t_pile[action.sequence.from.pile_number];
   const card_index = action.sequence.from.card_number;
 
-  console.log(pile);
+  if(pile[card_index - 1] != undefined && pile[card_index - 1].hidden == true) 
+  { 
+    pile[card_index - 1].hidden = false;
+  }
+   
 
   return pile.splice(card_index);
 }

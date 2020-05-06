@@ -182,8 +182,6 @@ function addGameEventHandler(socket) {
     if (Object.keys(room.state).length == 0) {
       solitaire.init((state) => {
         room.state = state;
-        const playerState = solitaire.filterState(state);
-        callback(playerState);
       });
     } else {
       solitaire.action(room.state, action, (state, err) => {
@@ -191,10 +189,11 @@ function addGameEventHandler(socket) {
           socket.send(err);
         } else {
           room.state = state;
-          callback(state);
         }
       });
     }
+    const playerState = solitaire.filterState(room.state);
+    callback(playerState);
   });
 }
 
