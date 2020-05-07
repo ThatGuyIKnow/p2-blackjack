@@ -72,5 +72,4 @@ function init(callback) {
   callback(state);
 }
 
-// ==== The export module ====
 module.exports = init;

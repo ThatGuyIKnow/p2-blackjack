@@ -144,7 +144,7 @@ to interpret the action passed to the GameMaster</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line85">line 85</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -342,7 +342,7 @@ of jokers.</p>
 
 
 <div class="description">
-    <p>Check if the tableau card package can be moved, based on the card to move
+    <p>Checks if the tableau card package can be moved, based on the card to move
 and the card below it. Here card1 is the card to move.
 Here a the order of cards are so that card1 is above card2 on the solitaire
 table e.g. card1 = 10 of Spades, card2 = 9 of Hearts would be valid.
@@ -390,7 +390,7 @@ Returns True if the configuration is valid and False otherwise.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line340">line 340</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line311">line 311</a>
     </li></ul></dd>
     
 
@@ -435,8 +435,7 @@ Returns True if the configuration is valid and False otherwise.</p>
 
 <div class="description">
     <p>Moves cards from the {deck} to an array of tableau piles
-which the function returns. These piles are based on the structure
-of a game of solitaire.</p>
+which the function returns.</p>
 </div>
 
 
@@ -529,7 +528,7 @@ of a game of solitaire.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line9">line 9</a>
+        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -666,7 +665,7 @@ of a game of solitaire.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line428">line 428</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line398">line 398</a>
     </li></ul></dd>
     
 
@@ -804,7 +803,7 @@ an callback function.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line52">line 52</a>
+        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -897,7 +896,7 @@ Returns True if the configuration is valid and False otherwise.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line391">line 391</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line361">line 361</a>
     </li></ul></dd>
     
 
@@ -988,7 +987,7 @@ Returns True if the configuration is valid and False otherwise.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line364">line 364</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line334">line 334</a>
     </li></ul></dd>
     
 
@@ -1032,17 +1031,11 @@ Returns True if the configuration is valid and False otherwise.</p>
 
 
 <div class="description">
-    <p>The action function(s) are functions which verifies the
-validity of an action, and then passes the information to the dealer
-if it is valid.
-The only action in solitaire is the MovePile action, which
-moves one or more card(s) from one pile to another.
-The action function firstly verifies whenever an action
-is valid on a certain state, and if yes, it copies the state
-and calls a function from the dealer to alter the copied state.
-This state is then passed in the callback function.
+    <p>Verifies whenever an action is valid on a certain state, and if yes,
+it copies the state and calls a function from the dealer to alter
+the copied state. This state is then passed in the callback function.
 If the verification fails, the original passed state, and an error
-is passed in the callback instead</p>
+is passed in the callback instead.</p>
 </div>
 
 
@@ -1140,7 +1133,7 @@ is passed in the callback instead</p>
 
             
 
-            <td class="description last"><p>A callback fn in the form om (state, err) =&gt;</p></td>
+            <td class="description last"><p>A callback</p></td>
         </tr>
 
     
@@ -1181,7 +1174,7 @@ is passed in the callback instead</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line110">line 110</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line99">line 99</a>
     </li></ul></dd>
     
 
@@ -1364,7 +1357,7 @@ is passed in the callback instead</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line81">line 81</a>
+        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -1823,7 +1816,7 @@ based on the action.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line61">line 61</a>
+        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -2442,7 +2435,7 @@ cards in the pile being determined by {number_of_cards}.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line32">line 32</a>
+        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -2580,7 +2573,7 @@ if the foundation piles are full.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line211">line 211</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line192">line 192</a>
     </li></ul></dd>
     
 
@@ -2743,7 +2736,7 @@ Returns either an array of cards or an VerificationError</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line234">line 234</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line213">line 213</a>
     </li></ul></dd>
     
 
@@ -2906,7 +2899,7 @@ Returns either an array of cards or an VerificationError</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line255">line 255</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line233">line 233</a>
     </li></ul></dd>
     
 
@@ -2952,8 +2945,7 @@ Returns either an array of cards or an VerificationError</p>
 <div class="description">
     <p>Verifies if the given cards can be picked up from the tableau pile.
 If yes, returns an array of the corresponding cards else returns
-an error.
-Returns either an array of cards or an VerificationError</p>
+an error. Returns either an array of cards or an VerificationError</p>
 </div>
 
 
@@ -3069,7 +3061,7 @@ Returns either an array of cards or an VerificationError</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line275">line 275</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line251">line 251</a>
     </li></ul></dd>
     
 
@@ -3113,12 +3105,11 @@ Returns either an array of cards or an VerificationError</p>
 
 
 <div class="description">
-    <p>verifyMovePile verifies if the movePile action is valid on a given state.
-verifyMovePile separates the validation based on what pile the card(s) are
-being moved from (verifyFromFoundation, verifyFromStockpile,
-verifyFromTableau) and where they are being moved to (verifyToFoundation,
-verifyToTableau).
-Calls callback if an error is found. The function does not return anything.</p>
+    <p>Verifies if the movePile action is valid on a given state.
+Separates the validation based on what pile the card(s) are being moved from
+(verifyFromFoundation, verifyFromStockpile, verifyFromTableau) and
+where they are being moved to (verifyToFoundation, verifyToTableau).
+Calls callback if an error is found.</p>
 </div>
 
 
@@ -3257,7 +3248,7 @@ Calls callback if an error is found. The function does not return anything.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line155">line 155</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line137">line 137</a>
     </li></ul></dd>
     
 
@@ -3302,8 +3293,7 @@ Calls callback if an error is found. The function does not return anything.</p>
 
 <div class="description">
     <p>Verifies if a card is valid to be placed on a foundation pile, where that
-pile is defined from the {to} parameter.
-Returns a boolean value</p>
+pile is defined from the {to} parameter. Returns a boolean value</p>
 </div>
 
 
@@ -3442,7 +3432,7 @@ Returns a boolean value</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line320">line 320</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line292">line 292</a>
     </li></ul></dd>
     
 
@@ -3487,8 +3477,7 @@ Returns a boolean value</p>
 
 <div class="description">
     <p>Verifies if a card is valid to be placed on a tableau pile, where that pile
-is defined from the {to} parameter.
-Returns a boolean value</p>
+is defined from the {to} parameter. Returns a boolean value</p>
 </div>
 
 
@@ -3627,7 +3616,7 @@ Returns a boolean value</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line300">line 300</a>
+        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line274">line 274</a>
     </li></ul></dd>
     
 
@@ -3679,7 +3668,7 @@ Returns a boolean value</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 05 2020 15:09:44 GMT+0200 (Centraleuropæisk sommertid)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 07 2020 09:23:11 GMT+0200 (Centraleuropæisk sommertid)
 </footer>
 
 <script> prettyPrint(); </script>

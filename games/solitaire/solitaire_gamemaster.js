@@ -2,7 +2,7 @@ class VerificationError extends Error {}
 
 const dealer = require('./solitaire_dealer.js');
 
-/**
+/*
  * - Export module
  * - Ruleset
  * - Action functions
@@ -15,11 +15,11 @@ const dealer = require('./solitaire_dealer.js');
 
 /**
  * Export module (GameMaster).
- * Has two main functions, which is filterState and act.
- * filterState's function is to create a state which filters
+ * Has two main functions, filterState and act.
+ * filterState creates a state which filters
  * the state for cards which have hidden set to True.
  *
- * act's function is to take an action and trigger a corresponding
+ * act takes an action and trigger a corresponding
  * action function, which verifies and acts on the state.
  */
 module.exports = {
@@ -27,7 +27,6 @@ module.exports = {
   /**
    * Returns a copy of a solitaire state where all hidden cards values have
    * been set to 0/""
-   *
    * @param {object} state The solitaire state to filter
    */
   filterState: function (state) {
@@ -55,7 +54,6 @@ module.exports = {
   /**
    * Searches the ruleset const, for the key passed in action. If found,
    * calls the corresponding function with (state, action, callback) args.
-   *
    * @param {object}   state     The solitaire state
    * @param {object}   action    The action to preform on the state
    * @param {function} callback  A callback fn in the form om (state, err) =>
@@ -81,7 +79,6 @@ module.exports = {
  * ruleset is a preset map, which uses key/function pairs
  * to interpret the action passed to the GameMaster
  */
-
 const ruleset = {
 
   'MovePile': movePile,
@@ -90,24 +87,17 @@ const ruleset = {
 // ========== ACTION FUNCTION(S) ==========
 
 /**
- * The action function(s) are functions which verifies the
- * validity of an action, and then passes the information to the dealer
- * if it is valid.
- * The only action in solitaire is the MovePile action, which
- * moves one or more card(s) from one pile to another.
- * The action function firstly verifies whenever an action
- * is valid on a certain state, and if yes, it copies the state
- * and calls a function from the dealer to alter the copied state.
- * This state is then passed in the callback function.
+ * Verifies whenever an action is valid on a certain state, and if yes,
+ * it copies the state and calls a function from the dealer to alter
+ * the copied state. This state is then passed in the callback function.
  * If the verification fails, the original passed state, and an error
- * is passed in the callback instead
- *
+ * is passed in the callback instead.
  * @param {object}   state     The solitaire state
  * @param {object}   action    The action to preform on the state
- * @param {function} callback  A callback fn in the form om (state, err) =>
+ * @param {function} callback  A callback
  */
-
 function movePile(state, action, callback) {
+
   let error;
 
   verifyMovePile(state, action, (err) => {
@@ -135,23 +125,15 @@ function movePile(state, action, callback) {
 // ========== VERIFY FUNCTION(S) ==========
 
 /**
- * Verify function are responsible for verifying if a specific function
- * is valid to preform on a given state.
- */
-
-/**
- * verifyMovePile verifies if the movePile action is valid on a given state.
- * verifyMovePile separates the validation based on what pile the card(s) are
- * being moved from (verifyFromFoundation, verifyFromStockpile,
- * verifyFromTableau) and where they are being moved to (verifyToFoundation,
- * verifyToTableau).
- * Calls callback if an error is found. The function does not return anything.
- *
+ * Verifies if the movePile action is valid on a given state.
+ * Separates the validation based on what pile the card(s) are being moved from
+ * (verifyFromFoundation, verifyFromStockpile, verifyFromTableau) and
+ * where they are being moved to (verifyToFoundation, verifyToTableau).
+ * Calls callback if an error is found.
  * @param {object}   state     The solitaire state
  * @param {object}   action    The action to preform on the state
  * @param {function} callback  A callback fn in the form om (state, err) =>
  */
-
 function verifyMovePile(state, action, callback) {
 
   const from = action.sequence.from;
@@ -205,7 +187,6 @@ function verifyMovePile(state, action, callback) {
 /**
  * Verifies if a game of solitaire has reached its end-state, i.e.
  * if the foundation piles are full.
- *
  * @param {object} state  The solitaire state
  */
 function verifyEndState(state) {
@@ -221,13 +202,11 @@ function verifyEndState(state) {
 
 // ========== VERIFY HELPER FUNCTION(S) ==========
 
-
 /**
  * Verifies if the given cards can be picked up from the foundation pile.
  * If yes, returns an array of one card else returns
  * an error.
  * Returns either an array of cards or an VerificationError
- *
  * @param {object} state  The solitaire state
  * @param {object} from   The action.sequence.from
  */
@@ -248,7 +227,6 @@ function verifyFromFoundation(state, from) {
  * If yes, returns an array of one card else returns
  * an error.
  * Returns either an array of cards or an VerificationError
- *
  * @param {object} state  The solitaire state
  * @param {object} from   The action.sequence.from
  */
@@ -266,9 +244,7 @@ function verifyFromStockpile(state, from, to, callback) {
 /**
  * Verifies if the given cards can be picked up from the tableau pile.
  * If yes, returns an array of the corresponding cards else returns
- * an error.
- * Returns either an array of cards or an VerificationError
- *
+ * an error. Returns either an array of cards or an VerificationError
  * @param {object} state  The solitaire state
  * @param {object} from   The action.sequence.from
  */
@@ -290,9 +266,7 @@ function verifyFromTableau(state, from) {
 
 /**
  * Verifies if a card is valid to be placed on a tableau pile, where that pile
- * is defined from the {to} parameter.
- * Returns a boolean value
- *
+ * is defined from the {to} parameter. Returns a boolean value
  * @param {object} state     The solitaire state
  * @param {array}  from_card An array of up to card(s)
  * @param {object} to        The to sub-object of the action
@@ -310,9 +284,7 @@ function verifyToTableau(state, from_card, to) {
 
 /**
  * Verifies if a card is valid to be placed on a foundation pile, where that
- * pile is defined from the {to} parameter.
- * Returns a boolean value
- *
+ * pile is defined from the {to} parameter. Returns a boolean value
  * @param {object} state     The solitaire state
  * @param {array}  from_card An array of up to card(s)
  * @param {object} to        The to sub-object of the action
@@ -328,12 +300,11 @@ function verifyToFoundation(state, from_card, to) {
 }
 
 /**
- * Check if the tableau card package can be moved, based on the card to move
+ * Checks if the tableau card package can be moved, based on the card to move
  * and the card below it. Here card1 is the card to move.
  * Here a the order of cards are so that card1 is above card2 on the solitaire
  * table e.g. card1 = 10 of Spades, card2 = 9 of Hearts would be valid.
  * Returns True if the configuration is valid and False otherwise.
- *
  * @param{card Object} card1 The first card object
  * @param{card Object} card2 The second card object
  */
@@ -357,7 +328,6 @@ function canMoveTableau(card1, card2) {
  * in the tableau pile. Here card1 is the card which is being
  * moved, and card2 is the card which it is being moved onto.
  * Returns True if the configuration is valid and False otherwise.
- *
  * @param{card Object} card1 The first card object
  * @param{card Object} card2 The second card object
  */
