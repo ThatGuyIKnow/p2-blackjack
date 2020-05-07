@@ -1,3 +1,13 @@
-const getDeck = require('../cards.js');
+const stateInit = require("./solitaire_state");
+const gameMaster = require('./solitaire_gamemaster');
 
-getDeck(1);
+/*
+ * The export module for game of solitaire. Can be viewed as an interface for
+ * the solitaire game.
+ */
+module.exports = {
+
+  init: stateInit,
+  action: gameMaster.act,
+  filterState: gameMaster.filterState,
+};

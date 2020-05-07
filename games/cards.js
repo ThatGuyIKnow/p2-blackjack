@@ -1,60 +1,96 @@
-let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-    suits = ["spades", "hearts", "diamonds", "clubs"];
+// The different ranks and suits a card can have.
+const ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const suits = ["spades", "hearts", "clubs", "diamonds"];
 
-// Create X number of decks
-function createDeck(number_of_decks) {
+/**
+ * Creates a deck, which is an array of card objects. This deck contains
+ * {number_of_decks} amount of single decks, and {number_of_jokers} amount
+ * of jokers.
+ * @param {Integer} number_of_decks  The amounts of single decks in the deck
+ * @param {Integer} number_of_jokers The amount of jokers in the deck
+ */
+function buildDeck(number_of_decks, number_of_jokers) {
 
-    let deck = new Array,
-        ID, i, j, card;
+  let deck = [];
+  let ID = 1;
+  let card;
 
-    for (i = 0; i < suits.length; i++) {
+  for (let i = 0; i < suits.length; i++) {
 
-        for (j = 0; j < ranks.length * number_of_decks; j++) {
+    for (let j = 0; j < ranks.length * number_of_decks; j++) {
 
-            // Random alpha-numeric string
-            ID = randomNumber(1000000).toString(36);
-
-            card = {
-                Suit: suits[i % 4],
-                Rank: ranks[j % 13],
-                ID: ID
-            };
-            deck.push(card);
-        }
+      card = {
+        suit: suits[i % 4],
+        rank: ranks[j % 13],
+        id: ID++,
+        isJoker: false,
+        hidden: true
+      };
+      deck.push(card);
     }
+  }
+  // Get the last id to start of the joker id count
+  let last_id = deck[deck.length - 1].id + 1;
 
-    return deck;
+  // Construct jokers
+  for (let i = 0; i < number_of_jokers; i++) {
+
+    card = {
+      suit: 0,
+      rank: 0,
+      id: last_id++,
+      isJoker: true,
+      hidden: true
+    };
+    deck.push(card);
+  }
+
+  return deck;
 }
 
-// Shuffle deck using the Fisher-Yates shuffle algorithm
+/**
+ * A function which shuffles a deck using the Fisher-Yates algorithm.
+ * @param {Array} deck The deck to be shuffled
+ */
 function shuffleDeck(deck) {
-    let deck_size = deck.length,
-        temp, random_card;
 
-    // While there remain elements to shuffle
-    while (deck_size) {
+  let deck_size = deck.length;
+  let temp;
 
-        // Pick a remaining elements
-        random_card = randomNumber(deck_size--);
+  // While there remain elements to shuffle
+  while (deck_size) {
 
-        // And swap it with the current element
-        temp = deck[deck_size];
-        deck[deck_size] = deck[random_card];
-        deck[random_card] = temp;
-    }
+    // Pick a remaining elements
+    let random_card = randomNumber(deck_size--);
 
-    return deck;
+    // And swap it with the current element
+    temp = deck[deck_size];
+    deck[deck_size] = deck[random_card];
+    deck[random_card] = temp;
+  }
+
+  return deck;
 }
 
-// Generate random number of certain size
+/**
+ * Helper function which generates a random positive integer up to {size}.
+ * Returns said integer.
+ * @param {Integer} size The maximum size of the number
+ */
 function randomNumber(size) {
-    return Math.floor(Math.random() * size);
+  return Math.floor(Math.random() * size);
 }
 
-// Get the uber-deck
-module.exports = function getDeck(number_of_decks) {
-    deck = createDeck(number_of_decks);
-    shuffleDeck(deck);
-    console.log(deck);
-    return deck;
-}
+/**
+ * Returns a shuffled deck of {number_of_decks} size, with
+ * {number_of_jokers} jokers.
+ * @param {Integer} number_of_decks The amounts of single decks in the deck
+ * @param {Integer} number_of_jokers The amount of jokers in the deck
+ */
+module.exports = function createDeck(number_of_decks, number_of_jokers) {
+
+  let deck = buildDeck(number_of_decks, number_of_jokers);
+  shuffleDeck(deck);
+
+  return deck;
+};
