@@ -66,7 +66,6 @@ function setupDropzones(){
   
   $('#down_pile').click(() => {
     let first_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
-    console.log(first_child);
     $(first_child).prependTo('#s_pile')
   })
 
@@ -122,7 +121,6 @@ function addHandlers(elem, pile, pile_number, card_number) {
   elem.click((event) => {
     event.stopPropagation();
     let seq = action.sequence;
-    console.log(pile, pile_number, card_number);
     if(seq.from.pile == '') {
       if(card_number == -1)
         return;
