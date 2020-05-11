@@ -1,40 +1,10 @@
 
-let socket = io();
 
-socket.on('message', (msg) => {
-  console.log(msg);
-});
-
-
-let ping;
-socket.on('room control', () => {
-  if(ping == undefined) {
-    ping = setInterval(() => {
-      socket.emit('session ping');
-      console.log("Ping send");
-    }, 2000);
-  }
-  playerAction({});
-  setupDropzones();
-});
-
-accessRoom('room2');
-
-function accessRoom(roomID) {
-  socket.emit('accessRoom', roomID);
-}
-
-function playerAction(action) {
-  socket.emit("player action", action, (state, err) => {
-    if(err != undefined)
-      console.log(err);
-    currentState = state;
-    render(state);
-  });
-}
-
+/**
+ * Global variables
+ */
 let currentState = {};
-const cardList = [];
+let cardList = [];
 const action = {
   action: 'MovePile',
   sequence: {
@@ -49,7 +19,61 @@ const action = {
     }
   }
 }
+let socket = io();
 
+/**
+ * An socket IO event handler listening for messages.
+ */
+socket.on('message', (msg) => {
+  console.log(msg);
+});
+
+/**
+ * An socket IO event handler listening for a verification
+ * on the player joining the room. Sets up dropzones and gets
+ * initial state if verified.
+ */
+let ping;
+socket.on('room control', () => {
+  if(ping == undefined) {
+    ping = setInterval(() => {
+      socket.emit('session ping');
+      console.log("Ping send");
+    }, 2000);
+  }
+  playerAction({});
+  setupDropzones();
+});
+
+/**
+ * Cast a custom socket IO event asking to join a room on the server
+ * 
+ * @param {string} roomID The unique room identifier
+ */
+function accessRoom(roomID) {
+  socket.emit('accessRoom', roomID);
+}
+accessRoom('room2');
+
+/**
+ * Sends the action object to the server and renders the responds
+ * (which is in the form of a state). Prints error if received.
+ * 
+ * @param {object} action The action object
+ */
+function playerAction(action) {
+  socket.emit("player action", action, (state, err) => {
+    if(err != undefined)
+      console.log(err);
+    currentState = state;
+    render(state);
+  });
+}
+
+/**
+ * Sets up the dropzones which can be interacted with 
+ * similarly to the DOM cards
+ */
 function setupDropzones(){
   addHandlers($('#f_pile-0'), 'f_pile', 0, -1);
   addHandlers($('#f_pile-1'), 'f_pile', 1, -1);
@@ -71,6 +95,13 @@ function setupDropzones(){
 
 }
 
+// ======== RENDER FUNCTIONALITY ========
+
+/**
+ * A function which clears all card objects and renders new ones 
+ * based on the solitaire state
+ * @param {object} state The solitaire state
+ */
 function render(state) {
   clearCards();
   renderTableau(state.t_pile);
@@ -78,16 +109,24 @@ function render(state) {
   renderStockpile(state.s_pile);
 }
 
+/**
+ * Clears and removes all cards from cardList
+ */
 function clearCards() {
   for(let card of cardList) {
     card.remove();
   }
+  cardList = [];
 }
 
+/**
+ * Renders, creates handlers, and registers the foundation cards.
+ * @param {object} piles The f_pile object from state
+ */
 function renderFoundation(piles)
 {
-  for(let i=0; i < piles.length; i++) {
-    for(let j=0; j < piles[i].length; j++){
+  for(let i = 0; i < piles.length; i++) {
+    for(let j = 0; j < piles[i].length; j++) {
       let $card = createCard(piles[i][j]);
       addHandlers($card, 'f_pile', i, j);
       cardList.push($card)
@@ -95,6 +134,11 @@ function renderFoundation(piles)
     }
   }
 }
+
+/**
+ * Renders, creates handlers, and registers the stock cards.
+ * @param {object} pile The s_pile object from state
+ */
 function renderStockpile(pile)
 {
   for(let i = 0; i < pile.length; i++){
@@ -105,10 +149,15 @@ function renderStockpile(pile)
       $card.appendTo(`#s_pile`);
   }
 }
+
+/**
+ * Renders, creates handlers, and registers the tableau cards.
+ * @param {object} piles The t_pile object from state
+ */
 function renderTableau(piles)
 {
-  for(let i=0; i < piles.length; i++) {
-    for(let j=0; j < piles[i].length; j++){
+  for(let i = 0; i < piles.length; i++) {
+    for(let j = 0; j < piles[i].length; j++) {
       let $card = createCard(piles[i][j]);
       addHandlers($card, 't_pile', i, j);
       cardList.push($card);
@@ -117,6 +166,15 @@ function renderTableau(piles)
   }
 }
 
+/**
+ * Adds handlers to elem to register whenever a user clicks on it. This is used
+ * to determine the action to send to the server. 
+ * 
+ * @param {JQuery Object} elem Element to add handlers to
+ * @param {string} pile The name of the pile(s) ('f_pile', 't_pile' or 's_pile')
+ * @param {int} pile_number The pile the Element belongs to
+ * @param {*} card_number The order of the element in the pile
+ */
 function addHandlers(elem, pile, pile_number, card_number) {
   elem.click((event) => {
     event.stopPropagation();
@@ -156,8 +214,10 @@ function addHandlers(elem, pile, pile_number, card_number) {
   })
 }
 
-let cardTest = {"suit": "spades", "rank":1, "id":1, "isJoker":false,"hidden":false};
-
+/**
+ * Takes a card object and creates a JQuery representation
+ * @param {object} card Card object
+ */
 function createCard(card) {
   
     let suit;

@@ -189,9 +189,16 @@ function addGameEventHandler(socket) {
         }
       });
     }
-    const playerState = solitaire.filterState(room.state);
-    socket.send(room.state);
-    callback(playerState);
+    if(Object.keys(room.state) != 0) {
+      const playerState = solitaire.filterState(room.state);
+      callback(playerState);
+    }
+    else {
+      socket.send("Game has concluded!");
+      callback(room.state);
+      dropSession(socket);
+    }
+
   });
 }
 
