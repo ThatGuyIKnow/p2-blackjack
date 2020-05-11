@@ -89,12 +89,12 @@ function pushCards(state, action, cardPackage) {
   switch (action.sequence.to.pile) {
     case ('f_pile'):
       pile = state.f_pile[pile_number];
+      cardPackage = cardPackage.filter(value => value != null);
       state.f_pile[pile_number] = pile.concat(cardPackage);
       break;
 
     case ('t_pile'):
       pile = state.t_pile[pile_number];
-      console.log(pile);
       state.t_pile[pile_number] = pile.concat(cardPackage);
       break;
   }

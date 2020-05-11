@@ -1,145 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>P2 General Cards</title>
-    <meta charset="UTF-8">
-    <link href="./css/main.css" type="text/css" rel="stylesheet">
-  </head>
-  <body>
-    <h1>Tester tester</h1>
-    <h2>1..2..3</h2>
-    <div>
-      <button onclick="accessRoom('room1')">Room 1</button>
-      <button onclick="accessRoom('room2')">Room 2</button>
-      <button onclick="accessRoom('room3')">Room 3</button>
-      <button onclick="accessRoom('room4')">Room 4</button>
-      <button onclick="doTheThing()">Action</button>
-    </div>
+<head>
+    <link rel="stylesheet" href="css/main.css">
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+    <title>Solitaire</title>
+</head>
+<body class="background">
+  <!-- Preload images -->
+<div style="display:none;">
+<img src="back_5_compressed.png" width="1" height="1" border="0" alt="Image 01">
+<img src="Billedkort/Hjerter_Dame.png" width="1" height="1" border="0" alt="Image 02">
+<img src="Billedkort/Hjerter_Knaegt.png" width="1" height="1" border="0" alt="Image 03">
+<img src="Billedkort/Hjerter_Konge.png" width="1" height="1" border="0" alt="Image 04">
+<img src="Billedkort/Kloer_Konge.png" width="1" height="1" border="0" alt="Image 05">
+<img src="Billedkort/Kloer_Dame.png" width="1" height="1" border="0" alt="Image 06">
+<img src="Billedkort/Kloer_Knaegt.png" width="1" height="1" border="0" alt="Image 07">
+<img src="Billedkort/Ruder_Dame.png" width="1" height="1" border="0" alt="Image 08">
+<img src="Billedkort/Ruder_Knaegt.png" width="1" height="1" border="0" alt="Image 09">
+<img src="Billedkort/Ruder_Konge.png" width="1" height="1" border="0" alt="Image 10">
+<img src="Billedkort/Spar_Dame.png" width="1" height="1" border="0" alt="Image 11">
+<img src="Billedkort/Spar_Knaegt.png" width="1" height="1" border="0" alt="Image 12">
+<img src="Billedkort/Spar_Konge.png" width="1" height="1" border="0" alt="Image 13">
+</div>
+<!-- Preload images -->
+<div class="wrapper">
+  <div class="upperwrapper">
+  <div class="f_wrapper">
+    <div id="f_pile-0" class="dropzone"></div>
+    <div id="f_pile-1" class="dropzone"></div>
+    <div id="f_pile-2" class="dropzone"></div>
+    <div id="f_pile-3" class="dropzone"></div>
+</div>
 
-    <textarea id="testAction" rows="4" cols="50">
-      {
-      "action": "MovePile",
-      "sequence": {
-      "from": {
-      "pile": "f_pile",
-      "pile_number": 0,
-      "card_number": 1
-      },
-      "to": {
-      "pile": "f_pile",
-      "pile_number": 5
-      }
-      }
-      }
-    </textarea>
-
-    <div id="stateDisplay">
-      state: {<br>
-      f_pile : [<br>
-      [<br> { suit: 'spades', rank: 1, id: 1, isJoker: false, hidden: false },<br>
-      { suit: 'spades', rank: 2, id: 2, isJoker: false, hidden: false },
-      <br>
-      ],<br>
-      [],<br>
-      [],<br>
-      []<br>
-      ],<br>
-      t_pile : [<br>
-      [<br>
-      { suit: 'hearts', rank: 9, id: 22, isJoker: false, hidden: false },<br>
-      { suit: 'spades', rank: 8, id: 8, isJoker: false, hidden: false },],<br>
-      [<br>
-      { suit: 'spades', rank: 3, id: 3, isJoker: false, hidden: false },<br>
-      ],<br>
-      [<br>
-      { suit: 'diamonds', rank: 9, id: 48, isJoker: false, hidden: false },<br>
-      ],<br>
-      [
-      { suit: 'clubs', rank: 9, id: 35, isJoker: false, hidden: false },<br>
-      ],<br>
-      [<br>
-      { suit: 'clubs', rank: 10, id: 36, isJoker: false, hidden: false },<br>
-      ],<br>
-      [<br>
-      { suit: 'hearts', rank: 3, id: 16, isJoker: false, hidden: false },<br>
-      ],<br>
-      [],<br>
-      ],<br>
-      s_pile : [
-      { suit: 'clubs', rank: 1, id: 27, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 7, id: 20, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 6, id: 19, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 2, id: 41, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 2, id: 15, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 13, id: 52, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 12, id: 25, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 11, id: 24, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 11, id: 50, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 10, id: 23, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 5, id: 5, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 5, id: 44, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 7, id: 7, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 8, id: 21, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 4, id: 43, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 13, id: 13, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 12, id: 38, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 5, id: 18, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 7, id: 46, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 6, id: 6, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 4, id: 30, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 13, id: 39, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 8, id: 47, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 12, id: 51, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 6, id: 32, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 3, id: 29, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 1, id: 40, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 5, id: 31, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 9, id: 9, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 11, id: 11, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 6, id: 45, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 8, id: 34, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 4, id: 4, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 10, id: 49, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 11, id: 37, isJoker: false, hidden: false },
-      { suit: 'diamonds', rank: 3, id: 42, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 1, id: 14, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 13, id: 26, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 7, id: 33, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 12, id: 12, isJoker: false, hidden: false },
-      { suit: 'spades', rank: 10, id: 10, isJoker: false, hidden: false },
-      { suit: 'clubs', rank: 2, id: 28, isJoker: false, hidden: false },
-      { suit: 'hearts', rank: 4, id: 17, isJoker: false, hidden: false },
-      ]
-      }
-      },</div>
+<div class="s_wrapper">
+  <div id="s_pile" class="dropzone"></div>
+  <div id="down_pile" class="dropzone">
+    <div class="card">NEXT CARD</div>
+  </div>
+</div>
+</div>
+<div class="t_wrapper">
+  <div id="t_pile-0" class="dropzone stackdown"></div>
+  <div id="t_pile-1" class="dropzone stackdown"></div>
+  <div id="t_pile-2" class="dropzone stackdown"></div>
+  <div id="t_pile-3" class="dropzone stackdown"></div>
+  <div id="t_pile-4" class="dropzone stackdown"></div>
+  <div id="t_pile-5" class="dropzone stackdown"></div>
+  <div id="t_pile-6" class="dropzone stackdown"></div>
+</div>
+</div>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      let socket = io();
-      socket.on('message', function(msg){
-        console.log(msg);
-    });
-
-    let ping;
-    socket.on('room control', () => {
-      if(ping == undefined) {
-        ping = setInterval(() => {
-          socket.emit('session ping');
-          console.log("Ping send");
-        }, 2000);
-      }
-    })
-
-    function accessRoom(roomID) {
-      socket.emit('accessRoom', roomID);
-    }
-
-    function doTheThing()
-    {
-      let action = JSON.parse(document.getElementById("testAction").value);
-      socket.emit("player action", action, (state) => {
-        document.getElementById("stateDisplay").innerText = JSON.stringify(state);
-      })
-    }
-    </script>
-  </body>
+    <script src="js/main.js"></script> 
+</body>
 </html>
+
+
+<!--
+- Integrer flip af kort med backside (Vi har licens til at bruge) - Casper
+- Muligvis indfør designet på kort (Uden at tilføje flere div) - Lars
+- Gør baggrunden mere sexy
+- Hånd til spiller/playe
+
+
+
+Array af arrays med XY koordinater, XY værdierne er gemt i kortet så er det bare modtagelse i et array.
+-->

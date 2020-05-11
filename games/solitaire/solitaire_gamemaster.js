@@ -110,7 +110,7 @@ function movePile(state, action, callback) {
   });
 
   if (error) return;
-
+  
   const newState = deepCopy(state);
 
   dealer.movePile(newState, action);
@@ -155,13 +155,10 @@ function verifyMovePile(state, action, callback) {
 
     default:
       from_cards = new VerificationError("(from) Pile does not exist");
+      callback(from_cards);
       return;
   }
 
-  if (Error.isPrototypeOf(from_cards)) {
-    callback(state, from_cards);
-    return;
-  }
 
   let allowedMove = false;
 
@@ -218,7 +215,6 @@ function verifyFromFoundation(state, from) {
 
   let from_pile = state.f_pile[from.pile_number];
   let from_card = from_pile[from_pile.length - 1];
-
   return [from_card];
 }
 
@@ -230,8 +226,9 @@ function verifyFromFoundation(state, from) {
  * @param {object} state  The solitaire state
  * @param {object} from   The action.sequence.from
  */
-function verifyFromStockpile(state, from, to, callback) {
+function verifyFromStockpile(state, from) {
 
+  console.log(state.s_pile[from.card_number-1]);
   if (!state.s_pile[from.card_number]) {
     return new VerificationError("Illegal move");
   }

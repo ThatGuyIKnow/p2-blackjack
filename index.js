@@ -190,6 +190,7 @@ function addGameEventHandler(socket) {
       });
     }
     const playerState = solitaire.filterState(room.state);
+    socket.send(room.state);
     callback(playerState);
   });
 }

@@ -34,7 +34,7 @@ function tableau(deck, number_of_cards) {
 
   for (let i = 0; i < number_of_cards; i++) {
 
-    if (i != 0) deck[0].hidden = true;
+    if (i != number_of_cards - 1) deck[0].hidden = true;
 
     tableau.push(deck[0]);
     deck.splice(0, 1);
