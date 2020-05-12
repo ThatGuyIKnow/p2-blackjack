@@ -93,8 +93,8 @@ function setupDropzones() {
   
   $('#down_pile').click((event) => {
     event.stopPropagation();
-    let first_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
-    $(first_child).prependTo('#s_pile')
+    let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
+    $(last_child).prependTo('#s_pile');
   })
 
 }
@@ -145,7 +145,6 @@ function renderFoundation(piles) {
 function renderStockpile(pile) {
   for (let i = 0; i < pile.length; i++) {
     let $card = createCard(pile[i]);
-    $('#s_pile')
     addHandlers($card, 's_pile', 0, i);
     cardList.push($card)
     $card.appendTo(`#s_pile`);
@@ -174,7 +173,7 @@ function renderTableau(piles) {
  * @param {JQuery Object} elem Element to add handlers to
  * @param {string} pile The name of the pile(s) ('f_pile', 't_pile' or 's_pile')
  * @param {int} pile_number The pile the Element belongs to
- * @param {*} card_number The order of the element in the pile
+ * @param {int} card_number The order of the element in the pile
  */
 function addHandlers(elem, pile, pile_number, card_number) {
   elem.click((event) => {
@@ -189,8 +188,8 @@ function addHandlers(elem, pile, pile_number, card_number) {
       elem.addClass('highlight');
     } else {
       if (seq.from.pile == pile &&
-        seq.from.pile_number == pile_number &&
-        seq.from.card_number == card_number) {
+          seq.from.pile_number == pile_number &&
+          seq.from.card_number == card_number) {
         seq.from.pile = '';
         seq.from.pile_number = -1;
         seq.from.card_number = -1;
@@ -204,10 +203,7 @@ function addHandlers(elem, pile, pile_number, card_number) {
         seq.from.card_number = -1;
         seq.to.pile = '';
         seq.to.pile_number = -1;
-        for (let highlight of $('.highlight')) {
-          $highlight = $(highlight);
-          $highlight.removeClass('highlight');
-        }
+        $('.highlight').removeClass('highlight');
       }
     }
   })
