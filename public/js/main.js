@@ -93,6 +93,7 @@ function setupDropzones() {
   
   $('#down_pile').click((event) => {
     event.stopPropagation();
+    event.preventDefault();
     let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
     $(last_child).prependTo('#s_pile');
   })
