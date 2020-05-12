@@ -48,7 +48,8 @@ const rooms = {
  */
 
 function parseCookie(data) {
-
+  
+  console.log(data);
   let parseData = [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
 
   /* Converts the parsed data to an object with the key-value pairs found in
