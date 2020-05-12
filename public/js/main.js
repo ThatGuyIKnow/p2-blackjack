@@ -91,7 +91,7 @@ function setupDropzones() {
   addHandlers($('#t_pile-5'), 't_pile', 5, -1);
   addHandlers($('#t_pile-6'), 't_pile', 6, -1);
   
-  $('#down_pile').click((event) => {
+  $('#down_pile').off('click').on('click', (event) => {
     event.stopPropagation();
     event.preventDefault();
     let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
