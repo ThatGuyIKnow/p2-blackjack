@@ -26,7 +26,7 @@ const rooms = {
   },
   'room2': {
     connections: [],
-    maxConnections: 5,
+    maxConnections: 6,
     state: {}
   },
   'room3': {
@@ -192,6 +192,7 @@ function addGameEventHandler(socket) {
     }
     if(Object.keys(room.state) != 0) {
       const playerState = solitaire.filterState(room.state);
+      socket.to('room2').emit('room control', playerState);
       callback(playerState);
     }
     else {
