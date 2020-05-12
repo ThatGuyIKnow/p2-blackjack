@@ -45,6 +45,10 @@ socket.on('room control', () => {
   setupDropzones();
 });
 
+socket.on('room update', (state) => {
+  render(state);
+});
+
 /**
  * Cast a custom socket IO event asking to join a room on the server
  * 

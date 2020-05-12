@@ -192,7 +192,7 @@ function addGameEventHandler(socket) {
     }
     if(Object.keys(room.state) != 0) {
       const playerState = solitaire.filterState(room.state);
-      socket.to('room2').emit('room control', playerState);
+      socket.to('room2').emit('room update', playerState);
       callback(playerState);
     }
     else {
