@@ -46,6 +46,7 @@ socket.on('room control', () => {
 });
 
 socket.on('room update', (state) => {
+  currentState = state;
   render(state);
 });
 
