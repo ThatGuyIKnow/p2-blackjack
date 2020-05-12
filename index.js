@@ -46,13 +46,13 @@ const rooms = {
 /**
  * @param {string} data The cookie string
  */
-
 function parseCookie(data) {
-  
+
   console.log(data);
   let parseData = [...data.matchAll(/([^=\s]*)=([^;\s]*)/gm)];
 
-  /* Converts the parsed data to an object with the key-value pairs found in
+  /*
+   * Converts the parsed data to an object with the key-value pairs found in
    * the cookie (match[0] is the entire cookie string).
    */
   let cookie = {};
@@ -69,7 +69,6 @@ function parseCookie(data) {
  * Takes the default cookie sent by Socket IO and checks if the socket ID sent
  * in the cookie is already in a room in rooms. If yes, then the socket's new
  * ID (which is created on the new connection) replaces the ID in the room.
- *
  * @param {Socket object} socket The socket to call the middleware on
  * @param {function}      next   A callback function
  */
@@ -145,7 +144,6 @@ io.on('connection', (socket) => {
 /**
  * Adds the necessary eventhandlers to a socket ( as of now, this only includes
  * eventhandlers for maintaining an connection).
- *
  * @param {Socket object} socket The socket to apply the handlers
  */
 function addSocketEventHandlers(socket) {
@@ -164,7 +162,6 @@ function addSocketEventHandlers(socket) {
 
 /**
  * Adds a game handler for receiving player actions on the state
- *
  * @param {Socket object} socket The socket to apply the handlers
  */
 function addGameEventHandler(socket) {
@@ -190,12 +187,11 @@ function addGameEventHandler(socket) {
         }
       });
     }
-    if(Object.keys(room.state) != 0) {
+    if (Object.keys(room.state) != 0) {
       const playerState = solitaire.filterState(room.state);
       socket.to('room2').emit('room update', playerState);
       callback(playerState);
-    }
-    else {
+    } else {
       socket.send("Game has concluded!");
       callback(room.state);
       dropSession(socket);
@@ -208,7 +204,6 @@ function addGameEventHandler(socket) {
 
 /**
  * Removes a socket from all rooms and disconnects the socket.
- *
  * @param {Socket object} socket The socket to drop
  */
 function dropSession(socket) {
@@ -224,7 +219,6 @@ function dropSession(socket) {
 
 /**
  * Removes a socket from all rooms (expect its ID room)
- *
  * @param {Socket object} socket The socket to leave rooms
  */
 function leaveRooms(socket) {

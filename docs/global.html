@@ -144,7 +144,7 @@ to interpret the action passed to the GameMaster</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line82">line 82</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -165,6 +165,350 @@ to interpret the action passed to the GameMaster</p>
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accessRoom"><span class="type-signature"></span>accessRoom<span class="signature">(roomID)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Cast a custom socket IO event asking to join a room on the server</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>roomID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The unique room identifier</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addHandlers"><span class="type-signature"></span>addHandlers<span class="signature">(elem, pile, pile_number, card_number)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds handlers to elem to register whenever a user clicks on it. This is used
+to determine the action to send to the server.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>elem</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Element to add handlers to</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The name of the pile(s) ('f_pile', 't_pile' or 's_pile')</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pile_number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The pile the Element belongs to</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>card_number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The order of the element in the pile</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line165">line 165</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
             
@@ -298,7 +642,7 @@ of jokers.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cards.js.html">cards.js</a>, <a href="cards.js.html#line12">line 12</a>
+        <a href="games_cards.js.html">games/cards.js</a>, <a href="games_cards.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -390,7 +734,144 @@ Returns True if the configuration is valid and False otherwise.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line311">line 311</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line308">line 308</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createCard"><span class="type-signature"></span>createCard<span class="signature">(card)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Takes a card object and creates a JQuery representation</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>card</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Card object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line206">line 206</a>
     </li></ul></dd>
     
 
@@ -528,7 +1009,7 @@ which the function returns.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line8">line 8</a>
+        <a href="games_solitaire_solitaire_state.js.html">games/solitaire/solitaire_state.js</a>, <a href="games_solitaire_solitaire_state.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -665,7 +1146,7 @@ which the function returns.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line398">line 398</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line395">line 395</a>
     </li></ul></dd>
     
 
@@ -803,7 +1284,7 @@ an callback function.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line51">line 51</a>
+        <a href="games_solitaire_solitaire_state.js.html">games/solitaire/solitaire_state.js</a>, <a href="games_solitaire_solitaire_state.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -896,7 +1377,7 @@ Returns True if the configuration is valid and False otherwise.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line361">line 361</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line358">line 358</a>
     </li></ul></dd>
     
 
@@ -987,7 +1468,7 @@ Returns True if the configuration is valid and False otherwise.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line334">line 334</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line331">line 331</a>
     </li></ul></dd>
     
 
@@ -1174,7 +1655,145 @@ is passed in the callback instead.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line99">line 99</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line99">line 99</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="playerAction"><span class="type-signature"></span>playerAction<span class="signature">(action)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Sends the action object to the server and renders the responds
+(which is in the form of a state). Prints error if received.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>action</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The action object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -1357,7 +1976,7 @@ is passed in the callback instead.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line84">line 84</a>
+        <a href="games_solitaire_solitaire_dealer.js.html">games/solitaire/solitaire_dealer.js</a>, <a href="games_solitaire_solitaire_dealer.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -1495,7 +2114,7 @@ Returns said integer.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cards.js.html">cards.js</a>, <a href="cards.js.html#line80">line 80</a>
+        <a href="games_cards.js.html">games/cards.js</a>, <a href="games_cards.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -1655,7 +2274,7 @@ Returns said integer.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line21">line 21</a>
+        <a href="games_solitaire_solitaire_dealer.js.html">games/solitaire/solitaire_dealer.js</a>, <a href="games_solitaire_solitaire_dealer.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -1816,7 +2435,7 @@ based on the action.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line64">line 64</a>
+        <a href="games_solitaire_solitaire_dealer.js.html">games/solitaire/solitaire_dealer.js</a>, <a href="games_solitaire_solitaire_dealer.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -1976,7 +2595,7 @@ based on the action.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line45">line 45</a>
+        <a href="games_solitaire_solitaire_dealer.js.html">games/solitaire/solitaire_dealer.js</a>, <a href="games_solitaire_solitaire_dealer.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -2136,7 +2755,556 @@ based on the action.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_dealer.js.html">solitaire/solitaire_dealer.js</a>, <a href="solitaire_solitaire_dealer.js.html#line33">line 33</a>
+        <a href="games_solitaire_solitaire_dealer.js.html">games/solitaire/solitaire_dealer.js</a>, <a href="games_solitaire_solitaire_dealer.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(state)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>A function which clears all card objects and renders new ones
+based on the solitaire state</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The solitaire state</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renderFoundation"><span class="type-signature"></span>renderFoundation<span class="signature">(piles)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Renders, creates handlers, and registers the foundation cards.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>piles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The f_pile object from state</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line117">line 117</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renderStockpile"><span class="type-signature"></span>renderStockpile<span class="signature">(pile)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Renders, creates handlers, and registers the stock cards.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The s_pile object from state</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renderTableau"><span class="type-signature"></span>renderTableau<span class="signature">(piles)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Renders, creates handlers, and registers the tableau cards.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>piles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The t_pile object from state</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line146">line 146</a>
     </li></ul></dd>
     
 
@@ -2273,7 +3441,7 @@ based on the action.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cards.js.html">cards.js</a>, <a href="cards.js.html#line55">line 55</a>
+        <a href="games_cards.js.html">games/cards.js</a>, <a href="games_cards.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -2435,7 +3603,7 @@ cards in the pile being determined by {number_of_cards}.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_state.js.html">solitaire/solitaire_state.js</a>, <a href="solitaire_solitaire_state.js.html#line31">line 31</a>
+        <a href="games_solitaire_solitaire_state.js.html">games/solitaire/solitaire_state.js</a>, <a href="games_solitaire_solitaire_state.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -2573,7 +3741,7 @@ if the foundation piles are full.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line192">line 192</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line189">line 189</a>
     </li></ul></dd>
     
 
@@ -2736,7 +3904,7 @@ Returns either an array of cards or an VerificationError</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line213">line 213</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line210">line 210</a>
     </li></ul></dd>
     
 
@@ -2899,7 +4067,7 @@ Returns either an array of cards or an VerificationError</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line233">line 233</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line229">line 229</a>
     </li></ul></dd>
     
 
@@ -3061,7 +4229,7 @@ an error. Returns either an array of cards or an VerificationError</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line251">line 251</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line248">line 248</a>
     </li></ul></dd>
     
 
@@ -3248,7 +4416,7 @@ Calls callback if an error is found.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line137">line 137</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line137">line 137</a>
     </li></ul></dd>
     
 
@@ -3432,7 +4600,7 @@ pile is defined from the {to} parameter. Returns a boolean value</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line292">line 292</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line289">line 289</a>
     </li></ul></dd>
     
 
@@ -3616,7 +4784,7 @@ is defined from the {to} parameter. Returns a boolean value</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="solitaire_solitaire_gamemaster.js.html">solitaire/solitaire_gamemaster.js</a>, <a href="solitaire_solitaire_gamemaster.js.html#line274">line 274</a>
+        <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line271">line 271</a>
     </li></ul></dd>
     
 
@@ -3662,13 +4830,13 @@ is defined from the {to} parameter. Returns a boolean value</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#buildDeck">buildDeck</a></li><li><a href="global.html#canMoveTableau">canMoveTableau</a></li><li><a href="global.html#createTableaus">createTableaus</a></li><li><a href="global.html#deepCopy">deepCopy</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isCorrectPlacementFoundation">isCorrectPlacementFoundation</a></li><li><a href="global.html#isCorrectPlacementTableau">isCorrectPlacementTableau</a></li><li><a href="global.html#movePile">movePile</a></li><li><a href="global.html#pushCards">pushCards</a></li><li><a href="global.html#randomNumber">randomNumber</a></li><li><a href="global.html#removeCardFoundation">removeCardFoundation</a></li><li><a href="global.html#removeCards">removeCards</a></li><li><a href="global.html#removeCardsTableau">removeCardsTableau</a></li><li><a href="global.html#removeCardStockpile">removeCardStockpile</a></li><li><a href="global.html#ruleset">ruleset</a></li><li><a href="global.html#shuffleDeck">shuffleDeck</a></li><li><a href="global.html#tableau">tableau</a></li><li><a href="global.html#verifyEndState">verifyEndState</a></li><li><a href="global.html#verifyFromFoundation">verifyFromFoundation</a></li><li><a href="global.html#verifyFromStockpile">verifyFromStockpile</a></li><li><a href="global.html#verifyFromTableau">verifyFromTableau</a></li><li><a href="global.html#verifyMovePile">verifyMovePile</a></li><li><a href="global.html#verifyToFoundation">verifyToFoundation</a></li><li><a href="global.html#verifyToTableau">verifyToTableau</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#accessRoom">accessRoom</a></li><li><a href="global.html#addHandlers">addHandlers</a></li><li><a href="global.html#buildDeck">buildDeck</a></li><li><a href="global.html#canMoveTableau">canMoveTableau</a></li><li><a href="global.html#createCard">createCard</a></li><li><a href="global.html#createTableaus">createTableaus</a></li><li><a href="global.html#deepCopy">deepCopy</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isCorrectPlacementFoundation">isCorrectPlacementFoundation</a></li><li><a href="global.html#isCorrectPlacementTableau">isCorrectPlacementTableau</a></li><li><a href="global.html#movePile">movePile</a></li><li><a href="global.html#playerAction">playerAction</a></li><li><a href="global.html#pushCards">pushCards</a></li><li><a href="global.html#randomNumber">randomNumber</a></li><li><a href="global.html#removeCardFoundation">removeCardFoundation</a></li><li><a href="global.html#removeCards">removeCards</a></li><li><a href="global.html#removeCardsTableau">removeCardsTableau</a></li><li><a href="global.html#removeCardStockpile">removeCardStockpile</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderFoundation">renderFoundation</a></li><li><a href="global.html#renderStockpile">renderStockpile</a></li><li><a href="global.html#renderTableau">renderTableau</a></li><li><a href="global.html#ruleset">ruleset</a></li><li><a href="global.html#shuffleDeck">shuffleDeck</a></li><li><a href="global.html#tableau">tableau</a></li><li><a href="global.html#verifyEndState">verifyEndState</a></li><li><a href="global.html#verifyFromFoundation">verifyFromFoundation</a></li><li><a href="global.html#verifyFromStockpile">verifyFromStockpile</a></li><li><a href="global.html#verifyFromTableau">verifyFromTableau</a></li><li><a href="global.html#verifyMovePile">verifyMovePile</a></li><li><a href="global.html#verifyToFoundation">verifyToFoundation</a></li><li><a href="global.html#verifyToTableau">verifyToTableau</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu May 07 2020 09:23:11 GMT+0200 (Centraleuropæisk sommertid)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 12 2020 10:35:15 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
