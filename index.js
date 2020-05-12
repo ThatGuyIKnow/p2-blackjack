@@ -119,7 +119,8 @@ io.use(stickySessionMiddleware);
 io.on('connection', (socket) => {
 
   socket.send(`Connected through WebSocket. ID: ${socket.id}`);
-  socket.send(`Rooms: ${JSON.stringify(rooms)}`);
+  //socket.send(`Rooms: ${JSON.stringify(rooms)}`);
+  io.send(`Currently ${io.engine.clientsCount} client(s) connected`);
 
   socket.on('accessRoom', (roomID) => {
 
@@ -131,7 +132,7 @@ io.on('connection', (socket) => {
       socket.join(roomID);
       rooms[roomID].connections.push(socket.id);
       addSocketEventHandlers(socket);
-      socket.send(`Rooms: ${JSON.stringify(rooms)}`);
+      //socket.send(`Rooms: ${JSON.stringify(rooms)}`);
     }
   });
 
@@ -217,7 +218,7 @@ function dropSession(socket) {
 
   if (socket.connected) {
     socket.send(`Disconnected from Socket IO Session`);
-    socket.send(`Rooms: ${JSON.stringify(rooms)}`);
+    //socket.send(`Rooms: ${JSON.stringify(rooms)}`);
     socket.disconnect();
   }
 }
