@@ -109,12 +109,9 @@ const stickySessionMiddleware = (socket, next) => {
 };
 io.use(stickySessionMiddleware);
 
-
 // ======== CONNECTION HANDLER ========
 
-/**
- * The on-connection Socket IO handler
- */
+// The on-connection Socket IO handler
 io.on('connection', (socket) => {
 
   socket.send(`Connected through WebSocket. ID: ${socket.id}`);

@@ -1,4 +1,4 @@
-.body{
+.body {
   width: 100%;
   min-width: 100%;
   overflow-x: hidden;
@@ -8,14 +8,13 @@
   background-color: rgb(12, 105, 61);
   /* background-color: crimson; */
   /* background-color: green; */
-  
 }
 
 .card {
   background-color: white;
   position: absolute;
   cursor: pointer;
-  
+
   width: 110px;
   height: 175px;
   padding-top: 5px;
@@ -49,41 +48,56 @@
   display: flex;
   justify-content: left;
   align-items: flex-end;
-  transform:rotate(180deg);
+  transform: rotate(180deg);
   /* background-color: blue; */
 }
 
-.top--symbol, .bottom--symbol {
-font-size: 80%;
+.top--symbol,
+.bottom--symbol {
+  font-size: 80%;
 }
 
 .mid {
-font-size: 50%;
-height: 60%;
-width: 100%;
+  font-size: 50%;
+  height: 60%;
+  width: 100%;
 
-display: flex;
-flex-wrap: wrap;
-text-align: center;
-justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
 }
 
-.topleft, .topmid, .topright,
-.topmidleft, .topmidmid, .midleft,
-.midmid, .midright, .topmidright,
-.bottommidleft, .bottommidmid,.bottommidright,
-.bottomleft, .bottommid, .bottomright {
-width: calc(100% * (1/3));
-height: calc(100% * (1/5));
-font-size: 190%;
+.topleft,
+.topmid,
+.topright,
+.topmidleft,
+.topmidmid,
+.midleft,
+.midmid,
+.midright,
+.topmidright,
+.bottommidleft,
+.bottommidmid,
+.bottommidright,
+.bottomleft,
+.bottommid,
+.bottomright {
+  width: calc(100% * (1/3));
+  height: calc(100% * (1/5));
+  font-size: 190%;
 }
 
-.bottommidleft, .bottommidmid,.bottommidright,
-.bottomleft, .bottommid, .bottomright {
-  transform:rotate(180deg);
+.bottommidleft,
+.bottommidmid,
+.bottommidright,
+.bottomleft,
+.bottommid,
+.bottomright {
+  transform: rotate(180deg);
 }
 
-.myH1  {
+.myH1 {
   text-align: center;
   width: auto;
   height: auto;
@@ -92,53 +106,53 @@ font-size: 190%;
   border: none;
   border-radius: 5px;
   background-color: black;
-  color: white; 
+  color: white;
   position: static;
 }
 
 .button {
-background-color: black; 
-color: white;
-padding: 8px 16px;
-text-align: center;
-text-decoration: none;
-outline: none;
-font-size: 12px;
-margin-bottom: 5px;
+  background-color: black;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 
 .dropzone {
-float: right;
+  float: right;
 
-border: solid 6px rgba(204, 204, 204, 0.3);
-border-radius: 6px;
-margin: auto auto auto;
-min-width: 130px;
-width: 130px;
-height: 195px;
-transition: background-color 0.3s;
+  border: solid 6px rgba(204, 204, 204, 0.3);
+  border-radius: 6px;
+  margin: auto auto auto;
+  min-width: 130px;
+  width: 130px;
+  height: 195px;
+  transition: background-color 0.3s;
 
-margin-left: 10px;
-margin-right: 10px;
-margin-top: 10px;
-margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 
-cursor: pointer;
+  cursor: pointer;
 }
 
 .drop-active {
-border-color: rgb(55, 55, 201);
+  border-color: rgb(55, 55, 201);
 }
 
 .stackdown {
-	display: grid;
+  display: grid;
   grid-auto-rows: 30px;
   overflow-y: visible;
-	flex-basis: 100%;
+  flex-basis: 100%;
 }
 
-.stackdown > div {
+.stackdown>div {
   user-select: none;
   position: relative !important;
 
@@ -165,31 +179,34 @@ border-color: rgb(55, 55, 201);
   flex-direction: row;
   margin-left: 175px;
 }
+
 .f_wrapper {
   position: relative;
   left: 0;
   top: 0;
   display: flex;
   flex-direction: row;
-  
+
 }
+
 .t_wrapper {
   box-sizing: border-box;
   width: 100%;
   display: inline-flex;
 }
-.t_wrapper > div {
+
+.t_wrapper>div {
   flex-basis: inherit;
   flex-grow: 0;
 }
 
-.spades-icon::before, 
-.hearts-icon::before, 
-.clubs-icon::before, 
+.spades-icon::before,
+.hearts-icon::before,
+.clubs-icon::before,
 .diamonds-icon::before {
   width: 100px;
   height: 100px;
-	font-size: 100px;
+  font-size: 100px;
   color: rgba(202, 202, 202, 0.3);
   position: absolute;
   bottom: 50%;
@@ -198,59 +215,77 @@ border-color: rgb(55, 55, 201);
 
 .spades-icon::before {
   content: '\2660';
-} 
+}
+
 .hearts-icon::before {
   content: '\2665';
-} 
+}
+
 .clubs-icon::before {
   content: '\2663';
-} 
+}
+
 .diamonds-icon::before {
   content: '\2666';
-} 
-.hearts-icon::before, 
-.clubs-icon::before, 
-.diamonds-icon::before
-
-.card-hearts, .card-hearts .top--symbol:after, .card-hearts .bottom--symbol:after {
-color: red;
-content: '\2665';
 }
 
-.card-spades, .card-spades .top--symbol:after, .card-spades .bottom--symbol:after {
-color: black;
-content: '\2660';
+.hearts-icon::before,
+.clubs-icon::before,
+.diamonds-icon::before .card-hearts,
+.card-hearts .top--symbol:after,
+.card-hearts .bottom--symbol:after {
+  color: red;
+  content: '\2665';
 }
 
-.card-clubs, .card-clubs .top--symbol:after, .card-clubs .bottom--symbol:after {
-color: black;
-content: '\2663';
+.card-spades,
+.card-spades .top--symbol:after,
+.card-spades .bottom--symbol:after {
+  color: black;
+  content: '\2660';
 }
 
-.card-diamonds, .card-diamonds .top--symbol:after,.card-diamonds .bottom--symbol:after {
-color: red;
-content: '\2666';
+.card-clubs,
+.card-clubs .top--symbol:after,
+.card-clubs .bottom--symbol:after {
+  color: black;
+  content: '\2663';
 }
 
-.card-diamonds, .card-diamonds .top--symbol:after, .card-diamonds .bottom--symbol:after {
-color: red;
-content: '\2666';
+.card-diamonds,
+.card-diamonds .top--symbol:after,
+.card-diamonds .bottom--symbol:after {
+  color: red;
+  content: '\2666';
+}
+
+.card-diamonds,
+.card-diamonds .top--symbol:after,
+.card-diamonds .bottom--symbol:after {
+  color: red;
+  content: '\2666';
 
 }
 
-.card-spades, .card-spades .top--symbol:after, .card-spades .bottom--symbol:after {
-color: black;
-content: '\2660';
+.card-spades,
+.card-spades .top--symbol:after,
+.card-spades .bottom--symbol:after {
+  color: black;
+  content: '\2660';
 }
 
-.card-hearts, .card-hearts .top--symbol:after, .card-hearts .bottom--symbol:after {
-color: red;
-content: '\2665';
+.card-hearts,
+.card-hearts .top--symbol:after,
+.card-hearts .bottom--symbol:after {
+  color: red;
+  content: '\2665';
 }
 
-.card-clubs, .card-clubs .top--symbol:after, .card-clubs .bottom--symbol:after {
-color: black;
-content: '\2663';
+.card-clubs,
+.card-clubs .top--symbol:after,
+.card-clubs .bottom--symbol:after {
+  color: black;
+  content: '\2663';
 }
 
 /* Clubs */
@@ -276,425 +311,425 @@ content: '\2663';
 
 /* Clubs */
 .card-clubs.V-A .midmid:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-2 .topmid:after, 
+.card-clubs.V-2 .topmid:after,
 .card-clubs.V-2 .bottommid:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-3 .topmid:after, 
-.card-clubs.V-3 .midmid:after, 
+.card-clubs.V-3 .topmid:after,
+.card-clubs.V-3 .midmid:after,
 .card-clubs.V-3 .bottommid:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-4 .topleft:after, 
-.card-clubs.V-4 .topright:after, 
-.card-clubs.V-4 .bottomleft:after, 
+.card-clubs.V-4 .topleft:after,
+.card-clubs.V-4 .topright:after,
+.card-clubs.V-4 .bottomleft:after,
 .card-clubs.V-4 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-5 .topleft:after, 
-.card-clubs.V-5 .topright:after, 
-.card-clubs.V-5 .midmid:after, 
-.card-clubs.V-5 .bottomleft:after, 
+.card-clubs.V-5 .topleft:after,
+.card-clubs.V-5 .topright:after,
+.card-clubs.V-5 .midmid:after,
+.card-clubs.V-5 .bottomleft:after,
 .card-clubs.V-5 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-6 .topleft:after, 
-.card-clubs.V-6 .topright:after, 
+.card-clubs.V-6 .topleft:after,
+.card-clubs.V-6 .topright:after,
 .card-clubs.V-6 .midleft:after,
-.card-clubs.V-6 .midright:after, 
-.card-clubs.V-6 .bottomleft:after, 
+.card-clubs.V-6 .midright:after,
+.card-clubs.V-6 .bottomleft:after,
 .card-clubs.V-6 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-7 .topleft:after, 
-.card-clubs.V-7 .topright:after, 
+.card-clubs.V-7 .topleft:after,
+.card-clubs.V-7 .topright:after,
 .card-clubs.V-7 .midleft:after,
 .card-clubs.V-7 .midmid:after,
-.card-clubs.V-7 .midright:after, 
-.card-clubs.V-7 .bottomleft:after, 
+.card-clubs.V-7 .midright:after,
+.card-clubs.V-7 .bottomleft:after,
 .card-clubs.V-7 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-8 .topleft:after, 
-.card-clubs.V-8 .topright:after, 
+.card-clubs.V-8 .topleft:after,
+.card-clubs.V-8 .topright:after,
 .card-clubs.V-8 .topmidleft:after,
 .card-clubs.V-8 .topmidright:after,
 .card-clubs.V-8 .bottommidleft:after,
-.card-clubs.V-8 .bottommidright:after, 
-.card-clubs.V-8 .bottomleft:after, 
+.card-clubs.V-8 .bottommidright:after,
+.card-clubs.V-8 .bottomleft:after,
 .card-clubs.V-8 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-9 .topleft:after, 
-.card-clubs.V-9 .topright:after, 
+.card-clubs.V-9 .topleft:after,
+.card-clubs.V-9 .topright:after,
 .card-clubs.V-9 .topmidleft:after,
 .card-clubs.V-9 .topmidright:after,
 .card-clubs.V-9 .midmid:after,
 .card-clubs.V-9 .bottommidleft:after,
-.card-clubs.V-9 .bottommidright:after, 
-.card-clubs.V-9 .bottomleft:after, 
+.card-clubs.V-9 .bottommidright:after,
+.card-clubs.V-9 .bottomleft:after,
 .card-clubs.V-9 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
-.card-clubs.V-10 .topleft:after, 
-.card-clubs.V-10 .topright:after, 
+.card-clubs.V-10 .topleft:after,
+.card-clubs.V-10 .topright:after,
 .card-clubs.V-10 .topmidleft:after,
 .card-clubs.V-10 .topmidright:after,
 .card-clubs.V-10 .topmidmid:after,
 .card-clubs.V-10 .bottommidmid:after,
 .card-clubs.V-10 .bottommidleft:after,
 .card-clubs.V-10 .bottommidright:after,
-.card-clubs.V-10 .bottomleft:after, 
+.card-clubs.V-10 .bottomleft:after,
 .card-clubs.V-10 .bottomright:after {
-content: '\2663';
+  content: '\2663';
 }
 
 .card-clubs.V-Q {
-background-image: url("../img/Billedkort/Kloer_Dame.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Kloer_Dame.png");
+  background-size: contain;
 }
 
 .card-clubs.V-J {
-background-image: url("../img/Billedkort/Kloer_Knaegt.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Kloer_Knaegt.png");
+  background-size: contain;
 }
 
 .card-clubs.V-K {
-background-image: url("../img/Billedkort/Kloer_Konge.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Kloer_Konge.png");
+  background-size: contain;
 }
 
 /* Diamonds */
 .card-diamonds.V-A .midmid:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-2 .topmid:after, 
+.card-diamonds.V-2 .topmid:after,
 .card-diamonds.V-2 .bottommid:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-3 .topmid:after, 
-.card-diamonds.V-3 .midmid:after, 
+.card-diamonds.V-3 .topmid:after,
+.card-diamonds.V-3 .midmid:after,
 .card-diamonds.V-3 .bottommid:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-4 .topleft:after, 
-.card-diamonds.V-4 .topright:after, 
-.card-diamonds.V-4 .bottomleft:after, 
+.card-diamonds.V-4 .topleft:after,
+.card-diamonds.V-4 .topright:after,
+.card-diamonds.V-4 .bottomleft:after,
 .card-diamonds.V-4 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-5 .topleft:after, 
-.card-diamonds.V-5 .topright:after, 
-.card-diamonds.V-5 .midmid:after, 
-.card-diamonds.V-5 .bottomleft:after, 
+.card-diamonds.V-5 .topleft:after,
+.card-diamonds.V-5 .topright:after,
+.card-diamonds.V-5 .midmid:after,
+.card-diamonds.V-5 .bottomleft:after,
 .card-diamonds.V-5 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-6 .topleft:after, 
-.card-diamonds.V-6 .topright:after, 
+.card-diamonds.V-6 .topleft:after,
+.card-diamonds.V-6 .topright:after,
 .card-diamonds.V-6 .midleft:after,
-.card-diamonds.V-6 .midright:after, 
-.card-diamonds.V-6 .bottomleft:after, 
+.card-diamonds.V-6 .midright:after,
+.card-diamonds.V-6 .bottomleft:after,
 .card-diamonds.V-6 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-7 .topleft:after, 
-.card-diamonds.V-7 .topright:after, 
+.card-diamonds.V-7 .topleft:after,
+.card-diamonds.V-7 .topright:after,
 .card-diamonds.V-7 .midleft:after,
 .card-diamonds.V-7 .midmid:after,
-.card-diamonds.V-7 .midright:after, 
-.card-diamonds.V-7 .bottomleft:after, 
+.card-diamonds.V-7 .midright:after,
+.card-diamonds.V-7 .bottomleft:after,
 .card-diamonds.V-7 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-8 .topleft:after, 
-.card-diamonds.V-8 .topright:after, 
+.card-diamonds.V-8 .topleft:after,
+.card-diamonds.V-8 .topright:after,
 .card-diamonds.V-8 .topmidleft:after,
 .card-diamonds.V-8 .topmidright:after,
 .card-diamonds.V-8 .bottommidleft:after,
-.card-diamonds.V-8 .bottommidright:after, 
-.card-diamonds.V-8 .bottomleft:after, 
+.card-diamonds.V-8 .bottommidright:after,
+.card-diamonds.V-8 .bottomleft:after,
 .card-diamonds.V-8 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-9 .topleft:after, 
-.card-diamonds.V-9 .topright:after, 
+.card-diamonds.V-9 .topleft:after,
+.card-diamonds.V-9 .topright:after,
 .card-diamonds.V-9 .topmidleft:after,
 .card-diamonds.V-9 .topmidright:after,
 .card-diamonds.V-9 .midmid:after,
 .card-diamonds.V-9 .bottommidleft:after,
-.card-diamonds.V-9 .bottommidright:after, 
-.card-diamonds.V-9 .bottomleft:after, 
+.card-diamonds.V-9 .bottommidright:after,
+.card-diamonds.V-9 .bottomleft:after,
 .card-diamonds.V-9 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
-.card-diamonds.V-10 .topleft:after, 
-.card-diamonds.V-10 .topright:after, 
+.card-diamonds.V-10 .topleft:after,
+.card-diamonds.V-10 .topright:after,
 .card-diamonds.V-10 .topmidleft:after,
 .card-diamonds.V-10 .topmidright:after,
 .card-diamonds.V-10 .topmidmid:after,
 .card-diamonds.V-10 .bottommidmid:after,
 .card-diamonds.V-10 .bottommidleft:after,
 .card-diamonds.V-10 .bottommidright:after,
-.card-diamonds.V-10 .bottomleft:after, 
+.card-diamonds.V-10 .bottomleft:after,
 .card-diamonds.V-10 .bottomright:after {
-content: '\2666';
+  content: '\2666';
 }
 
 .card-diamonds.V-Q {
-background-image: url("../img/Billedkort/Ruder_Dame.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Ruder_Dame.png");
+  background-size: contain;
 }
 
 .card-diamonds.V-J {
-background-image: url("../img/Billedkort/Ruder_Knaegt.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Ruder_Knaegt.png");
+  background-size: contain;
 }
 
 .card-diamonds.V-K {
-background-image: url("../img/Billedkort/Ruder_Konge.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Ruder_Konge.png");
+  background-size: contain;
 }
 
 /* Spades */
 .card-spades.V-A .midmid:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-2 .topmid:after, 
+.card-spades.V-2 .topmid:after,
 .card-spades.V-2 .bottommid:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-3 .topmid:after, 
-.card-spades.V-3 .midmid:after, 
+.card-spades.V-3 .topmid:after,
+.card-spades.V-3 .midmid:after,
 .card-spades.V-3 .bottommid:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-4 .topleft:after, 
-.card-spades.V-4 .topright:after, 
-.card-spades.V-4 .bottomleft:after, 
+.card-spades.V-4 .topleft:after,
+.card-spades.V-4 .topright:after,
+.card-spades.V-4 .bottomleft:after,
 .card-spades.V-4 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-5 .topleft:after, 
-.card-spades.V-5 .topright:after, 
-.card-spades.V-5 .midmid:after, 
-.card-spades.V-5 .bottomleft:after, 
+.card-spades.V-5 .topleft:after,
+.card-spades.V-5 .topright:after,
+.card-spades.V-5 .midmid:after,
+.card-spades.V-5 .bottomleft:after,
 .card-spades.V-5 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-6 .topleft:after, 
-.card-spades.V-6 .topright:after, 
+.card-spades.V-6 .topleft:after,
+.card-spades.V-6 .topright:after,
 .card-spades.V-6 .midleft:after,
-.card-spades.V-6 .midright:after, 
-.card-spades.V-6 .bottomleft:after, 
+.card-spades.V-6 .midright:after,
+.card-spades.V-6 .bottomleft:after,
 .card-spades.V-6 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-7 .topleft:after, 
-.card-spades.V-7 .topright:after, 
+.card-spades.V-7 .topleft:after,
+.card-spades.V-7 .topright:after,
 .card-spades.V-7 .midleft:after,
 .card-spades.V-7 .midmid:after,
-.card-spades.V-7 .midright:after, 
-.card-spades.V-7 .bottomleft:after, 
+.card-spades.V-7 .midright:after,
+.card-spades.V-7 .bottomleft:after,
 .card-spades.V-7 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-8 .topleft:after, 
-.card-spades.V-8 .topright:after, 
+.card-spades.V-8 .topleft:after,
+.card-spades.V-8 .topright:after,
 .card-spades.V-8 .topmidleft:after,
 .card-spades.V-8 .topmidright:after,
 .card-spades.V-8 .bottommidleft:after,
-.card-spades.V-8 .bottommidright:after, 
-.card-spades.V-8 .bottomleft:after, 
+.card-spades.V-8 .bottommidright:after,
+.card-spades.V-8 .bottomleft:after,
 .card-spades.V-8 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-9 .topleft:after, 
-.card-spades.V-9 .topright:after, 
+.card-spades.V-9 .topleft:after,
+.card-spades.V-9 .topright:after,
 .card-spades.V-9 .topmidleft:after,
 .card-spades.V-9 .topmidright:after,
 .card-spades.V-9 .midmid:after,
 .card-spades.V-9 .bottommidleft:after,
-.card-spades.V-9 .bottommidright:after, 
-.card-spades.V-9 .bottomleft:after, 
+.card-spades.V-9 .bottommidright:after,
+.card-spades.V-9 .bottomleft:after,
 .card-spades.V-9 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
-.card-spades.V-10 .topleft:after, 
-.card-spades.V-10 .topright:after, 
+.card-spades.V-10 .topleft:after,
+.card-spades.V-10 .topright:after,
 .card-spades.V-10 .topmidleft:after,
 .card-spades.V-10 .topmidright:after,
 .card-spades.V-10 .topmidmid:after,
 .card-spades.V-10 .bottommidmid:after,
 .card-spades.V-10 .bottommidleft:after,
 .card-spades.V-10 .bottommidright:after,
-.card-spades.V-10 .bottomleft:after, 
+.card-spades.V-10 .bottomleft:after,
 .card-spades.V-10 .bottomright:after {
-content: '\2660';
+  content: '\2660';
 }
 
 .card-spades.V-Q {
-background-image: url("../img/Billedkort/Spar_Dame.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Spar_Dame.png");
+  background-size: contain;
 }
 
 .card-spades.V-J {
-background-image: url("../img/Billedkort/Spar_Knaegt.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Spar_Knaegt.png");
+  background-size: contain;
 }
 
 .card-spades.V-K {
-background-image: url("../img/Billedkort/Spar_Konge.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Spar_Konge.png");
+  background-size: contain;
 }
 
 /* Hearts */
 .card-hearts.V-A .midmid:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-2 .topmid:after, 
+.card-hearts.V-2 .topmid:after,
 .card-hearts.V-2 .bottommid:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-3 .topmid:after, 
-.card-hearts.V-3 .midmid:after, 
+.card-hearts.V-3 .topmid:after,
+.card-hearts.V-3 .midmid:after,
 .card-hearts.V-3 .bottommid:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-4 .topleft:after, 
-.card-hearts.V-4 .topright:after, 
-.card-hearts.V-4 .bottomleft:after, 
+.card-hearts.V-4 .topleft:after,
+.card-hearts.V-4 .topright:after,
+.card-hearts.V-4 .bottomleft:after,
 .card-hearts.V-4 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-5 .topleft:after, 
-.card-hearts.V-5 .topright:after, 
-.card-hearts.V-5 .midmid:after, 
-.card-hearts.V-5 .bottomleft:after, 
+.card-hearts.V-5 .topleft:after,
+.card-hearts.V-5 .topright:after,
+.card-hearts.V-5 .midmid:after,
+.card-hearts.V-5 .bottomleft:after,
 .card-hearts.V-5 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-6 .topleft:after, 
-.card-hearts.V-6 .topright:after, 
+.card-hearts.V-6 .topleft:after,
+.card-hearts.V-6 .topright:after,
 .card-hearts.V-6 .midleft:after,
-.card-hearts.V-6 .midright:after, 
-.card-hearts.V-6 .bottomleft:after, 
+.card-hearts.V-6 .midright:after,
+.card-hearts.V-6 .bottomleft:after,
 .card-hearts.V-6 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-7 .topleft:after, 
-.card-hearts.V-7 .topright:after, 
+.card-hearts.V-7 .topleft:after,
+.card-hearts.V-7 .topright:after,
 .card-hearts.V-7 .midleft:after,
 .card-hearts.V-7 .midmid:after,
-.card-hearts.V-7 .midright:after, 
-.card-hearts.V-7 .bottomleft:after, 
+.card-hearts.V-7 .midright:after,
+.card-hearts.V-7 .bottomleft:after,
 .card-hearts.V-7 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-8 .topleft:after, 
-.card-hearts.V-8 .topright:after, 
+.card-hearts.V-8 .topleft:after,
+.card-hearts.V-8 .topright:after,
 .card-hearts.V-8 .topmidleft:after,
 .card-hearts.V-8 .topmidright:after,
 .card-hearts.V-8 .bottommidleft:after,
-.card-hearts.V-8 .bottommidright:after, 
-.card-hearts.V-8 .bottomleft:after, 
+.card-hearts.V-8 .bottommidright:after,
+.card-hearts.V-8 .bottomleft:after,
 .card-hearts.V-8 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-9 .topleft:after, 
-.card-hearts.V-9 .topright:after, 
+.card-hearts.V-9 .topleft:after,
+.card-hearts.V-9 .topright:after,
 .card-hearts.V-9 .topmidleft:after,
 .card-hearts.V-9 .topmidright:after,
 .card-hearts.V-9 .midmid:after,
 .card-hearts.V-9 .bottommidleft:after,
-.card-hearts.V-9 .bottommidright:after, 
-.card-hearts.V-9 .bottomleft:after, 
+.card-hearts.V-9 .bottommidright:after,
+.card-hearts.V-9 .bottomleft:after,
 .card-hearts.V-9 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
-.card-hearts.V-10 .topleft:after, 
-.card-hearts.V-10 .topright:after, 
+.card-hearts.V-10 .topleft:after,
+.card-hearts.V-10 .topright:after,
 .card-hearts.V-10 .topmidleft:after,
 .card-hearts.V-10 .topmidright:after,
 .card-hearts.V-10 .topmidmid:after,
 .card-hearts.V-10 .bottommidmid:after,
 .card-hearts.V-10 .bottommidleft:after,
 .card-hearts.V-10 .bottommidright:after,
-.card-hearts.V-10 .bottomleft:after, 
+.card-hearts.V-10 .bottomleft:after,
 .card-hearts.V-10 .bottomright:after {
-content: '\2665';
+  content: '\2665';
 }
 
 .card-hearts.V-Q {
-background-image: url("../img/Billedkort/Hjerter_Dame.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Hjerter_Dame.png");
+  background-size: contain;
 }
 
 .card-hearts.V-J {
-background-image: url("../img/Billedkort/Hjerter_Knaegt.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Hjerter_Knaegt.png");
+  background-size: contain;
 }
 
 .card-hearts.V-K {
-background-image: url("../img/Billedkort/Hjerter_Konge.png");
-background-size: contain;
+  background-image: url("../img/Billedkort/Hjerter_Konge.png");
+  background-size: contain;
 }
 
 /* CSS for hidden card */
 .hidden-card {
-background-color: #fff;
-background-image: url('../img/back_5_compressed.png') !important;
-background-size: contain;
-background-repeat: no-repeat;
-background-position: center center;
-cursor: default !important;
+  background-color: #fff;
+  background-image: url('../img/back_5_compressed.png') !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: default !important;
 }
 
-.hidden-card > * {
-display: none;
+.hidden-card>* {
+  display: none;
 }
 
 /* CSS for highlighting */
 .highlight {
--webkit-box-shadow: 0px 0px 5px 5px rgba(236,255,143,1);
--moz-box-shadow: 0px 0px 5px 5px rgba(236,255,143,1);
-box-shadow: 0px 0px 5px 5px rgba(236,255,143,1);
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(236, 255, 143, 1);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(236, 255, 143, 1);
+  box-shadow: 0px 0px 5px 5px rgba(236, 255, 143, 1);
 }

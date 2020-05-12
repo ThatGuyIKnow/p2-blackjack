@@ -1,6 +1,7 @@
 // Global variables
 let currentState = {};
 let cardList = [];
+
 const action = {
   action: 'MovePile',
   sequence: {
@@ -15,31 +16,35 @@ const action = {
     }
   }
 };
+
 let socket = io();
 
 // An socket IO event handler listening for messages.
-socket.on('message', (msg) => {
-  console.log(msg);
-});
+socket.on('message', (msg) => console.log(msg));
 
 /*
  * An socket IO event handler listening for a verification
  * on the player joining the room. Sets up dropzones and gets
  * initial state if verified.
  */
-let ping;
 socket.on('room control', () => {
+
+  let ping;
+
   if (ping == undefined) {
+
     ping = setInterval(() => {
       socket.emit('session ping');
       console.log("Ping send");
     }, 2000);
   }
+
   playerAction({});
   setupDropzones();
 });
 
 socket.on('room update', (state) => {
+
   currentState = state;
   render(state);
 });
@@ -49,6 +54,7 @@ socket.on('room update', (state) => {
  * @param {string} roomID The unique room identifier
  */
 function accessRoom(roomID) {
+
   socket.emit('accessRoom', roomID);
 }
 accessRoom('room2');
@@ -59,9 +65,11 @@ accessRoom('room2');
  * @param {object} action The action object
  */
 function playerAction(action) {
+
   socket.emit("player action", action, (state, err) => {
-    if (err != undefined)
-      console.log(err);
+
+    if (err != undefined) console.log(err);
+
     currentState = state;
     render(state);
   });
@@ -69,6 +77,7 @@ function playerAction(action) {
 
 // Sets up the dropzones which can be interacted with similarly to the DOM cards
 function setupDropzones() {
+
   addHandlers($('#f_pile-0'), 'f_pile', 0, -1);
   addHandlers($('#f_pile-1'), 'f_pile', 1, -1);
   addHandlers($('#f_pile-2'), 'f_pile', 2, -1);
@@ -83,7 +92,9 @@ function setupDropzones() {
   addHandlers($('#t_pile-6'), 't_pile', 6, -1);
 
   $('#down_pile').click(() => {
+
     let first_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
+
     $(first_child).prependTo('#s_pile');
   });
 }
@@ -96,6 +107,7 @@ function setupDropzones() {
  * @param {object} state The solitaire state
  */
 function render(state) {
+
   clearCards();
   renderTableau(state.t_pile);
   renderFoundation(state.f_pile);
@@ -104,7 +116,9 @@ function render(state) {
 
 // Clears and removes all cards from cardList
 function clearCards() {
+
   for (let card of cardList) {
+
     card.remove();
   }
   cardList = [];
@@ -115,9 +129,13 @@ function clearCards() {
  * @param {object} piles The f_pile object from state
  */
 function renderFoundation(piles) {
+
   for (let i = 0; i < piles.length; i++) {
+
     for (let j = 0; j < piles[i].length; j++) {
+
       let $card = createCard(piles[i][j]);
+
       addHandlers($card, 'f_pile', i, j);
       cardList.push($card);
       $card.appendTo(`#f_pile-${i}`);
@@ -130,8 +148,11 @@ function renderFoundation(piles) {
  * @param {object} pile The s_pile object from state
  */
 function renderStockpile(pile) {
+
   for (let i = 0; i < pile.length; i++) {
+
     let $card = createCard(pile[i]);
+
     $('#s_pile');
     addHandlers($card, 's_pile', 0, i);
     cardList.push($card);
@@ -144,9 +165,13 @@ function renderStockpile(pile) {
  * @param {object} piles The t_pile object from state
  */
 function renderTableau(piles) {
+
   for (let i = 0; i < piles.length; i++) {
+
     for (let j = 0; j < piles[i].length; j++) {
+
       let $card = createCard(piles[i][j]);
+
       addHandlers($card, 't_pile', i, j);
       cardList.push($card);
       $card.appendTo(`#t_pile-${i}`);
@@ -163,17 +188,23 @@ function renderTableau(piles) {
  * @param {Integer} card_number The order of the element in the pile
  */
 function addHandlers(elem, pile, pile_number, card_number) {
+
   elem.click((event) => {
+
     event.stopPropagation();
+
     let seq = action.sequence;
+
     if (seq.from.pile == '') {
-      if (card_number == -1)
-        return;
+
+      if (card_number == -1) return;
+
       seq.from.pile = pile;
       seq.from.pile_number = pile_number;
       seq.from.card_number = card_number;
       elem.addClass('highlight');
     } else {
+
       if (seq.from.pile == pile &&
         seq.from.pile_number == pile_number &&
         seq.from.card_number == card_number) {
@@ -182,6 +213,7 @@ function addHandlers(elem, pile, pile_number, card_number) {
         seq.from.card_number = -1;
         elem.removeClass('highlight');
       } else {
+
         seq.to.pile = pile;
         seq.to.pile_number = pile_number;
         playerAction(action);
@@ -190,7 +222,9 @@ function addHandlers(elem, pile, pile_number, card_number) {
         seq.from.card_number = -1;
         seq.to.pile = '';
         seq.to.pile_number = -1;
+
         for (let highlight of $('.highlight')) {
+
           $highlight = $(highlight);
           $highlight.removeClass('highlight');
         }
@@ -233,25 +267,33 @@ function createCard(card) {
   let mid15 = document.createElement("div");
 
   if (card.hidden) {
+
     suit = "card hidden-card";
     textValue = "";
   } else {
+
     let setup = "card card-";
     let setup2 = " V-";
+
     suit = setup.concat(card.suit);
+
     switch (card.rank) {
       case (1):
         rank = 'A';
         break;
+
       case (11):
         rank = 'J';
         break;
+
       case (12):
         rank = 'Q';
         break;
+
       case (13):
         rank = 'K';
         break;
+
       default:
         rank = card.rank;
         break;
