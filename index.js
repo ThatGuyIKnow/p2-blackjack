@@ -26,7 +26,7 @@ const rooms = {
   },
   'room2': {
     connections: [],
-    maxConnections: 1,
+    maxConnections: 5,
     state: {}
   },
   'room3': {
