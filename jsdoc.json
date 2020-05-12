@@ -2,7 +2,8 @@
   "source": {
     "include": [
       "./games",
-      "./public"
+      "./public",
+      "./index.js"
     ],
     "includePattern": ".js$",
     "excludePattern": "(node_modules/|docs)"

@@ -309,6 +309,143 @@ to interpret the action passed to the GameMaster</p>
     
 
     
+    <h4 class="name" id="addGameEventHandler"><span class="type-signature"></span>addGameEventHandler<span class="signature">(socket)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds a game handler for receiving player actions on the state</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The socket to apply the handlers</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="addHandlers"><span class="type-signature"></span>addHandlers<span class="signature">(elem, pile, pile_number, card_number)</span><span class="type-signature"></span></h4>
     
 
@@ -481,6 +618,144 @@ to determine the action to send to the server.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="public_js_main.js.html">public/js/main.js</a>, <a href="public_js_main.js.html#line165">line 165</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addSocketEventHandlers"><span class="type-signature"></span>addSocketEventHandlers<span class="signature">(socket)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds the necessary eventhandlers to a socket ( as of now, this only includes
+eventhandlers for maintaining an connection).</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The socket to apply the handlers</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line149">line 149</a>
     </li></ul></dd>
     
 
@@ -1182,6 +1457,143 @@ which the function returns.</p>
     
 
     
+    <h4 class="name" id="dropSession"><span class="type-signature"></span>dropSession<span class="signature">(socket)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Removes a socket from all rooms and disconnects the socket.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The socket to drop</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line209">line 209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">(callback)</span><span class="type-signature"></span></h4>
     
 
@@ -1504,6 +1916,143 @@ Returns True if the configuration is valid and False otherwise.</p>
     
 
     
+    <h4 class="name" id="leaveRooms"><span class="type-signature"></span>leaveRooms<span class="signature">(socket)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Removes a socket from all rooms (expect its ID room)</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The socket to leave rooms</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line224">line 224</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="movePile"><span class="type-signature"></span>movePile<span class="signature">(state, action, callback)</span><span class="type-signature"></span></h4>
     
 
@@ -1656,6 +2205,139 @@ is passed in the callback instead.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="games_solitaire_solitaire_gamemaster.js.html">games/solitaire/solitaire_gamemaster.js</a>, <a href="games_solitaire_solitaire_gamemaster.js.html#line99">line 99</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="parseCookie"><span class="type-signature"></span>parseCookie<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The cookie string</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -3477,6 +4159,168 @@ based on the solitaire state</p>
     
 
     
+    <h4 class="name" id="stickySessionMiddleware"><span class="type-signature"></span>stickySessionMiddleware<span class="signature">(socket, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Takes the default cookie sent by Socket IO and checks if the socket ID sent
+in the cookie is already in a room in rooms. If yes, then the socket's new
+ID (which is created on the new connection) replaces the ID in the room.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>socket</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The socket to call the middleware on</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A callback function</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line75">line 75</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="tableau"><span class="type-signature"></span>tableau<span class="signature">(deck, number_of_cards)</span><span class="type-signature"></span></h4>
     
 
@@ -4830,13 +5674,13 @@ is defined from the {to} parameter. Returns a boolean value</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#accessRoom">accessRoom</a></li><li><a href="global.html#addHandlers">addHandlers</a></li><li><a href="global.html#buildDeck">buildDeck</a></li><li><a href="global.html#canMoveTableau">canMoveTableau</a></li><li><a href="global.html#createCard">createCard</a></li><li><a href="global.html#createTableaus">createTableaus</a></li><li><a href="global.html#deepCopy">deepCopy</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isCorrectPlacementFoundation">isCorrectPlacementFoundation</a></li><li><a href="global.html#isCorrectPlacementTableau">isCorrectPlacementTableau</a></li><li><a href="global.html#movePile">movePile</a></li><li><a href="global.html#playerAction">playerAction</a></li><li><a href="global.html#pushCards">pushCards</a></li><li><a href="global.html#randomNumber">randomNumber</a></li><li><a href="global.html#removeCardFoundation">removeCardFoundation</a></li><li><a href="global.html#removeCards">removeCards</a></li><li><a href="global.html#removeCardsTableau">removeCardsTableau</a></li><li><a href="global.html#removeCardStockpile">removeCardStockpile</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderFoundation">renderFoundation</a></li><li><a href="global.html#renderStockpile">renderStockpile</a></li><li><a href="global.html#renderTableau">renderTableau</a></li><li><a href="global.html#ruleset">ruleset</a></li><li><a href="global.html#shuffleDeck">shuffleDeck</a></li><li><a href="global.html#tableau">tableau</a></li><li><a href="global.html#verifyEndState">verifyEndState</a></li><li><a href="global.html#verifyFromFoundation">verifyFromFoundation</a></li><li><a href="global.html#verifyFromStockpile">verifyFromStockpile</a></li><li><a href="global.html#verifyFromTableau">verifyFromTableau</a></li><li><a href="global.html#verifyMovePile">verifyMovePile</a></li><li><a href="global.html#verifyToFoundation">verifyToFoundation</a></li><li><a href="global.html#verifyToTableau">verifyToTableau</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#accessRoom">accessRoom</a></li><li><a href="global.html#addGameEventHandler">addGameEventHandler</a></li><li><a href="global.html#addHandlers">addHandlers</a></li><li><a href="global.html#addSocketEventHandlers">addSocketEventHandlers</a></li><li><a href="global.html#buildDeck">buildDeck</a></li><li><a href="global.html#canMoveTableau">canMoveTableau</a></li><li><a href="global.html#createCard">createCard</a></li><li><a href="global.html#createTableaus">createTableaus</a></li><li><a href="global.html#deepCopy">deepCopy</a></li><li><a href="global.html#dropSession">dropSession</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isCorrectPlacementFoundation">isCorrectPlacementFoundation</a></li><li><a href="global.html#isCorrectPlacementTableau">isCorrectPlacementTableau</a></li><li><a href="global.html#leaveRooms">leaveRooms</a></li><li><a href="global.html#movePile">movePile</a></li><li><a href="global.html#parseCookie">parseCookie</a></li><li><a href="global.html#playerAction">playerAction</a></li><li><a href="global.html#pushCards">pushCards</a></li><li><a href="global.html#randomNumber">randomNumber</a></li><li><a href="global.html#removeCardFoundation">removeCardFoundation</a></li><li><a href="global.html#removeCards">removeCards</a></li><li><a href="global.html#removeCardsTableau">removeCardsTableau</a></li><li><a href="global.html#removeCardStockpile">removeCardStockpile</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderFoundation">renderFoundation</a></li><li><a href="global.html#renderStockpile">renderStockpile</a></li><li><a href="global.html#renderTableau">renderTableau</a></li><li><a href="global.html#ruleset">ruleset</a></li><li><a href="global.html#shuffleDeck">shuffleDeck</a></li><li><a href="global.html#stickySessionMiddleware">stickySessionMiddleware</a></li><li><a href="global.html#tableau">tableau</a></li><li><a href="global.html#verifyEndState">verifyEndState</a></li><li><a href="global.html#verifyFromFoundation">verifyFromFoundation</a></li><li><a href="global.html#verifyFromStockpile">verifyFromStockpile</a></li><li><a href="global.html#verifyFromTableau">verifyFromTableau</a></li><li><a href="global.html#verifyMovePile">verifyMovePile</a></li><li><a href="global.html#verifyToFoundation">verifyToFoundation</a></li><li><a href="global.html#verifyToTableau">verifyToTableau</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 12 2020 10:36:13 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 12 2020 10:56:26 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
