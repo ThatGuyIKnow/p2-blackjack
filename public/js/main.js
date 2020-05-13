@@ -102,10 +102,17 @@ function setupDropzones() {
   
   $('#down_pile').off('click').on('click', (event) => {
     event.stopPropagation();
-    event.preventDefault();
     let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
     $(last_child).prependTo('#s_pile');
     stockCounter = (stockCounter + 1) % currentState.s_pile.length;
+    //Removes the highlighted from card
+    let seq = action.sequence;
+    seq.from.pile = '';
+    seq.from.pile_number = -1;
+    seq.from.card_number = -1;
+    seq.to.pile = '';
+    seq.to.pile_number = -1;
+    $('.highlight').removeClass('highlight');
   })
 
 }
