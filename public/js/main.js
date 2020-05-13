@@ -3,6 +3,7 @@
  */
 let currentState = {};
 let cardList = [];
+let stockCounter = 0;
 const action = {
   action: 'MovePile',
   sequence: {
@@ -73,6 +74,14 @@ function playerAction(action) {
   });
 }
 
+function resetGame() {
+  socket.emit("reset game", (state) => {
+    currentState = state;
+    render(state);
+    stockCounter = 0;
+  });
+}
+
 /**
  * Sets up the dropzones which can be interacted with
  * similarly to the DOM cards
@@ -96,6 +105,7 @@ function setupDropzones() {
     event.preventDefault();
     let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
     $(last_child).prependTo('#s_pile');
+    stockCounter = (stockCounter + 1) % currentState.s_pile.length;
   })
 
 }
@@ -149,6 +159,10 @@ function renderStockpile(pile) {
     addHandlers($card, 's_pile', 0, i);
     cardList.push($card)
     $card.appendTo(`#s_pile`);
+  }
+  for(let i = 0; i < stockCounter; i++) {
+    let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
+    $(last_child).prependTo('#s_pile');
   }
 }
 

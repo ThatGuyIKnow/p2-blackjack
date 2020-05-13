@@ -20,21 +20,25 @@ const options = {
 const rooms = {
 
   'room1': {
+    id : 'room1',
     connections: [],
     maxConnections: 1,
     state: JSON.parse(fs.readFileSync('testState.json', 'utf-8'))
   },
   'room2': {
+    id : 'room2',
     connections: [],
     maxConnections: 6,
     state: {}
   },
   'room3': {
+    id : 'room3',
     connections: [],
     maxConnections: 1,
     state: {}
   },
   'room4': {
+    id : 'room4',
     connections: [],
     maxConnections: 1,
     state: {}
@@ -193,15 +197,26 @@ function addGameEventHandler(socket) {
     }
     if(Object.keys(room.state) != 0) {
       const playerState = solitaire.filterState(room.state);
-      socket.to('room2').emit('room update', playerState);
+      socket.to(room.id).emit('room update', playerState);
       callback(playerState);
     }
     else {
-      socket.send("Game has concluded!");
+      io.in(room.id).send("Game has concluded!");
+      socket.to(room.id).emit('room update', playerState);
       callback(room.state);
-      dropSession(socket);
     }
+  });
 
+  socket.on('reset game', (callback) => {
+    let room = Object.values(rooms).find((room) =>
+      room.connections.includes(socket.id)
+    );
+
+    solitaire.init((state) => {
+      room.state = state;
+    });
+    socket.to(room.id).emit('room update', room.state);
+    callback(room.state);
   });
 }
 
