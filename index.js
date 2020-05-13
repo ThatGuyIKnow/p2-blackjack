@@ -22,7 +22,7 @@ const rooms = {
   'room1': {
     id : 'room1',
     connections: [],
-    maxConnections: 1,
+    maxConnections: 6,
     state: JSON.parse(fs.readFileSync('testState.json', 'utf-8'))
   },
   'room2': {
@@ -34,13 +34,13 @@ const rooms = {
   'room3': {
     id : 'room3',
     connections: [],
-    maxConnections: 1,
+    maxConnections: 6,
     state: {}
   },
   'room4': {
     id : 'room4',
     connections: [],
-    maxConnections: 1,
+    maxConnections: 6,
     state: {}
   },
 };
