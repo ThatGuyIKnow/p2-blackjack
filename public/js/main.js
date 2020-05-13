@@ -29,7 +29,7 @@ socket.on('message', (msg) => {
 
 /**
  * An socket IO event handler listening for a verification
- * on the player joining the room. Sets up dropzones and gets
+ * on the player joining the room. Gets
  * initial state if verified.
  */
 let ping;
@@ -41,8 +41,8 @@ socket.on('room control', () => {
     }, 2000);
   }
   playerAction({});
-  setupDropzones();
 });
+setupDropzones();
 
 socket.on('room update', (state) => {
   currentState = state;
@@ -77,8 +77,8 @@ function playerAction(action) {
 function resetGame() {
   socket.emit("reset game", (state) => {
     currentState = state;
-    render(state);
     stockCounter = 0;
+    render(state);
   });
 }
 

@@ -140,7 +140,7 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('disconnect', (socket) => {
+  socket.on('disconnect', () => {
     console.log("disconnected");
   });
 });
@@ -154,6 +154,12 @@ io.on('connection', (socket) => {
  * @param {Socket object} socket The socket to apply the handlers
  */
 function addSocketEventHandlers(socket) {
+
+  //Remove all previous event listeners
+  socket.removeAllListeners('session ping');
+  socket.removeAllListeners('player action');
+  socket.removeAllListeners('reset game');
+
   // Disconnects the client if a ping hasn't been send in pingTimeout ms
   let sessionDrop = setTimeout(dropSession, options.pingTimeout, socket);
 
@@ -214,9 +220,9 @@ function addGameEventHandler(socket) {
 
     solitaire.init((state) => {
       room.state = state;
+      socket.to(room.id).emit('room update', state);
+      callback(state);
     });
-    socket.to(room.id).emit('room update', room.state);
-    callback(room.state);
   });
 }
 
