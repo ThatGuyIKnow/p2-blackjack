@@ -133,7 +133,7 @@ border-color: rgb(55, 55, 201);
 
 .stackdown {
 	display: grid;
-  grid-auto-rows: 30px;
+  grid-auto-rows: 37px;
   overflow-y: visible;
 	flex-basis: 100%;
 }

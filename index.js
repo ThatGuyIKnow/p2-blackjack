@@ -249,7 +249,6 @@ function dropSession(socket) {
  * @param {Socket object} socket The socket to leave rooms
  */
 function leaveRooms(socket) {
-  socket.send("LEAVE ROOM FUNCTION ACCESSED")
   for (let roomKey of Object.keys(rooms)) {
 
     const room = rooms[roomKey];
