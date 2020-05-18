@@ -13,12 +13,12 @@ Project to create a general system for representing card games, which utilizes s
    action: 'MovePile',
    sequence: {
      from: {
-       pile: 'f_pile',
+       pile: 'foundation',
        pile_number: 2,
        card_number: 3
      },
      to: {
-       pile: 't_pile',
+       pile: 'tableau',
        pile_number: 4
      }
    }
@@ -31,34 +31,34 @@ Project to create a general system for representing card games, which utilizes s
    action: 'MovePile',
    sequence: {
      from: {
-       pile: 'f_pile',
+       pile: 'foundation',
        pile_number: 2,
        card_number: 3
      },
      to: {
-       pile: 't_pile',
+       pile: 'tableau',
        pile_number: 4
      }
    }
  }
 
-       pile: 'f_pile',
+       pile: 'foundation',
        pile_number: 2,
        card_number: 3
      },
      to: {
-       pile: 't_pile',
+       pile: 'tableau',
        pile_number: 4
      }
    }
  }
 
-       pile: 'f_pile',
+       pile: 'foundation',
        pile_number: 2,
        card_number: 3
      },
      to: {
-       pile: 't_pile',
+       pile: 'tableau',
        pile_number: 4
      }
    }

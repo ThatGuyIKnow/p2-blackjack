@@ -15,9 +15,9 @@ function buildDeck(number_of_decks, number_of_jokers) {
   let ID = 1;
   let card;
 
-  for (let i = 0; i < suits.length; i++) {
+  for (let i = 0; i < suits.length * number_of_decks; i++) {
 
-    for (let j = 0; j < ranks.length * number_of_decks; j++) {
+    for (let j = 0; j < ranks.length; j++) {
 
       card = {
         suit: suits[i % 4],

@@ -87,24 +87,24 @@ function resetGame() {
  * similarly to the DOM cards
  */
 function setupDropzones() {
-  addHandlers($('#f_pile-0'), 'f_pile', 0, -1);
-  addHandlers($('#f_pile-1'), 'f_pile', 1, -1);
-  addHandlers($('#f_pile-2'), 'f_pile', 2, -1);
-  addHandlers($('#f_pile-3'), 'f_pile', 3, -1);
+  addHandlers($('#foundation-0'), 'foundation', 0, -1);
+  addHandlers($('#foundation-1'), 'foundation', 1, -1);
+  addHandlers($('#foundation-2'), 'foundation', 2, -1);
+  addHandlers($('#foundation-3'), 'foundation', 3, -1);
 
-  addHandlers($('#t_pile-0'), 't_pile', 0, -1);
-  addHandlers($('#t_pile-1'), 't_pile', 1, -1);
-  addHandlers($('#t_pile-2'), 't_pile', 2, -1);
-  addHandlers($('#t_pile-3'), 't_pile', 3, -1);
-  addHandlers($('#t_pile-4'), 't_pile', 4, -1);
-  addHandlers($('#t_pile-5'), 't_pile', 5, -1);
-  addHandlers($('#t_pile-6'), 't_pile', 6, -1);
+  addHandlers($('#tableau-0'), 'tableau', 0, -1);
+  addHandlers($('#tableau-1'), 'tableau', 1, -1);
+  addHandlers($('#tableau-2'), 'tableau', 2, -1);
+  addHandlers($('#tableau-3'), 'tableau', 3, -1);
+  addHandlers($('#tableau-4'), 'tableau', 4, -1);
+  addHandlers($('#tableau-5'), 'tableau', 5, -1);
+  addHandlers($('#tableau-6'), 'tableau', 6, -1);
   
   $('#down_pile').off('click').on('click', (event) => {
     event.stopPropagation();
-    let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
-    $(last_child).prependTo('#s_pile');
-    stockCounter = (stockCounter + 1) % currentState.s_pile.length;
+    let last_child = $('#stockpile').children()[$('#stockpile').children().length - 1];
+    $(last_child).prependTo('#stockpile');
+    stockCounter = (stockCounter + 1) % currentState.stockpile.length;
     //Removes the highlighted from card
     let seq = action.sequence;
     seq.from.pile = '';
@@ -126,9 +126,9 @@ function setupDropzones() {
  */
 function render(state) {
   clearCards();
-  renderTableau(state.t_pile);
-  renderFoundation(state.f_pile);
-  renderStockpile(state.s_pile);
+  renderTableau(state.tableau);
+  renderFoundation(state.foundation);
+  renderStockpile(state.stockpile);
 }
 
 /**
@@ -143,47 +143,47 @@ function clearCards() {
 
 /**
  * Renders, creates handlers, and registers the foundation cards.
- * @param {object} piles The f_pile object from state
+ * @param {object} piles The foundation object from state
  */
 function renderFoundation(piles) {
   for (let i = 0; i < piles.length; i++) {
     for (let j = 0; j < piles[i].length; j++) {
       let $card = createCard(piles[i][j]);
-      addHandlers($card, 'f_pile', i, j);
+      addHandlers($card, 'foundation', i, j);
       cardList.push($card)
-      $card.appendTo(`#f_pile-${i}`);
+      $card.appendTo(`#foundation-${i}`);
     }
   }
 }
 
 /**
  * Renders, creates handlers, and registers the stock cards.
- * @param {object} pile The s_pile object from state
+ * @param {object} pile The stockpile object from state
  */
 function renderStockpile(pile) {
   for (let i = 0; i < pile.length; i++) {
     let $card = createCard(pile[i]);
-    addHandlers($card, 's_pile', 0, i);
+    addHandlers($card, 'stockpile', 0, i);
     cardList.push($card)
-    $card.appendTo(`#s_pile`);
+    $card.appendTo(`#stockpile`);
   }
   for(let i = 0; i < stockCounter; i++) {
-    let last_child = $('#s_pile').children()[$('#s_pile').children().length - 1];
-    $(last_child).prependTo('#s_pile');
+    let last_child = $('#stockpile').children()[$('#stockpile').children().length - 1];
+    $(last_child).prependTo('#stockpile');
   }
 }
 
 /**
  * Renders, creates handlers, and registers the tableau cards.
- * @param {object} piles The t_pile object from state
+ * @param {object} piles The tableau object from state
  */
 function renderTableau(piles) {
   for (let i = 0; i < piles.length; i++) {
     for (let j = 0; j < piles[i].length; j++) {
       let $card = createCard(piles[i][j]);
-      addHandlers($card, 't_pile', i, j);
+      addHandlers($card, 'tableau', i, j);
       cardList.push($card);
-      $card.appendTo(`#t_pile-${i}`);
+      $card.appendTo(`#tableau-${i}`);
     }
   }
 }
@@ -193,7 +193,7 @@ function renderTableau(piles) {
  * to determine the action to send to the server.
  *
  * @param {JQuery Object} elem Element to add handlers to
- * @param {string} pile The name of the pile(s) ('f_pile', 't_pile' or 's_pile')
+ * @param {string} pile The name of the pile(s) ('foundation', 'tableau' or 'stockpile')
  * @param {int} pile_number The pile the Element belongs to
  * @param {int} card_number The order of the element in the pile
  */

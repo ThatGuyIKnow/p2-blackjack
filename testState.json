@@ -1,30 +1,33 @@
 {
-  "f_pile":[
+  "foundation":[
     [
       {"suit":"spades","rank":1,"id":1,"isJoker":false,"hidden":false},
       {"suit":"spades","rank":2,"id":2,"isJoker":false,"hidden":false}
     ],
     [],
-    [],
+    [
+      {"suit":"clubs","rank":1,"id":27,"isJoker":false,"hidden":false}
+    ],
     []
   ],
-  "t_pile":[
+  "tableau":[
     [
       {"suit":"hearts","rank":9,"id":22,"isJoker":false,"hidden":false},
       {"suit":"spades","rank":8,"id":8,"isJoker":false,"hidden":false}
     ],
     [
+      {"suit":"hearts","rank":9,"id":22,"isJoker":false,"hidden":true},
+      {"suit":"spades","rank":8,"id":8,"isJoker":false,"hidden":false}
     ],
     [{"suit":"diamonds","rank":9,"id":48,"isJoker":false,"hidden":false}],
     [{"suit":"clubs","rank":9,"id":35,"isJoker":false,"hidden":false}],
-    [{"suit":"clubs","rank":10,"id":36,"isJoker":false,"hidden":false}],
+    [],
     [{"suit":"hearts","rank":3,"id":16,"isJoker":false,"hidden":false}],
     [
       {"suit":"diamonds","rank":13,"id":52,"isJoker":false,"hidden":false}]
   ],
-  "s_pile":[
+  "stockpile":[
     {"suit":"spades","rank":3,"id":3,"isJoker":false,"hidden":false},
-    {"suit":"clubs","rank":1,"id":27,"isJoker":false,"hidden":false},
     {"suit":"hearts","rank":7,"id":20,"isJoker":false,"hidden":false},
     {"suit":"hearts","rank":6,"id":19,"isJoker":false,"hidden":false},
     {"suit":"diamonds","rank":2,"id":41,"isJoker":false,"hidden":false},

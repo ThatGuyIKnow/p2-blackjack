@@ -207,7 +207,7 @@ function addGameEventHandler(socket) {
     }
     else {
       io.in(room.id).send("Game has concluded!");
-      socket.to(room.id).emit('room update', playerState);
+      socket.to(room.id).emit('room update', room.state);
       callback(room.state);
     }
   });

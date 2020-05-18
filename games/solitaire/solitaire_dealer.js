@@ -20,7 +20,7 @@ module.exports = {
  */
 function removeCardFoundation(state, action) {
 
-  const pile = state.f_pile[action.sequence.from.pile_number];
+  const pile = state.foundation[action.sequence.from.pile_number];
 
   return [pile.pop()];
 }
@@ -34,7 +34,7 @@ function removeCardStockpile(state, action) {
 
   const index = action.sequence.from.card_number;
 
-  return state.s_pile.splice(index, 1);
+  return state.stockpile.splice(index, 1);
 }
 
 /**
@@ -44,7 +44,7 @@ function removeCardStockpile(state, action) {
  */
 function removeCardsTableau(state, action) {
 
-  const pile = state.t_pile[action.sequence.from.pile_number];
+  const pile = state.tableau[action.sequence.from.pile_number];
   const card_index = action.sequence.from.card_number;
 
   if (pile[card_index - 1] != undefined && pile[card_index - 1].hidden == true) {
@@ -64,13 +64,13 @@ function removeCardsTableau(state, action) {
 function removeCards(state, action) {
 
   switch (action.sequence.from.pile) {
-    case ('f_pile'):
+    case ('foundation'):
       return removeCardFoundation(state, action);
 
-    case ('s_pile'):
+    case ('stockpile'):
       return removeCardStockpile(state, action);
 
-    case ('t_pile'):
+    case ('tableau'):
       return removeCardsTableau(state, action);
   }
 }
@@ -87,15 +87,15 @@ function pushCards(state, action, cardPackage) {
   let pile;
 
   switch (action.sequence.to.pile) {
-    case ('f_pile'):
-      pile = state.f_pile[pile_number];
+    case ('foundation'):
+      pile = state.foundation[pile_number];
       cardPackage = cardPackage.filter(value => value != null);
-      state.f_pile[pile_number] = pile.concat(cardPackage);
+      state.foundation[pile_number] = pile.concat(cardPackage);
       break;
 
-    case ('t_pile'):
-      pile = state.t_pile[pile_number];
-      state.t_pile[pile_number] = pile.concat(cardPackage);
+    case ('tableau'):
+      pile = state.tableau[pile_number];
+      state.tableau[pile_number] = pile.concat(cardPackage);
       break;
   }
 }

@@ -78,23 +78,23 @@ function tableau(deck, number_of_cards) {
  */
 function init(callback) {
 
-  const s_pile = createDeck(1);
+  const stockpile = createDeck(1);
 
-  for (let card of s_pile) {
+  for (let card of stockpile) {
     card.hidden = false;
   }
 
-  const t_pile = createTableaus(s_pile);
-  const f_pile = [
+  const tableau = createTableaus(stockpile);
+  const foundation = [
     [],
     [],
     [],
     []
   ];
   const state = {
-    s_pile,
-    t_pile,
-    f_pile
+    stockpile,
+    tableau,
+    foundation
   };
 
   callback(state);

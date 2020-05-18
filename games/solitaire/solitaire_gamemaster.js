@@ -33,9 +33,9 @@ module.exports = {
 
     let filteredState = deepCopy(state);
 
-    let t_pile = filteredState.t_pile;
+    let tableau = filteredState.tableau;
 
-    for (let pile of t_pile) {
+    for (let pile of tableau) {
 
       for (let card of pile) {
 
@@ -69,7 +69,7 @@ module.exports = {
       let err = new VerificationError('Action not found');
       callback(state, err);
     }
-  },
+  }
 };
 
 // ========== RULESET ==========
@@ -141,15 +141,15 @@ function verifyMovePile(state, action, callback) {
   let from_cards;
 
   switch (from.pile) {
-    case ('f_pile'):
+    case ('foundation'):
       from_cards = verifyFromFoundation(state, from, to, callback);
       break;
 
-    case ('t_pile'):
+    case ('tableau'):
       from_cards = verifyFromTableau(state, from, to, callback);
       break;
 
-    case ('s_pile'):
+    case ('stockpile'):
       from_cards = verifyFromStockpile(state, from, to, callback);
       break;
 
@@ -163,13 +163,13 @@ function verifyMovePile(state, action, callback) {
   let allowedMove = false;
 
   switch (to.pile) {
-    case ('f_pile'):
+    case ('foundation'):
       if (from_cards[1] == undefined) {
         allowedMove = verifyToFoundation(state, from_cards[0], to);
       }
       break;
 
-    case ('t_pile'):
+    case ('tableau'):
       allowedMove = verifyToTableau(state, from_cards[0], to);
       break;
 
@@ -179,6 +179,7 @@ function verifyMovePile(state, action, callback) {
   }
 
   if (allowedMove == false) callback(new VerificationError("Illegal move"));
+  else callback();
 }
 
 /**
@@ -188,9 +189,9 @@ function verifyMovePile(state, action, callback) {
  */
 function verifyEndState(state) {
 
-  const f_piles = state.f_pile;
+  const foundations = state.foundation;
 
-  for (let pile of f_piles) {
+  for (let pile of foundations) {
 
     if (pile.length != 13) return false;
   }
@@ -209,11 +210,11 @@ function verifyEndState(state) {
  */
 function verifyFromFoundation(state, from) {
 
-  if (state.f_pile[from.pile_number] == undefined) {
+  if (state.foundation[from.pile_number] == undefined) {
     return new VerificationError("Illegal move");
   }
 
-  let from_pile = state.f_pile[from.pile_number];
+  let from_pile = state.foundation[from.pile_number];
   let from_card = from_pile[from_pile.length - 1];
   return [from_card];
 }
@@ -228,12 +229,12 @@ function verifyFromFoundation(state, from) {
  */
 function verifyFromStockpile(state, from) {
 
-  console.log(state.s_pile[from.card_number-1]);
-  if (!state.s_pile[from.card_number]) {
+  console.log(state.stockpile[from.card_number-1]);
+  if (!state.stockpile[from.card_number]) {
     return new VerificationError("Illegal move");
   }
 
-  let from_card = state.s_pile[from.card_number];
+  let from_card = state.stockpile[from.card_number];
 
   return [from_card];
 }
@@ -247,12 +248,12 @@ function verifyFromStockpile(state, from) {
  */
 function verifyFromTableau(state, from) {
 
-  if (!state.t_pile[from.pile_number][from.card_number]) {
+  if (!state.tableau[from.pile_number][from.card_number]) {
     return new VerificationError("Illegal move");
   }
 
-  let from_card1 = state.t_pile[from.pile_number][from.card_number];
-  let from_card2 = state.t_pile[from.pile_number][from.card_number + 1];
+  let from_card1 = state.tableau[from.pile_number][from.card_number];
+  let from_card2 = state.tableau[from.pile_number][from.card_number + 1];
 
   if (canMoveTableau(from_card1, from_card2) == false) {
     return new VerificationError("Illegal move");
@@ -270,9 +271,9 @@ function verifyFromTableau(state, from) {
  */
 function verifyToTableau(state, from_card, to) {
 
-  if (state.t_pile[to.pile_number] == undefined) return false;
+  if (state.tableau[to.pile_number] == undefined) return false;
 
-  let to_pile = state.t_pile[to.pile_number];
+  let to_pile = state.tableau[to.pile_number];
   let to_card = to_pile[to_pile.length - 1];
 
   return isCorrectPlacementTableau(from_card, to_card);
@@ -288,9 +289,9 @@ function verifyToTableau(state, from_card, to) {
  */
 function verifyToFoundation(state, from_card, to) {
 
-  if (state.f_pile[to.pile_number] == undefined) return false;
+  if (state.foundation[to.pile_number] == undefined) return false;
 
-  let to_pile = state.f_pile[to.pile_number];
+  let to_pile = state.foundation[to.pile_number];
   let to_card = to_pile[to_pile.length - 1];
 
   return isCorrectPlacementFoundation(from_card, to_card, to.pile_number);
