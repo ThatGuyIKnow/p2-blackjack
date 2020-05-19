@@ -111,14 +111,12 @@ function movePile(state, action, callback) {
 
   if (error) return;
   
-  const newState = deepCopy(state);
+  dealer.movePile(state, action);
 
-  dealer.movePile(newState, action);
-
-  if (verifyEndState(newState)) {
+  if (verifyEndState(state)) {
     callback({});
   } else {
-    callback(newState);
+    callback(state);
   }
 }
 
