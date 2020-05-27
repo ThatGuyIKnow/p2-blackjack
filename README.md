@@ -1,4 +1,4 @@
-# P2 Blackjack
+# P2 General Scalable Browser-Based Card Game Model
 
 ## SW2 b2-28
 
