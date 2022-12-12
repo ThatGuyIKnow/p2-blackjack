@@ -4,7 +4,7 @@
   "main": "index.js",
   "dependencies": {
     "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsdoc": "^3.6.4",
     "socket.io": "^2.3.0"
   },
